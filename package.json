@@ -1,0 +1,13 @@
+{
+  "name": "evosport",
+  "private": true,
+  "scripts": {
+    "dev:api": "bun --filter api dev",
+    "dev:web": "bun --filter web dev",
+    "dev": "bun --filter \"*\" dev"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ]
+}
