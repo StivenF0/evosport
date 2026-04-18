@@ -29,7 +29,7 @@ Criar apps/api/src/repositories/match-repository.ts:
 - [x] Repository de Classificação.
 Criar funções para buscar partidas finalizadas que servirão de base para o serviço de ranking.
 
-- [ ] Script de População.
+- [x] Script de População.
 Criar um arquivo apps/api/src/db/seed.ts que utiliza o Drizzle para inserir:
   1 registro de Evento.
   Pelo menos 8 Times.
