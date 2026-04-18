@@ -5,7 +5,7 @@
     "dev:api": "bun --filter api dev",
     "dev:web": "bun --filter web dev",
     "dev": "bun --filter \"*\" dev",
-    "seed": "bun --filter api db:seed"
+    "db:seed": "bun --filter api db:seed"
   },
   "workspaces": [
     "apps/*",
