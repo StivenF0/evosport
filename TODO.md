@@ -2,7 +2,7 @@
 
 ## Sprint 1:
 
-- [ ] Definir Schema Unificado.
+- [x] Definir Schema Unificado.
 Criar o arquivo apps/api/src/db/schema.ts contendo:
   Tabela event: (id, name, start_date, end_date, logo_url).
   Tabela teams: (id, name, flag_url).
