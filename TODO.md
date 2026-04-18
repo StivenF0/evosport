@@ -22,7 +22,7 @@ Criar apps/api/src/repositories/venue-repository.ts:
   Função findAll(): Retorna todas as sedes.
   Função findById(id): Retorna detalhes de uma sede específica.
 
-- [ ] Repository de Partidas.
+- [x] Repository de Partidas.
 Criar apps/api/src/repositories/match-repository.ts:
   Função getAllWithTeams(): Uma query que já faz o join com a tabela de times para trazer os nomes e bandeiras.
 
