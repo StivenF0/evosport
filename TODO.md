@@ -36,7 +36,7 @@ Criar um arquivo apps/api/src/db/seed.ts que utiliza o Drizzle para inserir:
   Pelo menos 4 Sedes/Estádios.
   Uma lista inicial de Partidas.
 
-- [ ] Comando Bun.
+- [x] Comando Bun.
 Adicionar no package.json o script "db:seed": "bun src/db/seed.ts".
 
 ## Sprint 2:
