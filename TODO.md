@@ -26,7 +26,7 @@ Criar apps/api/src/repositories/venue-repository.ts:
 Criar apps/api/src/repositories/match-repository.ts:
   Função getAllWithTeams(): Uma query que já faz o join com a tabela de times para trazer os nomes e bandeiras.
 
-- [ ] Repository de Classificação.
+- [x] Repository de Classificação.
 Criar funções para buscar partidas finalizadas que servirão de base para o serviço de ranking.
 
 - [ ] Script de População.
