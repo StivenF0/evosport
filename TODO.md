@@ -9,10 +9,10 @@ Criar o arquivo apps/api/src/db/schema.ts contendo:
   Tabela stadiums: (id, name, city, capacity, latitude, longitude).
   Tabela matches: (id, home_team_id, away_team_id, stadium_id, date, status).
 
-- [ ] Configurar Relacionamentos.
+- [x] Configurar Relacionamentos.
 Utilizar as funções de relations do Drizzle para conectar matches com teams e stadiums.
 
-- [ ] Fluxo de Migração.
+- [x] Fluxo de Migração.
 Configurar o arquivo drizzle.config.ts.
 Gerar a primeira migration: bunx drizzle-kit generate:sqlite.
 Aplicar a migration: bunx drizzle-kit push:sqlite.
