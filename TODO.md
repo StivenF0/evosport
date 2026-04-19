@@ -56,6 +56,9 @@ Retornar um array de objetos ordenado (do 1º ao último colocado).
 - [x] Criar VenueService.
 Consolidar os dados da sede com as informações de geolocalização para o mapa.
 
+- [x] Criar TeamService.
+Implementar o CRUD completo na camada de serviço para gerenciar as regras de negócio e validações relacionadas aos times do campeonato.
+
 - [ ] Implementar Rotas de Evento e Sedes.
 GET /event: Retorna o objeto do evento (UC01).
 GET /venues: Retorna a lista de estádios/cidades (UC05).
