@@ -49,7 +49,7 @@ Adicionar no package.json o script "db:seed": "bun src/db/seed.ts".
 Implementar lógica para formatar as datas vindas do banco para o padrão brasileiro (DD/MM/YYYY).
 Criar função para retornar partidas agrupadas por estádio ou data.
 
-- [ ] Criar RankingService.
+- [x] Criar RankingService.
 O Desafio da Sprint: Criar a função que busca todas as partidas, itera sobre elas e calcula: Pontos, Vitórias, Empates, Derrotas e Saldo de Gols.
 Retornar um array de objetos ordenado (do 1º ao último colocado).
 
