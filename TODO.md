@@ -45,7 +45,7 @@ Adicionar no package.json o script "db:seed": "bun src/db/seed.ts".
 
 ## Sprint 2:
 
-- [ ] Criar MatchService.
+- [x] Criar MatchService.
 Implementar lógica para formatar as datas vindas do banco para o padrão brasileiro (DD/MM/YYYY).
 Criar função para retornar partidas agrupadas por estádio ou data.
 
