@@ -53,7 +53,7 @@ Criar função para retornar partidas agrupadas por estádio ou data.
 O Desafio da Sprint: Criar a função que busca todas as partidas, itera sobre elas e calcula: Pontos, Vitórias, Empates, Derrotas e Saldo de Gols.
 Retornar um array de objetos ordenado (do 1º ao último colocado).
 
-- [ ] Criar VenueService.
+- [x] Criar VenueService.
 Consolidar os dados da sede com as informações de geolocalização para o mapa.
 
 - [ ] Implementar Rotas de Evento e Sedes.
