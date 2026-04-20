@@ -1,9 +1,7 @@
 import { eq } from 'drizzle-orm';
 import { db } from '../db';
+import type { NewVenue, UpdateVenue } from '@packages/types/venue-types';
 import { stadiums } from '../db/schema';
-
-type NewVenue = typeof stadiums.$inferInsert;
-type UpdateVenue = Partial<NewVenue>;
 
 export const venueRepository = {
   // CREATE

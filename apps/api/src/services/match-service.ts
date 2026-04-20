@@ -1,5 +1,6 @@
 import { matchRepository } from '../repositories/match-repository';
-import { matches } from '../db/schema';
+import type { NewMatch, UpdateMatch } from '@packages/types/match-types';
+// import { matches } from '../db/schema';
 
 const formatDateToBR = (date: Date | number | string): string => {
   return new Intl.DateTimeFormat('pt-BR', {
@@ -9,9 +10,6 @@ const formatDateToBR = (date: Date | number | string): string => {
     timeZone: 'UTC'
   }).format(new Date(date));
 };
-
-type NewMatch = typeof matches.$inferInsert;
-type UpdateMatch = Partial<NewMatch>;
 
 export const matchService = {
   // CREATE

@@ -1,8 +1,6 @@
 import { venueRepository } from '../repositories/venue-repository';
-import { stadiums } from '../db/schema';
-
-type NewVenue = typeof stadiums.$inferInsert;
-type UpdateVenue = Partial<NewVenue>;
+import type { NewVenue, UpdateVenue } from '@packages/types/venue-types';
+// import { stadiums } from '../db/schema';
 
 export const venueService = {
   // CREATE

@@ -1,8 +1,6 @@
 import { teamRepository } from '../repositories/team-repository';
-import { teams } from '../db/schema';
-
-type NewTeam = typeof teams.$inferInsert;
-type UpdateTeam = Partial<NewTeam>;
+import type { NewTeam, UpdateTeam } from '@packages/types/teams-types';
+// import { teams } from '../db/schema';
 
 export const teamService = {
   // CREATE

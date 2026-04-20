@@ -1,9 +1,7 @@
 import { eq } from 'drizzle-orm';
 import { db } from '../db';
+import type { NewMatch, UpdateMatch } from '@packages/types/match-types';
 import { matches } from '../db/schema';
-
-type NewMatch = typeof matches.$inferInsert;
-type UpdateMatch = Partial<NewMatch>;
 
 export const matchRepository = {
   // CREATE
