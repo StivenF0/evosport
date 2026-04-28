@@ -2,55 +2,62 @@
 
 ## Sprint 1:
 
-- [ ] Definir Schema Unificado.
+- [x] Definir Schema Unificado.
 Criar o arquivo apps/api/src/db/schema.ts contendo:
   Tabela event: (id, name, start_date, end_date, logo_url).
   Tabela teams: (id, name, flag_url).
   Tabela stadiums: (id, name, city, capacity, latitude, longitude).
   Tabela matches: (id, home_team_id, away_team_id, stadium_id, date, status).
 
-- [ ] Configurar Relacionamentos.
+- [x] Configurar Relacionamentos.
 Utilizar as funções de relations do Drizzle para conectar matches com teams e stadiums.
 
-- [ ] Fluxo de Migração.
+- [x] Fluxo de Migração.
 Configurar o arquivo drizzle.config.ts.
 Gerar a primeira migration: bunx drizzle-kit generate:sqlite.
 Aplicar a migration: bunx drizzle-kit push:sqlite.
 
-- [ ] Repository de Eventos e Sedes.
+- [x] Repository de Eventos e Sedes.
 Criar apps/api/src/repositories/venue-repository.ts:
   Função findAll(): Retorna todas as sedes.
   Função findById(id): Retorna detalhes de uma sede específica.
 
-- [ ] Repository de Partidas.
+- [x] Repository de Partidas.
 Criar apps/api/src/repositories/match-repository.ts:
   Função getAllWithTeams(): Uma query que já faz o join com a tabela de times para trazer os nomes e bandeiras.
 
-- [ ] Repository de Classificação.
+- [x] Repository de Times.
+Criar apps/api/src/repositories/team-repository.ts:
+Implementar o CRUD completo para gerenciar as entidades de times isoladamente no banco de dados.
+
+- [x] Repository de Classificação.
 Criar funções para buscar partidas finalizadas que servirão de base para o serviço de ranking.
 
-- [ ] Script de População.
+- [x] Script de População.
 Criar um arquivo apps/api/src/db/seed.ts que utiliza o Drizzle para inserir:
   1 registro de Evento.
   Pelo menos 8 Times.
   Pelo menos 4 Sedes/Estádios.
   Uma lista inicial de Partidas.
 
-- [ ] Comando Bun.
+- [x] Comando Bun.
 Adicionar no package.json o script "db:seed": "bun src/db/seed.ts".
 
 ## Sprint 2:
 
-- [ ] Criar MatchService.
+- [x] Criar MatchService.
 Implementar lógica para formatar as datas vindas do banco para o padrão brasileiro (DD/MM/YYYY).
 Criar função para retornar partidas agrupadas por estádio ou data.
 
-- [ ] Criar RankingService.
+- [x] Criar RankingService.
 O Desafio da Sprint: Criar a função que busca todas as partidas, itera sobre elas e calcula: Pontos, Vitórias, Empates, Derrotas e Saldo de Gols.
 Retornar um array de objetos ordenado (do 1º ao último colocado).
 
-- [ ] Criar VenueService.
+- [x] Criar VenueService.
 Consolidar os dados da sede com as informações de geolocalização para o mapa.
+
+- [x] Criar TeamService.
+Implementar o CRUD completo na camada de serviço para gerenciar as regras de negócio e validações relacionadas aos times do campeonato.
 
 - [ ] Implementar Rotas de Evento e Sedes.
 GET /event: Retorna o objeto do evento (UC01).
@@ -59,6 +66,7 @@ GET /venues/:id: Retorna detalhes de uma sede específica.
 
 - [ ] Implementar Rotas de Competição.
 GET /matches: Retorna a lista de jogos formatada (UC02 e UC03).
+GET /teams: Retorna a lista de times.
 GET /ranking: Retorna a tabela de classificação calculada pelo Service (UC04).
 
 - [ ] Documentação Automática.
@@ -179,3 +187,24 @@ Certificar-se de que as imagens estão utilizando otimização e "lazy loading" 
 - [ ] Elaboração da Documentação (README.md).
 Atualizar o arquivo README.md na raiz do repositório com uma breve descrição do projeto (Evosport) e os nomes dos integrantes da equipe.
 Documentar o passo a passo claro para rodar o projeto localmente, incluindo os comandos de instalação (`bun install`), execução do banco de dados/seed (`bun run seed`) e inicialização do servidor (`bun dev`).
+
+
+Elysia is unopinionated about folder structure, leaving you to decide how to organize your code yourself.
+
+However, if you don't have a specific structure in mind, we recommend a feature-based folder structure where each feature has its own folder containing controllers, services, and models.
+
+| src
+  | modules
+	| auth
+	  | index.ts (Elysia controller)
+	  | service.ts (service)
+	  | model.ts (model)
+	| user
+	  | index.ts (Elysia controller)
+	  | service.ts (service)
+	  | model.ts (model)
+  | utils
+	| a
+	  | index.ts
+	| b
+	  | index.ts
