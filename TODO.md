@@ -72,7 +72,7 @@ GET /event: Retorna o objeto do evento (UC01).
 GET /venues: Retorna a lista de estádios/cidades (UC05).
 GET /venues/:id: Retorna detalhes de uma sede específica.
 
-- [ ] Implementar Rotas de Competição.
+- [x] Implementar Rotas de Competição.
 GET /matches: Retorna a lista de jogos formatada (UC02 e UC03).
 GET /teams: Retorna a lista de times.
 GET /ranking: Retorna a tabela de classificação calculada pelo Service (UC04).
