@@ -77,7 +77,7 @@ GET /matches: Retorna a lista de jogos formatada (UC02 e UC03).
 GET /teams: Retorna a lista de times.
 GET /ranking: Retorna a tabela de classificação calculada pelo Service (UC04).
 
-- [ ] Atualizar Entrypoint da API.
+- [x] Atualizar Entrypoint da API.
 Refatorar o arquivo principal para registrar todos os módulos de rotas criados, centralizando a inicialização da aplicação Elysia.
 
 - [ ] Implementação de Testes Unitários e Integração.
