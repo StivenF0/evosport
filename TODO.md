@@ -69,6 +69,12 @@ GET /matches: Retorna a lista de jogos formatada (UC02 e UC03).
 GET /teams: Retorna a lista de times.
 GET /ranking: Retorna a tabela de classificação calculada pelo Service (UC04).
 
+- [ ] Implementação de Testes Unitários e Integração.
+Configurar o runner nativo do Bun e implementar a cobertura de testes para as três camadas da API, garantindo que as mensagens de erro retornadas ao usuário estejam em português.
+Repositories: Testar operações de banco de dados (CRUD) com mocks do Drizzle.
+Services: Validar regras de negócio, formatação de datas e cálculos de ranking.
+Controllers (Elysia): Testar os endpoints utilizando o método app.handle() para validar status HTTP e payloads.
+
 - [ ] Documentação Automática.
 Configurar o plugin @elysiajs/swagger (já que você está usando Elysia). Isso gera uma página visual com todos os seus endpoints automaticamente — o que ganha muitos pontos em disciplinas de engenharia.
 
