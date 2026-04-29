@@ -1,7 +1,7 @@
 import { Elysia } from 'elysia';
 import { teamService } from '../services/team-service';
 
-export const teamRoutes = new Elysia({ prefix: '/teams' })
+export const teamRoutes = new Elysia({ prefix: '/team' })
   // CREATE
   .post('/', async ({ body }) => {
     try {

@@ -1,7 +1,7 @@
 import { Elysia } from 'elysia';
 import { venueService } from '../services/venue-service';
 
-export const venueRoutes = new Elysia({ prefix: '/venues' })
+export const venueRoutes = new Elysia({ prefix: '/venue' })
   // CREATE
   .post('/', async ({ body }) => {
     try {
