@@ -59,15 +59,26 @@ Consolidar os dados da sede com as informações de geolocalização para o mapa
 - [x] Criar TeamService.
 Implementar o CRUD completo na camada de serviço para gerenciar as regras de negócio e validações relacionadas aos times do campeonato.
 
-- [ ] Implementar Rotas de Evento e Sedes.
+- [x] Implementar EventRepository.*
+Criar apps/api/src/repositories/event-repository.ts:
+Implementar o CRUD completo para abstrair as operações de banco de dados da entidade de Evento.
+
+- [x] Implementar EventService.*
+Criar o arquivo apps/api/src/services/event-service.ts:
+Implementar o CRUD completo na camada de serviço para gerenciar a lógica de negócio do evento principal.
+
+- [x] Implementar Rotas de Evento e Sedes.
 GET /event: Retorna o objeto do evento (UC01).
 GET /venues: Retorna a lista de estádios/cidades (UC05).
 GET /venues/:id: Retorna detalhes de uma sede específica.
 
-- [ ] Implementar Rotas de Competição.
+- [x] Implementar Rotas de Competição.
 GET /matches: Retorna a lista de jogos formatada (UC02 e UC03).
 GET /teams: Retorna a lista de times.
 GET /ranking: Retorna a tabela de classificação calculada pelo Service (UC04).
+
+- [x] Atualizar Entrypoint da API.
+Refatorar o arquivo principal para registrar todos os módulos de rotas criados, centralizando a inicialização da aplicação Elysia.
 
 - [ ] Implementação de Testes Unitários e Integração.
 Configurar o runner nativo do Bun e implementar a cobertura de testes para as três camadas da API, garantindo que as mensagens de erro retornadas ao usuário estejam em português.
