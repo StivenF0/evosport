@@ -1,15 +1,19 @@
 import { eq } from 'drizzle-orm';
 import { db } from '../db';
-import type { NewMatch, UpdateMatch } from '@packages/types/match-types';
+import type { NewMatch, UpdateMatch } from '@packages/types';
 import { matches } from '../db/schema';
 
 export const matchRepository = {
   // CREATE
   async create(data: NewMatch) {
     try {
-      const result = await db.insert(matches).values(data).returning();
-      return result[0];
+      const [created] = await db.insert(matches).values(data).returning();
+      if (!created) {
+        throw new Error('Falha ao criar a partida.');
+      }
+      return created;
     } catch (error) {
+      if (error instanceof Error) throw error;
       throw new Error('Erro ao criar a partida.');
     }
   },
@@ -56,17 +60,17 @@ export const matchRepository = {
   // UPDATE
   async update(id: number, data: UpdateMatch) {
     try {
-      const result = await db
+      const [updated] = await db
         .update(matches)
         .set(data)
         .where(eq(matches.id, id))
         .returning();
 
-      if (!result.length) {
+      if (!updated) {
         throw new Error('Partida não encontrada para atualização.');
       }
 
-      return result[0];
+      return updated;
     } catch (error) {
       if (error instanceof Error) throw error;
       throw new Error('Erro ao atualizar a partida.');
@@ -76,16 +80,16 @@ export const matchRepository = {
   // DELETE
   async delete(id: number) {
     try {
-      const result = await db
+      const [deleted] = await db
         .delete(matches)
         .where(eq(matches.id, id))
         .returning();
 
-      if (!result.length) {
+      if (!deleted) {
         throw new Error('Partida não encontrada para exclusão.');
       }
 
-      return result[0];
+      return deleted;
     } catch (error) {
       if (error instanceof Error) throw error;
       throw new Error('Erro ao excluir a partida.');

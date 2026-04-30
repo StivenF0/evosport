@@ -1,15 +1,19 @@
 import { eq } from 'drizzle-orm';
 import { db } from '../db';
-import type { NewTeam, UpdateTeam } from '@packages/types/teams-types';
+import type { NewTeam, UpdateTeam } from '@packages/types';
 import { teams } from '../db/schema';
 
 export const teamRepository = {
   // CREATE
   async create(data: NewTeam) {
     try {
-      const result = await db.insert(teams).values(data).returning();
-      return result[0];
+      const [created] = await db.insert(teams).values(data).returning();
+      if (!created) {
+        throw new Error('Falha ao criar o time.');
+      }
+      return created;
     } catch (error) {
+      if (error instanceof Error) throw error;
       throw new Error('Erro ao criar o time.');
     }
   },
@@ -26,13 +30,13 @@ export const teamRepository = {
   // READ (One)
   async findById(id: number) {
     try {
-      const result = await db.select().from(teams).where(eq(teams.id, id)).limit(1);
+      const [found] = await db.select().from(teams).where(eq(teams.id, id)).limit(1);
 
-      if (!result.length) {
+      if (!found) {
         throw new Error('Time não encontrado.');
       }
 
-      return result[0];
+      return found;
     } catch (error) {
       if (error instanceof Error) throw error;
       throw new Error('Erro interno ao buscar o time.');
@@ -42,17 +46,17 @@ export const teamRepository = {
   // UPDATE
   async update(id: number, data: UpdateTeam) {
     try {
-      const result = await db
+      const [updated] = await db
         .update(teams)
         .set(data)
         .where(eq(teams.id, id))
         .returning();
 
-      if (!result.length) {
+      if (!updated) {
         throw new Error('Time não encontrado para atualização.');
       }
 
-      return result[0];
+      return updated;
     } catch (error) {
       if (error instanceof Error) throw error;
       throw new Error('Erro ao atualizar o time.');
@@ -62,16 +66,16 @@ export const teamRepository = {
   // DELETE
   async delete(id: number) {
     try {
-      const result = await db
+      const [deleted] = await db
         .delete(teams)
         .where(eq(teams.id, id))
         .returning();
 
-      if (!result.length) {
+      if (!deleted) {
         throw new Error('Time não encontrado para exclusão.');
       }
 
-      return result[0];
+      return deleted;
     } catch (error) {
       if (error instanceof Error) throw error;
       throw new Error('Erro ao excluir o time.');
