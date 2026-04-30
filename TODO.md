@@ -89,7 +89,7 @@ Controllers (Elysia): Testar os endpoints utilizando o método app.handle() para
 - [x] Documentação Automática.
 Configurar o plugin @elysia/openapi. Isso gera uma página visual com todos os seus endpoints automaticamente.
 
-- [ ] Habilitar Acesso Externo.
+- [x] Habilitar Acesso Externo.
 Configurar o plugin @elysiajs/cors para permitir que o Next.js (porta 3000) acesse a API (porta 3001).
 
 - [ ] Exportar Tipos para o Frontend.
