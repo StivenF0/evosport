@@ -86,8 +86,8 @@ Repositories: Testar operações de banco de dados (CRUD) com mocks do Drizzle.
 Services: Validar regras de negócio, formatação de datas e cálculos de ranking.
 Controllers (Elysia): Testar os endpoints utilizando o método app.handle() para validar status HTTP e payloads.
 
-- [ ] Documentação Automática.
-Configurar o plugin @elysiajs/swagger (já que você está usando Elysia). Isso gera uma página visual com todos os seus endpoints automaticamente — o que ganha muitos pontos em disciplinas de engenharia.
+- [x] Documentação Automática.
+Configurar o plugin @elysia/openapi. Isso gera uma página visual com todos os seus endpoints automaticamente.
 
 - [ ] Habilitar Acesso Externo.
 Configurar o plugin @elysiajs/cors para permitir que o Next.js (porta 3000) acesse a API (porta 3001).
