@@ -1,5 +1,5 @@
 import { teamRepository } from '../repositories/team-repository';
-import type { NewTeam, UpdateTeam } from '@packages/types/teams-types';
+import type { NewTeam, UpdateTeam } from '@packages/types/team-types';
 // import { teams } from '../db/schema';
 
 export const teamService = {
