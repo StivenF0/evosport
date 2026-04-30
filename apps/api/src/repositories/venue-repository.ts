@@ -1,15 +1,19 @@
 import { eq } from 'drizzle-orm';
 import { db } from '../db';
-import type { NewVenue, UpdateVenue } from '@packages/types/venue-types';
+import type { NewVenue, UpdateVenue } from '@packages/types';
 import { stadiums } from '../db/schema';
 
 export const venueRepository = {
   // CREATE
   async create(data: NewVenue) {
     try {
-      const result = await db.insert(stadiums).values(data).returning();
-      return result[0];
+      const [created] = await db.insert(stadiums).values(data).returning();
+      if (!created) {
+        throw new Error('Falha ao criar a sede.');
+      }
+      return created;
     } catch (error) {
+      if (error instanceof Error) throw error;
       throw new Error('Erro ao criar a sede.');
     }
   },
@@ -26,13 +30,13 @@ export const venueRepository = {
   // READ (One)
   async findById(id: number) {
     try {
-      const result = await db.select().from(stadiums).where(eq(stadiums.id, id)).limit(1);
+      const [found] = await db.select().from(stadiums).where(eq(stadiums.id, id)).limit(1);
 
-      if (!result.length) {
+      if (!found) {
         throw new Error('Sede não encontrada.');
       }
 
-      return result[0];
+      return found;
     } catch (error) {
       if (error instanceof Error) throw error;
       throw new Error('Erro interno ao procurar a sede.');
@@ -42,17 +46,17 @@ export const venueRepository = {
   // UPDATE
   async update(id: number, data: UpdateVenue) {
     try {
-      const result = await db
+      const [updated] = await db
         .update(stadiums)
         .set(data)
         .where(eq(stadiums.id, id))
         .returning();
 
-      if (!result.length) {
+      if (!updated) {
         throw new Error('Sede não encontrada para atualização.');
       }
 
-      return result[0];
+      return updated;
     } catch (error) {
       if (error instanceof Error) throw error;
       throw new Error('Erro ao atualizar a sede.');
@@ -62,16 +66,16 @@ export const venueRepository = {
   // DELETE
   async delete(id: number) {
     try {
-      const result = await db
+      const [deleted] = await db
         .delete(stadiums)
         .where(eq(stadiums.id, id))
         .returning();
 
-      if (!result.length) {
+      if (!deleted) {
         throw new Error('Sede não encontrada para eliminação.');
       }
 
-      return result[0];
+      return deleted;
     } catch (error) {
       if (error instanceof Error) throw error;
       throw new Error('Erro ao eliminar a sede.');

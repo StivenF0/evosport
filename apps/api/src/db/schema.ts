@@ -1,5 +1,6 @@
 import { sqliteTable, text, integer, real } from 'drizzle-orm/sqlite-core';
 import { relations } from 'drizzle-orm';
+import type { MatchStatus } from '@packages/types';
 
 export const event = sqliteTable('event', {
   id: integer('id').primaryKey({ autoIncrement: true }),
@@ -30,7 +31,7 @@ export const matches = sqliteTable('matches', {
   awayTeamId: integer('away_team_id').notNull().references(() => teams.id),
   stadiumId: integer('stadium_id').notNull().references(() => stadiums.id),
   date: integer('date', { mode: 'timestamp' }).notNull(),
-  status: text('status').notNull().default('agendado'), // status: 'agendado', 'em_andamento', 'encerrado'
+  status: text('status').$type<MatchStatus>().notNull().default('agendado'), // status: 'agendado', 'em_andamento', 'encerrado'
 });
 
 // Definição de relações para facilitar as consultas (joins) no Drizzle

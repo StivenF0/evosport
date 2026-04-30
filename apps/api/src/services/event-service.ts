@@ -1,8 +1,5 @@
 import { eventRepository } from '../repositories/event-repository';
-import { event } from '../db/schema';
-
-type NewEvent = typeof event.$inferInsert;
-type UpdateEvent = Partial<NewEvent>;
+import type { NewEvent, UpdateEvent } from '@packages/types';
 
 export const eventService = {
   // CREATE

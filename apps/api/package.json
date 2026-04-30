@@ -19,6 +19,7 @@
     "typescript": "^5"
   },
   "dependencies": {
+    "@elysia/openapi": "^1.4.15",
     "@elysiajs/cors": "^1.4.1",
     "@libsql/client": "^0.17.2",
     "dotenv": "^17.3.1",

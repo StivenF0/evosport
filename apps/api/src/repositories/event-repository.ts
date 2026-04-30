@@ -1,16 +1,14 @@
 import { db } from '../db';
 import { event } from '../db/schema';
 import { eq } from 'drizzle-orm';
-
-type NewEvent = typeof event.$inferInsert;
-type UpdateEvent = Partial<NewEvent>;
+import type { NewEvent, UpdateEvent } from '@packages/types';
 
 export const eventRepository = {
   // CREATE
   async create(data: NewEvent) {
-    const result = await db.insert(event).values(data).returning();
-    if (!result.length) throw new Error('Falha ao criar o evento.');
-    return result[0];
+    const [created] = await db.insert(event).values(data).returning();
+    if (!created) throw new Error('Falha ao criar o evento.');
+    return created;
   },
 
   // READ (All)
@@ -20,22 +18,22 @@ export const eventRepository = {
 
   // READ (One)
   async findById(id: number) {
-    const result = await db.select().from(event).where(eq(event.id, id)).limit(1);
-    if (!result.length) throw new Error('Evento não encontrado.');
-    return result[0];
+    const [found] = await db.select().from(event).where(eq(event.id, id)).limit(1);
+    if (!found) throw new Error('Evento não encontrado.');
+    return found;
   },
 
   // UPDATE
   async update(id: number, data: UpdateEvent) {
-    const result = await db.update(event).set(data).where(eq(event.id, id)).returning();
-    if (!result.length) throw new Error('Evento não encontrado para atualização.');
-    return result[0];
+    const [updated] = await db.update(event).set(data).where(eq(event.id, id)).returning();
+    if (!updated) throw new Error('Evento não encontrado para atualização.');
+    return updated;
   },
 
   // DELETE
   async delete(id: number) {
-    const result = await db.delete(event).where(eq(event.id, id)).returning();
-    if (!result.length) throw new Error('Evento não encontrado para exclusão.');
-    return result[0];
+    const [deleted] = await db.delete(event).where(eq(event.id, id)).returning();
+    if (!deleted) throw new Error('Evento não encontrado para exclusão.');
+    return deleted;
   }
 };
