@@ -10,7 +10,11 @@ import { teamRoutes } from './routes/team-routes.ts';
 import { rankingRoutes } from './routes/ranking-routes.ts';
 
 const app = new Elysia({ prefix: '/api'})
-  .use(cors())
+  .use(cors({
+    origin: '*',
+    methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+    credentials: true,
+  }))
   .use(openapi({
     scalar: {
       spec: {
