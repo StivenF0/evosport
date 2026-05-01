@@ -13,7 +13,9 @@ export const eventRepository = {
 
   // READ (All)
   async findAll() {
-    return await db.select().from(event);
+    const found = await db.select().from(event);
+    if (!found) throw new Error('Falha ao encontrar o evento.');
+    return found;
   },
 
   // READ (One)

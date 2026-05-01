@@ -5,7 +5,9 @@
     "dev:api": "bun --filter api dev",
     "dev:web": "bun --filter web dev",
     "dev": "bun --filter \"*\" dev",
-    "db:seed": "bun --filter api db:seed"
+    "db:seed": "bun --filter api db:seed",
+    "test:api": "bun --filter api --elide-lines=0 test",
+    "coverage:api": "bun --filter api --elide-lines=0 coverage"
   },
   "workspaces": [
     "apps/*",
