@@ -9,7 +9,7 @@ describe('EventService - Create Event', () => {
   })
 
   it('should create a new event.', async () => {
-    const mockCreate = spyOn(eventRepository, 'create').mockResolvedValue({
+    const mockCreateEvent = spyOn(eventRepository, 'create').mockResolvedValue({
       id: 1,
       name: 'Brasileirão',
       startDate: new Date('2026-06-15'),
@@ -28,8 +28,8 @@ describe('EventService - Create Event', () => {
     expect(event?.name).toBe('Brasileirão');
   })
 
-  it('should return an error if event failed to be created.', async () => {
-    const mockCreateError = spyOn(eventRepository, 'create').mockRejectedValue(Error('Falha ao criar o evento.'));
+  it('should throw an error if event failed to be created.', async () => {
+    const mockCreateEventError = spyOn(eventRepository, 'create').mockRejectedValue(Error('Falha ao criar o evento.'));
 
     const event = eventService.createEvent({
       name: 'Champions',
@@ -62,7 +62,7 @@ describe('EventService - Find By Id', () => {
     expect(event?.name).toBe('Brasileirão');
   })
 
-  it('should throw an error if no event is find by ID.', async () => {
+  it('should throw an error if no event was found by ID.', async () => {
     const mockFindByIdError = spyOn(eventRepository, 'findById').mockRejectedValue(new Error('Evento não encontrado.'));
 
     const event = eventService.getEventById(2);
@@ -101,7 +101,7 @@ describe('EventService - Find All', () => {
     expect(events[1]?.name).toBe('Champions');
   })
 
-  it('should throw an error if no event is find.', async () => {
+  it('should throw an error if no event was found.', async () => {
     const mockFindAllError = spyOn(eventRepository, 'findAll').mockRejectedValue(new Error('Falha ao encontrar o evento.'));
 
     const events = eventService.getAllEvents();
@@ -132,7 +132,7 @@ describe('EventService - Update Event', () => {
     expect(event?.name).toBe('Brasileirão - Série A');
   })
 
-  it('should throw an error if no event is find for update.', async () => {
+  it('should throw an error if no event was found for update.', async () => {
     const mockUpdateEventError = spyOn(eventRepository, 'update').mockRejectedValue(new Error('Evento não encontrado para atualização.'));
 
     const event = eventService.updateEvent(2, {
@@ -163,7 +163,7 @@ describe('EventService - Delete Event', () => {
     expect(event?.name).toBe('Brasileirão');
   })
 
-  it('should throw an error if no event is find for delete.', async () => {
+  it('should throw an error if no event was found for delete.', async () => {
     const mockDeleteEventError = spyOn(eventRepository, 'delete').mockRejectedValue(new Error('Evento não encontrado para exclusão.'));
 
     const event = eventService.deleteEvent(2);
