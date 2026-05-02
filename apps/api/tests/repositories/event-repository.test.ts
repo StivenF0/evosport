@@ -8,7 +8,6 @@ describe('EventRepository - Create Event', () => {
   });
 
   it('should create a new event.', async () => {
-    // Mock da chain: db.insert().values().returning()
     spyOn(db, 'insert').mockReturnValue({
       values: () => ({
         returning: () => Promise.resolve([{ id: 1, name: 'Copa Evosport' }])
@@ -27,7 +26,6 @@ describe('EventRepository - Create Event', () => {
   });
 
   it('should throw an error if event failed to be created.', async () => {
-    // Simulando o retorno de um array vazio (onde destruturação [created] fica undefined)
     spyOn(db, 'insert').mockReturnValue({
       values: () => ({
         returning: () => Promise.resolve([])
@@ -50,7 +48,6 @@ describe('EventRepository - Find All', () => {
   });
 
   it('should return all events.', async () => {
-    // Mock da chain: db.select().from()
     spyOn(db, 'select').mockReturnValue({
       from: () => Promise.resolve([
         { id: 1, name: 'Copa Evosport' },
@@ -71,7 +68,6 @@ describe('EventRepository - Find By Id', () => {
   });
 
   it('should return an event by ID.', async () => {
-    // Mock da chain: db.select().from().where().limit()
     spyOn(db, 'select').mockReturnValue({
       from: () => ({
         where: () => ({
@@ -107,7 +103,6 @@ describe('EventRepository - Update Event', () => {
   });
 
   it('should update an event.', async () => {
-    // Mock da chain: db.update().set().where().returning()
     spyOn(db, 'update').mockReturnValue({
       set: () => ({
         where: () => ({
@@ -143,7 +138,6 @@ describe('EventRepository - Delete Event', () => {
   });
 
   it('should delete an event.', async () => {
-    // Mock da chain: db.delete().where().returning()
     spyOn(db, 'delete').mockReturnValue({
       where: () => ({
         returning: () => Promise.resolve([{ id: 1, name: 'Copa Evosport' }])
