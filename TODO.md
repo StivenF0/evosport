@@ -80,7 +80,7 @@ GET /ranking: Retorna a tabela de classificação calculada pelo Service (UC04).
 - [x] Atualizar Entrypoint da API.
 Refatorar o arquivo principal para registrar todos os módulos de rotas criados, centralizando a inicialização da aplicação Elysia.
 
-- [ ] Implementação de Testes Unitários e Integração.
+- [x] Implementação de Testes Unitários e Integração.
 Configurar o runner nativo do Bun e implementar a cobertura de testes para as três camadas da API, garantindo que as mensagens de erro retornadas ao usuário estejam em português.
 Repositories: Testar operações de banco de dados (CRUD) com mocks do Drizzle.
 Services: Validar regras de negócio, formatação de datas e cálculos de ranking.
