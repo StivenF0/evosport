@@ -113,7 +113,7 @@ Garantir que o menu funciona no celular (ex: um botão de "hambúrguer" simples 
 - [x] Desenvolver o Footer.
 Rodapé simples com o nome do projeto (Evosport), ano e os nomes dos membros da equipe (ótimo para a apresentação da disciplina).
 
-- [ ] Aplicar o Layout Global.
+- [x] Aplicar o Layout Global.
 Garantir que todas as páginas do Next.js herdem esse Header e Footer automaticamente através do layout.tsx.
 
 - [ ] Importar Tipos do Monorepo.
