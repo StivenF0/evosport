@@ -21,23 +21,23 @@ export function useRanking() {
 // Fetch das Partidas
 export function useMatches() {
   return useQuery({
-    queryKey: ['matches'],
-    queryFn: () => apiFetch<Match[]>('/matches'),
+    queryKey: ['match'],
+    queryFn: () => apiFetch<Match[]>('/match'),
   });
 }
 
 // Fetch das Sedes (Estádios/Mapas)
 export function useVenues() {
   return useQuery({
-    queryKey: ['venues'],
-    queryFn: () => apiFetch<Venue[]>('/venues'),
+    queryKey: ['venus'],
+    queryFn: () => apiFetch<Venue[]>('/venue'),
   });
 }
 
 // Fetch dos Times
 export function useTeams() {
   return useQuery({
-    queryKey: ['teams'],
-    queryFn: () => apiFetch<Team[]>('/teams'),
+    queryKey: ['team'],
+    queryFn: () => apiFetch<Team[]>('/team'),
   });
 }

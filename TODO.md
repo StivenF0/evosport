@@ -119,7 +119,7 @@ Garantir que todas as páginas do Next.js herdem esse Header e Footer automatica
 - [x] Importar Tipos do Monorepo.
 Consumir as interfaces TypeScript exportadas do seu packages/types para tipar as respostas da API no frontend.
 
-- [ ] Criar o Hook de Busca (Event Data).
+- [x] Criar o Hook de Busca (Event Data).
 Criar um custom hook (ex: useEventInfo()) usando o TanStack Query para chamar a rota GET /event do Elysia.
 
 - [ ] Desenvolver a seção Hero (Capa).
