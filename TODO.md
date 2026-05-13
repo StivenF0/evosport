@@ -116,7 +116,7 @@ Rodapé simples com o nome do projeto (Evosport), ano e os nomes dos membros da 
 - [x] Aplicar o Layout Global.
 Garantir que todas as páginas do Next.js herdem esse Header e Footer automaticamente através do layout.tsx.
 
-- [ ] Importar Tipos do Monorepo.
+- [x] Importar Tipos do Monorepo.
 Consumir as interfaces TypeScript exportadas do seu packages/types para tipar as respostas da API no frontend.
 
 - [ ] Criar o Hook de Busca (Event Data).
