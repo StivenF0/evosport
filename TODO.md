@@ -204,24 +204,3 @@ Certificar-se de que as imagens estão utilizando otimização e "lazy loading" 
 - [ ] Elaboração da Documentação (README.md).
 Atualizar o arquivo README.md na raiz do repositório com uma breve descrição do projeto (Evosport) e os nomes dos integrantes da equipe.
 Documentar o passo a passo claro para rodar o projeto localmente, incluindo os comandos de instalação (`bun install`), execução do banco de dados/seed (`bun run seed`) e inicialização do servidor (`bun dev`).
-
-
-Elysia is unopinionated about folder structure, leaving you to decide how to organize your code yourself.
-
-However, if you don't have a specific structure in mind, we recommend a feature-based folder structure where each feature has its own folder containing controllers, services, and models.
-
-| src
-  | modules
-	| auth
-	  | index.ts (Elysia controller)
-	  | service.ts (service)
-	  | model.ts (model)
-	| user
-	  | index.ts (Elysia controller)
-	  | service.ts (service)
-	  | model.ts (model)
-  | utils
-	| a
-	  | index.ts
-	| b
-	  | index.ts
