@@ -110,7 +110,7 @@ Criar um arquivo (ex: src/lib/api.ts) com uma função base que usa o fetch nati
 Criar o menu de navegação superior com links para "Home", "Jogos" e "Sedes".
 Garantir que o menu funciona no celular (ex: um botão de "hambúrguer" simples usando Tailwind).
 
-- [ ] Desenvolver o Footer.
+- [x] Desenvolver o Footer.
 Rodapé simples com o nome do projeto (Evosport), ano e os nomes dos membros da equipe (ótimo para a apresentação da disciplina).
 
 - [ ] Aplicar o Layout Global.
