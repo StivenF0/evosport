@@ -100,7 +100,7 @@ Garantir que as interfaces dos objetos de resposta da API estejam no diretório 
 - [x] Configurar Variáveis de Ambiente.
 Criar o arquivo .env.local na pasta apps/web com a variável NEXT_PUBLIC_API_URL=http://localhost:3001
 
-- [ ] Configurar o TanStack Query.
+- [x] Configurar o TanStack Query.
 Configurar o QueryClientProvider no arquivo principal do Next.js (geralmente app/layout.tsx ou providers.tsx). Isso vai gerenciar o cache e os estados de "carregando" das suas requisições.
 
 - [ ] Criar utilitário de Fetch.
