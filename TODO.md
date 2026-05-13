@@ -106,7 +106,7 @@ Configurar o QueryClientProvider no arquivo principal do Next.js (geralmente app
 - [x] Criar utilitário de Fetch.
 Criar um arquivo (ex: src/lib/api.ts) com uma função base que usa o fetch nativo apontando para a sua NEXT_PUBLIC_API_URL.
 
-- [ ] Desenvolver o Header (Navbar).
+- [x] Desenvolver o Header (Navbar).
 Criar o menu de navegação superior com links para "Home", "Jogos" e "Sedes".
 Garantir que o menu funciona no celular (ex: um botão de "hambúrguer" simples usando Tailwind).
 
