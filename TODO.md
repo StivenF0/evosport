@@ -122,7 +122,7 @@ Consumir as interfaces TypeScript exportadas do seu packages/types para tipar as
 - [x] Criar o Hook de Busca (Event Data).
 Criar um custom hook (ex: useEventInfo()) usando o TanStack Query para chamar a rota GET /event do Elysia.
 
-- [ ] Desenvolver a seção Hero (Capa).
+- [x] Desenvolver a seção Hero (Capa).
 Construir a interface principal da Home (app/page.tsx).
 Exibir dinamicamente o Nome do Evento, as Datas e a Logo (Caso de Uso: UC01).
 
