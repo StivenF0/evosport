@@ -126,7 +126,7 @@ Criar um custom hook (ex: useEventInfo()) usando o TanStack Query para chamar a 
 Construir a interface principal da Home (app/page.tsx).
 Exibir dinamicamente o Nome do Evento, as Datas e a Logo (Caso de Uso: UC01).
 
-- [ ] Tratar Estados de UI.
+- [x] Tratar Estados de UI.
 Adicionar um texto ou spinner de "Carregando..." enquanto a API responde, e uma mensagem de erro amigável caso o backend esteja desligado.
 
 ## Sprint 4
