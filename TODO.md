@@ -59,11 +59,11 @@ Consolidar os dados da sede com as informações de geolocalização para o mapa
 - [x] Criar TeamService.
 Implementar o CRUD completo na camada de serviço para gerenciar as regras de negócio e validações relacionadas aos times do campeonato.
 
-- [x] Implementar EventRepository.*
+- [x] Implementar EventRepository.
 Criar apps/api/src/repositories/event-repository.ts:
 Implementar o CRUD completo para abstrair as operações de banco de dados da entidade de Evento.
 
-- [x] Implementar EventService.*
+- [x] Implementar EventService.
 Criar o arquivo apps/api/src/services/event-service.ts:
 Implementar o CRUD completo na camada de serviço para gerenciar a lógica de negócio do evento principal.
 
@@ -97,36 +97,36 @@ Garantir que as interfaces dos objetos de resposta da API estejam no diretório 
 
 ## Sprint 3
 
-- [ ] Configurar Variáveis de Ambiente.
+- [x] Configurar Variáveis de Ambiente.
 Criar o arquivo .env.local na pasta apps/web com a variável NEXT_PUBLIC_API_URL=http://localhost:3001
 
-- [ ] Configurar o TanStack Query.
+- [x] Configurar o TanStack Query.
 Configurar o QueryClientProvider no arquivo principal do Next.js (geralmente app/layout.tsx ou providers.tsx). Isso vai gerenciar o cache e os estados de "carregando" das suas requisições.
 
-- [ ] Criar utilitário de Fetch.
+- [x] Criar utilitário de Fetch.
 Criar um arquivo (ex: src/lib/api.ts) com uma função base que usa o fetch nativo apontando para a sua NEXT_PUBLIC_API_URL.
 
-- [ ] Desenvolver o Header (Navbar).
+- [x] Desenvolver o Header (Navbar).
 Criar o menu de navegação superior com links para "Home", "Jogos" e "Sedes".
 Garantir que o menu funciona no celular (ex: um botão de "hambúrguer" simples usando Tailwind).
 
-- [ ] Desenvolver o Footer.
+- [x] Desenvolver o Footer.
 Rodapé simples com o nome do projeto (Evosport), ano e os nomes dos membros da equipe (ótimo para a apresentação da disciplina).
 
-- [ ] Aplicar o Layout Global.
+- [x] Aplicar o Layout Global.
 Garantir que todas as páginas do Next.js herdem esse Header e Footer automaticamente através do layout.tsx.
 
-- [ ] Importar Tipos do Monorepo.
+- [x] Importar Tipos do Monorepo.
 Consumir as interfaces TypeScript exportadas do seu packages/types para tipar as respostas da API no frontend.
 
-- [ ] Criar o Hook de Busca (Event Data).
+- [x] Criar o Hook de Busca (Event Data).
 Criar um custom hook (ex: useEventInfo()) usando o TanStack Query para chamar a rota GET /event do Elysia.
 
-- [ ] Desenvolver a seção Hero (Capa).
+- [x] Desenvolver a seção Hero (Capa).
 Construir a interface principal da Home (app/page.tsx).
 Exibir dinamicamente o Nome do Evento, as Datas e a Logo (Caso de Uso: UC01).
 
-- [ ] Tratar Estados de UI.
+- [x] Tratar Estados de UI.
 Adicionar um texto ou spinner de "Carregando..." enquanto a API responde, e uma mensagem de erro amigável caso o backend esteja desligado.
 
 ## Sprint 4
@@ -204,24 +204,3 @@ Certificar-se de que as imagens estão utilizando otimização e "lazy loading" 
 - [ ] Elaboração da Documentação (README.md).
 Atualizar o arquivo README.md na raiz do repositório com uma breve descrição do projeto (Evosport) e os nomes dos integrantes da equipe.
 Documentar o passo a passo claro para rodar o projeto localmente, incluindo os comandos de instalação (`bun install`), execução do banco de dados/seed (`bun run seed`) e inicialização do servidor (`bun dev`).
-
-
-Elysia is unopinionated about folder structure, leaving you to decide how to organize your code yourself.
-
-However, if you don't have a specific structure in mind, we recommend a feature-based folder structure where each feature has its own folder containing controllers, services, and models.
-
-| src
-  | modules
-	| auth
-	  | index.ts (Elysia controller)
-	  | service.ts (service)
-	  | model.ts (model)
-	| user
-	  | index.ts (Elysia controller)
-	  | service.ts (service)
-	  | model.ts (model)
-  | utils
-	| a
-	  | index.ts
-	| b
-	  | index.ts
