@@ -18,7 +18,7 @@ async function seed() {
       name: 'Copa do Mundo Evosport 2026',
       startDate: new Date('2026-06-11'),
       endDate: new Date('2026-07-19'),
-      logoUrl: 'https://example.com/logo-worldcup.png'
+      logoUrl: 'https://i.pinimg.com/736x/63/90/04/63900492a4c38c5b89321260e13c4eda.jpg'
     }).returning();
 
     // 3. Inserir Sedes/Estádios
@@ -33,14 +33,14 @@ async function seed() {
     // 4. Inserir Times
     console.log('⚽ Inserindo times...');
     const insertedTeams = await db.insert(teams).values([
-      { name: 'Brasil', flagUrl: 'https://flagsapi.com/BR/flat/64.png' },
-      { name: 'Argentina', flagUrl: 'https://flagsapi.com/AR/flat/64.png' },
-      { name: 'França', flagUrl: 'https://flagsapi.com/FR/flat/64.png' },
-      { name: 'Alemanha', flagUrl: 'https://flagsapi.com/DE/flat/64.png' },
-      { name: 'Japão', flagUrl: 'https://flagsapi.com/JP/flat/64.png' },
-      { name: 'Marrocos', flagUrl: 'https://flagsapi.com/MA/flat/64.png' },
-      { name: 'Espanha', flagUrl: 'https://flagsapi.com/ES/flat/64.png' },
-      { name: 'Portugal', flagUrl: 'https://flagsapi.com/PT/flat/64.png' }
+      { name: 'Brasil', flagUrl: 'https://flagfeed.com/country/br' },
+      { name: 'Argentina', flagUrl: 'https://flagfeed.com/country/ar' },
+      { name: 'França', flagUrl: 'https://flagfeed.com/country/fr' },
+      { name: 'Alemanha', flagUrl: 'https://flagfeed.com/country/de' },
+      { name: 'Japão', flagUrl: 'https://flagfeed.com/country/jp' },
+      { name: 'Marrocos', flagUrl: 'https://flagfeed.com/country/ma' },
+      { name: 'Espanha', flagUrl: 'https://flagfeed.com/country/es' },
+      { name: 'Portugal', flagUrl: 'https://flagfeed.com/country/pt' }
     ]).returning();
 
     // 5. Inserir Partidas Iniciais
