@@ -1,15 +1,15 @@
 'use client';
 
-import { useEvent } from '@web/hooks/useApi';
+import { usePrimaryEvent } from '@web/hooks/use-event';
 import { Calendar, AlertCircle, Loader2 } from 'lucide-react';
 
 export default function Home() {
-  const { data: event, isLoading, isError } = useEvent();
+  const { data: event, isLoading, isError } = usePrimaryEvent();
 
   // ESTADO 1: CARREGAMENTO (LOADING)
   if (isLoading) {
     return (
-      <div className="bg-white/60 backdrop-blur-sm rounded-3xl border border-gray-100 border-dashed p-12 md:p-20 flex flex-col items-center justify-center min-h-[300px]">
+      <div className="bg-white/60 backdrop-blur-sm rounded-3xl border border-gray-100 border-dashed p-12 md:p-20 flex flex-col items-center justify-center min-h-75">
         <div className="relative">
           <div className="absolute -inset-4 bg-blue-100 rounded-full blur-xl opacity-50 animate-pulse"></div>
           <Loader2 className="w-12 h-12 text-blue-600 animate-spin relative z-10" />
@@ -24,7 +24,7 @@ export default function Home() {
   // ESTADO 2: ERRO (OFFLINE/FALHA NA API)
   if (isError || !event) {
     return (
-      <div className="bg-red-50 rounded-3xl border border-red-100 p-12 md:p-20 flex flex-col items-center justify-center min-h-[300px] text-center">
+      <div className="bg-red-50 rounded-3xl border border-red-100 p-12 md:p-20 flex flex-col items-center justify-center min-h-75 text-center">
         <div className="bg-red-100 p-4 rounded-full mb-6">
           <AlertCircle className="w-10 h-10 text-red-600" />
         </div>

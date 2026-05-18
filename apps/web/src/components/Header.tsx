@@ -19,6 +19,7 @@ export function Header() {
           {/* Desktop Menu */}
           <div className="hidden sm:ml-6 sm:flex sm:items-center sm:space-x-8">
             <Link href="/" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Home</Link>
+            <Link href="/teams" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Times</Link>
             <Link href="/matches" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Jogos</Link>
             <Link href="/venues" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Sedes</Link>
           </div>
@@ -48,6 +49,7 @@ export function Header() {
       <div className={`${isOpen ? 'block' : 'hidden'} sm:hidden`}>
         <div className="pt-2 pb-3 space-y-1 bg-white border-t border-gray-200">
           <Link href="/" onClick={() => setIsOpen(false)} className="block px-4 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Home</Link>
+          <Link href="/teams" onClick={() => setIsOpen(false)} className="block px-4 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Times</Link>
           <Link href="/matches" onClick={() => setIsOpen(false)} className="block px-4 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Jogos</Link>
           <Link href="/venues" onClick={() => setIsOpen(false)} className="block px-4 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50">Sedes</Link>
         </div>
