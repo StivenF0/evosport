@@ -32,7 +32,7 @@ export default function Map({ venues }: MapProps) {
       center={defaultCenter}
       zoom={defaultZoom}
       scrollWheelZoom={false}
-      className="w-full h-[500px] rounded-2xl shadow-sm border border-gray-100 z-0"
+      className="w-full h-full rounded-2xl shadow-sm border border-gray-100 z-0"
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -45,7 +45,7 @@ export default function Map({ venues }: MapProps) {
         return (
           <Marker key={venue.id} position={[venue.latitude, venue.longitude]}>
             <Popup>
-              <div className="flex flex-col gap-2 min-w-[150px]">
+              <div className="flex flex-col gap-2 min-w-37.5">
                 <div>
                   <div className="font-bold text-gray-800 text-base leading-tight">
                     {venue.name}

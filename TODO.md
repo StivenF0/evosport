@@ -179,7 +179,7 @@ Mapear o array de dados para renderizar um componente de marcador (<Marker>) nas
 Incluir um balão de informação (<Popup>) vinculado a cada marcador.
 Configurar o Popup para exibir o nome do estádio, a cidade e um link (usando next/link) que direciona o usuário para a página de detalhes da sede correspondente.
 
-- [ ] Implementar a Página de Mapa.
+- [x] Implementar a Página de Mapa.
 Construir a interface da rota app/map/page.tsx.
 Integrar o componente de mapa em um layout responsivo, garantindo que a visualização preencha corretamente a tela em dispositivos móveis e desktops (Caso de Uso: UC06).
 
