@@ -3,6 +3,7 @@
 import { useTeams } from '../../hooks/use-team';
 import { LoadingSpinner } from '../../components/ui/LoadingSpinner';
 import { ErrorMessage } from '../../components/ui/ErrorMessage';
+import { EmptyState } from '../../components/ui/EmptyState';
 import { Shield } from 'lucide-react';
 
 export default function TeamsPage() {
@@ -34,7 +35,7 @@ export default function TeamsPage() {
         </div>
       </section>
 
-      {/* Grid de Times */}
+      {/* Grid de Times ou Empty State */}
       {teams && teams.length > 0 ? (
         <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-6">
           {teams.map((team) => (
@@ -63,9 +64,10 @@ export default function TeamsPage() {
           ))}
         </div>
       ) : (
-        <div className="bg-white rounded-3xl border border-gray-100 border-dashed p-12 text-center text-gray-500">
-          <p className="text-lg font-medium">Nenhum time cadastrado no momento.</p>
-        </div>
+        <EmptyState
+          title="Nenhum time encontrado"
+          message="Ainda não há times cadastrados neste evento. Tente novamente mais tarde."
+        />
       )}
     </div>
   );

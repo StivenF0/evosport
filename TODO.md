@@ -131,6 +131,9 @@ Adicionar um texto ou spinner de "Carregando..." enquanto a API responde, e uma 
 
 ## Sprint 4
 
+- [x] Tratar estados vazios.
+Criação do componente `EmptyState` integrado com o `lucide-react` (já utilizado no projeto) e refatoração da página de times (`web/src/app/teams/page.tsx`) para utilizá-lo.
+
 - [ ] Criar o Hook de Busca (Matches).
 Criar um custom hook (ex: useMatches()) com o TanStack Query para consumir a rota GET /matches da sua API Elysia.
 
