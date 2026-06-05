@@ -155,9 +155,6 @@ Criar uma tabela estlizada com Tailwind CSS para listar as posições, times, po
 - [ ] Implementar a Página de Classificação.
 Construir a interface da rota app/classificacao/page.tsx importando o componente de Tabela de Classificação para exibir o rendimento das equipes no torneio (Caso de Uso: UC04).
 
-- [ ] Tratar Estados Vazios.
-Adicionar mensagens amigáveis na interface para o caso de não existirem partidas cadastradas ou a tabela de classificação ainda estar vazia no banco de dados.
-
 ## Sprint 5
 
 - [ ] Atualizar Banco de Dados (Geolocalização).
