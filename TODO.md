@@ -153,7 +153,7 @@ Criar um custom hook (ex: useRanking()) com o TanStack Query para consumir a rot
 Criar uma tabela estlizada com Tailwind CSS para listar as posições, times, pontos (PTS), vitórias (V), empates (E), derrotas (D) e saldo de gols (SG).
 
 - [x] Implementar a Página de Classificação.
-Construir a interface da rota app/classificacao/page.tsx importando o componente de Tabela de Classificação para exibir o rendimento das equipes no torneio (Caso de Uso: UC04).
+Construir a interface da rota app/rankings/page.tsx importando o componente de Tabela de Classificação para exibir o rendimento das equipes no torneio (Caso de Uso: UC04).
 
 ## Sprint 5
 
@@ -180,7 +180,7 @@ Incluir um balão de informação (<Popup>) vinculado a cada marcador.
 Configurar o Popup para exibir o nome do estádio, a cidade e um link (usando next/link) que direciona o usuário para a página de detalhes da sede correspondente.
 
 - [ ] Implementar a Página de Mapa.
-Construir a interface da rota app/mapa/page.tsx.
+Construir a interface da rota app/map/page.tsx.
 Integrar o componente de mapa em um layout responsivo, garantindo que a visualização preencha corretamente a tela em dispositivos móveis e desktops (Caso de Uso: UC06).
 
 ## Sprint 6
