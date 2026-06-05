@@ -43,10 +43,8 @@ export function MatchCard({ match }: MatchCardProps) {
       <div className="flex justify-between items-center mb-6 border-b border-gray-50 pb-4">
         <div className="flex items-center text-gray-500 text-sm gap-2">
           <CalendarDays className="w-4 h-4" />
-          {new Date(match.date).toLocaleString('pt-BR', {
-            dateStyle: 'short',
-            timeStyle: 'short',
-          })}
+          {/* Utilizando a data já formatada vinda da API */}
+          {match.formattedDate}
         </div>
         {getStatusBadge(match.status)}
       </div>
