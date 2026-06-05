@@ -149,10 +149,10 @@ Adicionar lógica no Card de Jogo para exibir o resultado numérico (placar_a e 
 - [x] Criar o Hook de Busca (Ranking).
 Criar um custom hook (ex: useRanking()) com o TanStack Query para consumir a rota GET /ranking da API.
 
-- [ ] Desenvolver Componente de Tabela de Classificação.
+- [x] Desenvolver Componente de Tabela de Classificação.
 Criar uma tabela estlizada com Tailwind CSS para listar as posições, times, pontos (PTS), vitórias (V), empates (E), derrotas (D) e saldo de gols (SG).
 
-- [ ] Implementar a Página de Classificação.
+- [x] Implementar a Página de Classificação.
 Construir a interface da rota app/classificacao/page.tsx importando o componente de Tabela de Classificação para exibir o rendimento das equipes no torneio (Caso de Uso: UC04).
 
 ## Sprint 5
