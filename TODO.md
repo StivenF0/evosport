@@ -157,7 +157,7 @@ Construir a interface da rota app/rankings/page.tsx importando o componente de T
 
 ## Sprint 5
 
-- [ ] Atualizar Banco de Dados (Geolocalização).
+- [x] Atualizar Banco de Dados (Geolocalização).
 Adicionar colunas de latitude e longitude no schema da tabela de Sedes (Drizzle).
 Atualizar o arquivo de seed (apps/api/src/db/seed.ts) para incluir coordenadas reais das cidades-sede.
 Gerar e aplicar a migration para refletir essas mudanças no SQLite.
