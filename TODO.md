@@ -137,10 +137,10 @@ Criação do componente `EmptyState` integrado com o `lucide-react` (já utiliza
 - [x] Criar o Hook de Busca (Matches).
 Criar um custom hook (ex: useMatches()) com o TanStack Query para consumir a rota GET /matches da sua API Elysia.
 
-- [ ] Desenvolver Componente de Card de Jogo.
+- [x] Desenvolver Componente de Card de Jogo.
 Criar um componente visual reutilizável para exibir as informações individuais de cada partida (escudos ou nomes dos times, data, horário e estádio).
 
-- [ ] Implementar a Página de Tabela de Jogos.
+- [x] Implementar a Página de Tabela de Jogos.
 Construir a interface da rota app/jogos/page.tsx, mapeando os dados vindos do useMatches() para renderizar uma lista ou grade com os Cards de Jogo (Caso de Uso: UC02).
 
 - [ ] Exibir Placares e Status da Partida.
