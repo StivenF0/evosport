@@ -157,29 +157,29 @@ Construir a interface da rota app/rankings/page.tsx importando o componente de T
 
 ## Sprint 5
 
-- [ ] Atualizar Banco de Dados (Geolocalização).
+- [x] Atualizar Banco de Dados (Geolocalização).
 Adicionar colunas de latitude e longitude no schema da tabela de Sedes (Drizzle).
 Atualizar o arquivo de seed (apps/api/src/db/seed.ts) para incluir coordenadas reais das cidades-sede.
 Gerar e aplicar a migration para refletir essas mudanças no SQLite.
 
-- [ ] Instalar e Configurar Biblioteca de Mapa.
+- [x] Instalar e Configurar Biblioteca de Mapa.
 Adicionar os pacotes leaflet e react-leaflet ao projeto frontend (apps/web).
 Importar os estilos CSS obrigatórios do Leaflet no arquivo global de estilos (globals.css) do Next.js.
 
-- [ ] Desenvolver Componente de Mapa Base.
+- [x] Desenvolver Componente de Mapa Base.
 Criar um componente isolado (ex: src/components/Map.tsx) com a diretiva "use client" no topo do arquivo.
 Configurar o carregamento dinâmico do componente no Next.js (usando next/dynamic com ssr: false) para evitar erros de renderização no lado do servidor.
 Definir o centro do mapa e o zoom inicial focado na região do evento.
 
-- [ ] Criar Marcadores (Pins) Dinâmicos.
+- [x] Criar Marcadores (Pins) Dinâmicos.
 Utilizar o hook de busca do TanStack Query para resgatar a lista de sedes da API.
 Mapear o array de dados para renderizar um componente de marcador (<Marker>) nas coordenadas de latitude e longitude de cada estádio.
 
-- [ ] Adicionar Interatividade aos Marcadores.
+- [x] Adicionar Interatividade aos Marcadores.
 Incluir um balão de informação (<Popup>) vinculado a cada marcador.
 Configurar o Popup para exibir o nome do estádio, a cidade e um link (usando next/link) que direciona o usuário para a página de detalhes da sede correspondente.
 
-- [ ] Implementar a Página de Mapa.
+- [x] Implementar a Página de Mapa.
 Construir a interface da rota app/map/page.tsx.
 Integrar o componente de mapa em um layout responsivo, garantindo que a visualização preencha corretamente a tela em dispositivos móveis e desktops (Caso de Uso: UC06).
 
