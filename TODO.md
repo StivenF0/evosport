@@ -162,7 +162,7 @@ Adicionar colunas de latitude e longitude no schema da tabela de Sedes (Drizzle)
 Atualizar o arquivo de seed (apps/api/src/db/seed.ts) para incluir coordenadas reais das cidades-sede.
 Gerar e aplicar a migration para refletir essas mudanças no SQLite.
 
-- [ ] Instalar e Configurar Biblioteca de Mapa.
+- [x] Instalar e Configurar Biblioteca de Mapa.
 Adicionar os pacotes leaflet e react-leaflet ao projeto frontend (apps/web).
 Importar os estilos CSS obrigatórios do Leaflet no arquivo global de estilos (globals.css) do Next.js.
 
