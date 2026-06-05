@@ -3,6 +3,7 @@
 import { useEffect } from 'react';
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import L from 'leaflet';
+import Link from 'next/link';
 import type { Venue } from '../../types/api-types';
 
 const fixLeafletIcons = () => {
@@ -31,7 +32,7 @@ export default function Map({ venues }: MapProps) {
       center={defaultCenter}
       zoom={defaultZoom}
       scrollWheelZoom={false}
-      className="w-full h-125 rounded-2xl shadow-sm border border-gray-100 z-0"
+      className="w-full h-[500px] rounded-2xl shadow-sm border border-gray-100 z-0"
     >
       <TileLayer
         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -44,11 +45,27 @@ export default function Map({ venues }: MapProps) {
         return (
           <Marker key={venue.id} position={[venue.latitude, venue.longitude]}>
             <Popup>
-              <div className="font-bold text-gray-800">{venue.name}</div>
-              {/* Renderiza a cidade apenas se a propriedade existir no objeto */}
-              {venue.city && (
-                <div className="text-sm text-gray-500">{venue.city}</div>
-              )}
+              <div className="flex flex-col gap-2 min-w-[150px]">
+                <div>
+                  <div className="font-bold text-gray-800 text-base leading-tight">
+                    {venue.name}
+                  </div>
+                  {venue.city && (
+                    <div className="text-sm text-gray-500 mt-1">
+                      {venue.city}
+                    </div>
+                  )}
+                </div>
+
+                <div className="border-t border-gray-100 pt-2 mt-1">
+                  <Link
+                    href={`/venues/${venue.id}`}
+                    className="text-sm text-blue-600 hover:text-blue-800 font-semibold transition-colors inline-flex items-center gap-1"
+                  >
+                    Ver detalhes do estádio &rarr;
+                  </Link>
+                </div>
+              </div>
             </Popup>
           </Marker>
         );
