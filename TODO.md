@@ -143,7 +143,7 @@ Criar um componente visual reutilizável para exibir as informações individuai
 - [x] Implementar a Página de Tabela de Jogos.
 Construir a interface da rota app/jogos/page.tsx, mapeando os dados vindos do useMatches() para renderizar uma lista ou grade com os Cards de Jogo (Caso de Uso: UC02).
 
-- [ ] Exibir Placares e Status da Partida.
+- [x] Exibir Placares e Status da Partida.
 Adicionar lógica no Card de Jogo para exibir o resultado numérico (placar_a e placar_b) e o status do jogo (ex: "Encerrado", "Em Andamento" ou "Em Breve") (Caso de Uso: UC03).
 
 - [ ] Criar o Hook de Busca (Ranking).

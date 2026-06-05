@@ -1,5 +1,10 @@
 import { CalendarDays } from 'lucide-react';
-import type { Match } from '../../types/api-types';
+import type { Match as BaseMatch } from '../../types/api-types';
+
+export interface Match extends BaseMatch {
+  homeScore?: number;
+  awayScore?: number;
+}
 
 interface MatchCardProps {
   match: Match;
@@ -11,13 +16,13 @@ export function MatchCard({ match }: MatchCardProps) {
       case 'agendado':
         return (
           <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-bold uppercase">
-            Agendado
+            Em Breve
           </span>
         );
       case 'em_andamento':
         return (
           <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold uppercase animate-pulse">
-            Ao Vivo
+            Em Andamento
           </span>
         );
       case 'encerrado':
@@ -30,6 +35,8 @@ export function MatchCard({ match }: MatchCardProps) {
         return null;
     }
   };
+
+  const showScore = match.status === 'encerrado' || match.status === 'em_andamento';
 
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
@@ -63,8 +70,18 @@ export function MatchCard({ match }: MatchCardProps) {
           </span>
         </div>
 
-        {/* VS */}
-        <div className="text-2xl font-black text-gray-300">X</div>
+        {/* Placar ou VS */}
+        <div className="flex items-center gap-3">
+          {showScore ? (
+            <>
+              <span className="text-3xl font-black text-gray-900">{match.homeScore ?? 0}</span>
+              <span className="text-gray-400 font-medium text-lg">x</span>
+              <span className="text-3xl font-black text-gray-900">{match.awayScore ?? 0}</span>
+            </>
+          ) : (
+            <span className="text-2xl font-black text-gray-300">X</span>
+          )}
+        </div>
 
         {/* Time Visitante */}
         <div className="flex flex-col items-center flex-1">
