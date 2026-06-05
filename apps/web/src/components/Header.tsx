@@ -21,6 +21,7 @@ export function Header() {
             <Link href="/" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Home</Link>
             <Link href="/teams" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Times</Link>
             <Link href="/matches" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Jogos</Link>
+            <Link href="/rankings" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Classificações</Link>
             <Link href="/venues" className="text-gray-700 hover:text-blue-600 px-3 py-2 rounded-md text-sm font-medium">Sedes</Link>
           </div>
 
