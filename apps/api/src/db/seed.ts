@@ -1,6 +1,11 @@
 import { db } from "./index";
 import { event, matches, stadiums, teams } from "./schema";
 
+function ensure<T>(value: T | undefined): T {
+  if (value == null) throw new Error("Unexpected undefined value");
+  return value;
+}
+
 async function seed() {
   console.log("🌱 Iniciando o processo de seed...");
 
@@ -80,30 +85,30 @@ async function seed() {
     console.log("📅 Inserindo partidas...");
     await db.insert(matches).values([
       {
-        homeTeamId: insertedTeams[0]!.id, // Brasil
-        awayTeamId: insertedTeams[1]!.id, // Argentina
-        stadiumId: insertedStadiums[1]!.id, // Maracanã
+        homeTeamId: ensure(insertedTeams[0]).id, // Brasil
+        awayTeamId: ensure(insertedTeams[1]).id, // Argentina
+        stadiumId: ensure(insertedStadiums[1]).id, // Maracanã
         date: new Date("2026-06-12T16:00:00Z"),
         status: "agendado",
       },
       {
-        homeTeamId: insertedTeams[2]!.id, // França
-        awayTeamId: insertedTeams[3]!.id, // Alemanha
-        stadiumId: insertedStadiums[2]!.id, // Neo Química
+        homeTeamId: ensure(insertedTeams[2]).id, // França
+        awayTeamId: ensure(insertedTeams[3]).id, // Alemanha
+        stadiumId: ensure(insertedStadiums[2]).id, // Neo Química
         date: new Date("2026-06-13T14:00:00Z"),
         status: "agendado",
       },
       {
-        homeTeamId: insertedTeams[4]!.id, // Japão
-        awayTeamId: insertedTeams[5]!.id, // Marrocos
-        stadiumId: insertedStadiums[0]!.id, // Arena Dunnas
+        homeTeamId: ensure(insertedTeams[4]).id, // Japão
+        awayTeamId: ensure(insertedTeams[5]).id, // Marrocos
+        stadiumId: ensure(insertedStadiums[0]).id, // Arena Dunnas
         date: new Date("2026-06-14T18:00:00Z"),
         status: "agendado",
       },
       {
-        homeTeamId: insertedTeams[6]!.id, // Espanha
-        awayTeamId: insertedTeams[7]!.id, // Portugal
-        stadiumId: insertedStadiums[3]!.id, // Mineirão
+        homeTeamId: ensure(insertedTeams[6]).id, // Espanha
+        awayTeamId: ensure(insertedTeams[7]).id, // Portugal
+        stadiumId: ensure(insertedStadiums[3]).id, // Mineirão
         date: new Date("2026-06-15T20:00:00Z"),
         status: "agendado",
       },
