@@ -61,6 +61,7 @@ export default function Home() {
               alt={`Logo do evento ${event.name}`}
               width={144}
               height={144}
+              priority
               className="w-full h-full object-cover rounded-xl"
             />
           </div>
