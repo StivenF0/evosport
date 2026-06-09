@@ -253,9 +253,7 @@ describe("MatchService - Group By Date", () => {
   });
 
   it("should throw an error if no match was found.", async () => {
-    spyOn(matchService, "getMatchesGroupedByDate").mockRejectedValue(
-      Error(),
-    );
+    spyOn(matchService, "getMatchesGroupedByDate").mockRejectedValue(Error());
 
     const match = matchService.getMatchesGroupedByDate();
 
@@ -305,10 +303,7 @@ describe("MatchService - Group By Stadium", () => {
   });
 
   it("should throw an error if no match was found.", async () => {
-    spyOn(
-      matchService,
-      "getMatchesGroupedByDate",
-    ).mockRejectedValue(Error());
+    spyOn(matchService, "getMatchesGroupedByDate").mockRejectedValue(Error());
 
     const match = matchService.getMatchesGroupedByDate();
 

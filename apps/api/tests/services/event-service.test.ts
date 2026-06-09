@@ -29,9 +29,7 @@ describe("EventService - Create Event", () => {
   });
 
   it("should throw an error if event failed to be created.", async () => {
-    spyOn(eventRepository, "create").mockRejectedValue(
-      Error("Falha ao criar o evento."),
-    );
+    spyOn(eventRepository, "create").mockRejectedValue(Error("Falha ao criar o evento."));
 
     const event = eventService.createEvent({
       name: "Champions",
@@ -65,9 +63,7 @@ describe("EventService - Find By Id", () => {
   });
 
   it("should throw an error if no event was found by ID.", async () => {
-    spyOn(eventRepository, "findById").mockRejectedValue(
-      new Error("Evento não encontrado."),
-    );
+    spyOn(eventRepository, "findById").mockRejectedValue(new Error("Evento não encontrado."));
 
     const event = eventService.getEventById(2);
 
@@ -106,9 +102,7 @@ describe("EventService - Find All", () => {
   });
 
   it("should throw an error if no event was found.", async () => {
-    spyOn(eventRepository, "findAll").mockRejectedValue(
-      new Error("Falha ao encontrar o evento."),
-    );
+    spyOn(eventRepository, "findAll").mockRejectedValue(new Error("Falha ao encontrar o evento."));
 
     const events = eventService.getAllEvents();
 

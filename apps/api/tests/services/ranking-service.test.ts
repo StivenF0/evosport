@@ -33,7 +33,7 @@ describe("RankingService - Get Ranking", () => {
         homeTeam: { id: 3, name: "França", flagUrl: "" },
         awayTeam: { id: 1, name: "Brasil", flagUrl: "" },
       },
-    // biome-ignore lint/suspicious/noExplicitAny: mock de Drizzle em teste
+      // biome-ignore lint/suspicious/noExplicitAny: mock de Drizzle em teste
     ] as any);
 
     const ranking = await rankingService.getRanking();
