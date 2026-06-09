@@ -32,7 +32,7 @@ export default function MapView({ venues }: MapProps) {
     <MapContainer
       center={defaultCenter}
       zoom={defaultZoom}
-      scrollWheelZoom={false}
+      scrollWheelZoom={true}
       className="w-full h-full rounded-2xl shadow-sm border border-gray-100 z-0"
     >
       <TileLayer

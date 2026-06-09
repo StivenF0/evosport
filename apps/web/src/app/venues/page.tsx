@@ -20,8 +20,8 @@ export default function MapPage() {
   }
 
   return (
-    // Utilizamos h-[calc(100vh-100px)] para garantir que a página preencha a tela sem quebrar o header global
-    <div className="flex flex-col h-[calc(100vh-120px)] min-h-150 gap-6 animate-in fade-in duration-500">
+    // O container ocupa toda a altura disponível descontando o header (h-16) e o padding do layout (py-8)
+    <div className="flex flex-col min-h-[calc(100dvh-8rem)] gap-6 animate-in fade-in duration-500">
       {/* Header Responsivo */}
       <section className="bg-white rounded-3xl shadow-sm border border-gray-100 p-6 flex flex-col sm:flex-row items-center justify-between gap-4 shrink-0">
         <div className="text-center sm:text-left">
