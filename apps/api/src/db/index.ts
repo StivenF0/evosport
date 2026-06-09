@@ -1,9 +1,9 @@
-import { drizzle } from 'drizzle-orm/libsql';
-import { createClient } from '@libsql/client';
-import * as schema from './schema';
+import { createClient } from "@libsql/client";
+import { drizzle } from "drizzle-orm/libsql";
+import * as schema from "./schema";
 
 const client = createClient({
-  url: process.env.DB_FILE_NAME!
+  url: process.env.DB_FILE_NAME ?? "file:evosport.db",
 });
 
 export const db = drizzle(client, { schema });

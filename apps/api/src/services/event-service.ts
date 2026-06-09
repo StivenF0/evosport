@@ -1,13 +1,13 @@
-import { eventRepository } from '../repositories/event-repository';
-import type { NewEvent, UpdateEvent } from '@packages/types';
+import type { NewEvent, UpdateEvent } from "@packages/types";
+import { eventRepository } from "../repositories/event-repository";
 
 export const eventService = {
   // CREATE
   async createEvent(data: NewEvent) {
     try {
       return await eventRepository.create(data);
-    } catch (error) {
-      throw new Error('Erro ao criar o evento.');
+    } catch {
+      throw new Error("Erro ao criar o evento.");
     }
   },
 
@@ -15,8 +15,8 @@ export const eventService = {
   async getAllEvents() {
     try {
       return await eventRepository.findAll();
-    } catch (error) {
-      throw new Error('Erro ao buscar os eventos.');
+    } catch {
+      throw new Error("Erro ao buscar os eventos.");
     }
   },
 
@@ -24,8 +24,8 @@ export const eventService = {
   async getEventById(id: number) {
     try {
       return await eventRepository.findById(id);
-    } catch (error) {
-      throw new Error('Erro ao buscar o evento específico.');
+    } catch {
+      throw new Error("Erro ao buscar o evento específico.");
     }
   },
 
@@ -33,8 +33,8 @@ export const eventService = {
   async updateEvent(id: number, data: UpdateEvent) {
     try {
       return await eventRepository.update(id, data);
-    } catch (error) {
-      throw new Error('Erro ao atualizar o evento.');
+    } catch {
+      throw new Error("Erro ao atualizar o evento.");
     }
   },
 
@@ -42,8 +42,8 @@ export const eventService = {
   async deleteEvent(id: number) {
     try {
       return await eventRepository.delete(id);
-    } catch (error) {
-      throw new Error('Erro ao excluir o evento.');
+    } catch {
+      throw new Error("Erro ao excluir o evento.");
     }
-  }
+  },
 };

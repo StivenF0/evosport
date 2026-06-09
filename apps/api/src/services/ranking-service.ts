@@ -1,5 +1,5 @@
-import { rankingRepository } from '../repositories/ranking-repository';
-import { teams } from '../db/schema';
+import type { teams } from "../db/schema";
+import { rankingRepository } from "../repositories/ranking-repository";
 
 interface TeamStats {
   id: number;
@@ -26,29 +26,31 @@ export const rankingService = {
 
       // Helper to initialize team stats
       const getTeamStats = (team: Team): TeamStats => {
-        if (!rankingMap.has(team.id)) {
-          rankingMap.set(team.id, {
-            id: team.id,
-            name: team.name,
-            flagUrl: team.flagUrl,
-            played: 0,
-            points: 0,
-            wins: 0,
-            draws: 0,
-            losses: 0,
-            goalsFor: 0,
-            goalsAgainst: 0,
-            goalDifference: 0,
-          });
-        }
-        return rankingMap.get(team.id)!;
+        const existing = rankingMap.get(team.id);
+        if (existing) return existing;
+
+        const stats: TeamStats = {
+          id: team.id,
+          name: team.name,
+          flagUrl: team.flagUrl,
+          played: 0,
+          points: 0,
+          wins: 0,
+          draws: 0,
+          losses: 0,
+          goalsFor: 0,
+          goalsAgainst: 0,
+          goalDifference: 0,
+        };
+        rankingMap.set(team.id, stats);
+        return stats;
       };
 
       // Calculate stats iterating over matches
       for (const match of matches) {
         // Os campos homeScore e awayScore serão adicionados na Sprint 3
-        const homeScore = (match as any).homeScore ?? 0;
-        const awayScore = (match as any).awayScore ?? 0;
+        const homeScore = match.homeScore ?? 0;
+        const awayScore = match.awayScore ?? 0;
 
         const homeStats = getTeamStats(match.homeTeam);
         const awayStats = getTeamStats(match.awayTeam);
@@ -86,9 +88,8 @@ export const rankingService = {
         if (b.wins !== a.wins) return b.wins - a.wins;
         return b.goalDifference - a.goalDifference;
       });
-
-    } catch (error) {
-      throw new Error('Erro ao calcular a tabela de classificação.');
+    } catch {
+      throw new Error("Erro ao calcular a tabela de classificação.");
     }
-  }
+  },
 };

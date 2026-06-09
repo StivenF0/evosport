@@ -7,10 +7,16 @@
     "dev": "bun --filter \"*\" dev",
     "db:seed": "bun --filter api db:seed",
     "test:api": "bun --filter api --elide-lines=0 test",
-    "coverage:api": "bun --filter api --elide-lines=0 coverage"
+    "coverage:api": "bun --filter api --elide-lines=0 coverage",
+    "lint": "biome check .",
+    "lint:fix": "biome check --write .",
+    "format": "biome format --write ."
   },
   "workspaces": [
     "apps/*",
     "packages/*"
-  ]
+  ],
+  "devDependencies": {
+    "@biomejs/biome": "^2.4.16"
+  }
 }

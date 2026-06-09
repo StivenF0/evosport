@@ -131,76 +131,76 @@ Adicionar um texto ou spinner de "Carregando..." enquanto a API responde, e uma 
 
 ## Sprint 4
 
-- [ ] Criar o Hook de Busca (Matches).
+- [x] Tratar estados vazios.
+Criação do componente `EmptyState` integrado com o `lucide-react` (já utilizado no projeto) e refatoração da página de times (`web/src/app/teams/page.tsx`) para utilizá-lo.
+
+- [x] Criar o Hook de Busca (Matches).
 Criar um custom hook (ex: useMatches()) com o TanStack Query para consumir a rota GET /matches da sua API Elysia.
 
-- [ ] Desenvolver Componente de Card de Jogo.
+- [x] Desenvolver Componente de Card de Jogo.
 Criar um componente visual reutilizável para exibir as informações individuais de cada partida (escudos ou nomes dos times, data, horário e estádio).
 
-- [ ] Implementar a Página de Tabela de Jogos.
+- [x] Implementar a Página de Tabela de Jogos.
 Construir a interface da rota app/jogos/page.tsx, mapeando os dados vindos do useMatches() para renderizar uma lista ou grade com os Cards de Jogo (Caso de Uso: UC02).
 
-- [ ] Exibir Placares e Status da Partida.
+- [x] Exibir Placares e Status da Partida.
 Adicionar lógica no Card de Jogo para exibir o resultado numérico (placar_a e placar_b) e o status do jogo (ex: "Encerrado", "Em Andamento" ou "Em Breve") (Caso de Uso: UC03).
 
-- [ ] Criar o Hook de Busca (Ranking).
+- [x] Criar o Hook de Busca (Ranking).
 Criar um custom hook (ex: useRanking()) com o TanStack Query para consumir a rota GET /ranking da API.
 
-- [ ] Desenvolver Componente de Tabela de Classificação.
+- [x] Desenvolver Componente de Tabela de Classificação.
 Criar uma tabela estlizada com Tailwind CSS para listar as posições, times, pontos (PTS), vitórias (V), empates (E), derrotas (D) e saldo de gols (SG).
 
-- [ ] Implementar a Página de Classificação.
-Construir a interface da rota app/classificacao/page.tsx importando o componente de Tabela de Classificação para exibir o rendimento das equipes no torneio (Caso de Uso: UC04).
-
-- [ ] Tratar Estados Vazios.
-Adicionar mensagens amigáveis na interface para o caso de não existirem partidas cadastradas ou a tabela de classificação ainda estar vazia no banco de dados.
+- [x] Implementar a Página de Classificação.
+Construir a interface da rota app/rankings/page.tsx importando o componente de Tabela de Classificação para exibir o rendimento das equipes no torneio (Caso de Uso: UC04).
 
 ## Sprint 5
 
-- [ ] Atualizar Banco de Dados (Geolocalização).
+- [x] Atualizar Banco de Dados (Geolocalização).
 Adicionar colunas de latitude e longitude no schema da tabela de Sedes (Drizzle).
 Atualizar o arquivo de seed (apps/api/src/db/seed.ts) para incluir coordenadas reais das cidades-sede.
 Gerar e aplicar a migration para refletir essas mudanças no SQLite.
 
-- [ ] Instalar e Configurar Biblioteca de Mapa.
+- [x] Instalar e Configurar Biblioteca de Mapa.
 Adicionar os pacotes leaflet e react-leaflet ao projeto frontend (apps/web).
 Importar os estilos CSS obrigatórios do Leaflet no arquivo global de estilos (globals.css) do Next.js.
 
-- [ ] Desenvolver Componente de Mapa Base.
+- [x] Desenvolver Componente de Mapa Base.
 Criar um componente isolado (ex: src/components/Map.tsx) com a diretiva "use client" no topo do arquivo.
 Configurar o carregamento dinâmico do componente no Next.js (usando next/dynamic com ssr: false) para evitar erros de renderização no lado do servidor.
 Definir o centro do mapa e o zoom inicial focado na região do evento.
 
-- [ ] Criar Marcadores (Pins) Dinâmicos.
+- [x] Criar Marcadores (Pins) Dinâmicos.
 Utilizar o hook de busca do TanStack Query para resgatar a lista de sedes da API.
 Mapear o array de dados para renderizar um componente de marcador (<Marker>) nas coordenadas de latitude e longitude de cada estádio.
 
-- [ ] Adicionar Interatividade aos Marcadores.
+- [x] Adicionar Interatividade aos Marcadores.
 Incluir um balão de informação (<Popup>) vinculado a cada marcador.
 Configurar o Popup para exibir o nome do estádio, a cidade e um link (usando next/link) que direciona o usuário para a página de detalhes da sede correspondente.
 
-- [ ] Implementar a Página de Mapa.
-Construir a interface da rota app/mapa/page.tsx.
+- [x] Implementar a Página de Mapa.
+Construir a interface da rota app/map/page.tsx.
 Integrar o componente de mapa em um layout responsivo, garantindo que a visualização preencha corretamente a tela em dispositivos móveis e desktops (Caso de Uso: UC06).
 
 ## Sprint 6
 
-- [ ] Padronização e Limpeza de Código.
+- [x] Padronização e Limpeza de Código.
 Rodar os comandos de verificação do Biome (linting e formatação) em todo o monorepo para garantir consistência no código.
 Revisar os arquivos para remover `console.log` esquecidos, códigos comentados e importações não utilizadas.
 
-- [ ] Revisão de Responsividade.
+- [x] Revisão de Responsividade.
 Testar todas as páginas (Home, Jogos, Classificação, Sedes e Mapa) em resoluções de celular e tablet utilizando as ferramentas de desenvolvedor do navegador.
 Ajustar as classes do Tailwind CSS (usando os prefixos `sm:`, `md:`, `lg:`) para garantir que tabelas e grids não "quebrem" ou fiquem espremidos em telas menores.
 
-- [ ] Tratamento de Erros e Página 404.
+- [x] Tratamento de Erros e Página 404.
 Criar uma página amigável para rotas inexistentes utilizando o arquivo padrão do Next.js (app/not-found.tsx).
 Revisar os hooks de requisição (TanStack Query) para garantir que mensagens de erro claras sejam exibidas caso a API do Elysia esteja offline ou demore a responder.
 
-- [ ] Otimização de Performance visual.
+- [x] Otimização de Performance visual.
 Revisar o carregamento de mídias, garantindo a utilização do componente `<Image />` nativo do Next.js (next/image) para logos, bandeiras e fotos de estádios.
 Certificar-se de que as imagens estão utilizando otimização e "lazy loading" para não pesar o carregamento inicial do site.
 
-- [ ] Elaboração da Documentação (README.md).
+- [x] Elaboração da Documentação (README.md).
 Atualizar o arquivo README.md na raiz do repositório com uma breve descrição do projeto (Evosport) e os nomes dos integrantes da equipe.
 Documentar o passo a passo claro para rodar o projeto localmente, incluindo os comandos de instalação (`bun install`), execução do banco de dados/seed (`bun run seed`) e inicialização do servidor (`bun dev`).

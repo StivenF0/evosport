@@ -1,4 +1,4 @@
-import { t } from 'elysia';
+import { t } from "elysia";
 
 /**
  * Schema reutilizável para parâmetros de ID na URL.
@@ -6,8 +6,8 @@ import { t } from 'elysia';
  */
 export const IdParam = t.Object({
   id: t.Numeric({
-    description: 'ID numérico do recurso'
-  })
+    description: "ID numérico do recurso",
+  }),
 });
 
 /**
@@ -15,6 +15,6 @@ export const IdParam = t.Object({
  */
 export const ErrorResponse = t.Object({
   message: t.String({
-    description: 'Mensagem detalhando o erro ocorrido'
-  })
+    description: "Mensagem detalhando o erro ocorrido",
+  }),
 });

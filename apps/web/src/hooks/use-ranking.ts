@@ -1,8 +1,8 @@
-import { useQuery } from '@tanstack/react-query';
-import { rankingService } from '../services/ranking-service';
+import { useQuery } from "@tanstack/react-query";
+import { rankingService } from "../services/ranking-service";
 
 export const rankingKeys = {
-  all: ['ranking'] as const,
+  all: ["ranking"] as const,
 };
 
 export const useRanking = () =>
