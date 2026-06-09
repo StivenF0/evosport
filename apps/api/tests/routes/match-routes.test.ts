@@ -44,6 +44,8 @@ describe("MatchRoutes - Integração", () => {
       stadiumId: 1,
       date: validDate,
       status: "agendado",
+      homeScore: null,
+      awayScore: null,
     });
 
     const res = await req("/", {
@@ -76,6 +78,8 @@ describe("MatchRoutes - Integração", () => {
         homeTeam: validHomeTeam,
         awayTeam: validAwayTeam,
         stadium: validStadium,
+        homeScore: null,
+        awayScore: null,
       },
     ]);
 
@@ -102,6 +106,8 @@ describe("MatchRoutes - Integração", () => {
           homeTeam: validHomeTeam,
           awayTeam: validAwayTeam,
           stadium: validStadium,
+          homeScore: null,
+          awayScore: null,
         },
       ],
     });
@@ -126,6 +132,8 @@ describe("MatchRoutes - Integração", () => {
       homeTeam: validHomeTeam,
       awayTeam: validAwayTeam,
       stadium: validStadium,
+      homeScore: null,
+      awayScore: null,
     });
 
     const res = await req("/1");
@@ -143,6 +151,8 @@ describe("MatchRoutes - Integração", () => {
       stadiumId: 1,
       date: validDate,
       status: "em_andamento",
+      homeScore: null,
+      awayScore: null,
     });
 
     const res = await req("/1", {
@@ -154,6 +164,8 @@ describe("MatchRoutes - Integração", () => {
         stadiumId: 1,
         date: "2026-06-15T00:00:00.000Z",
         status: "em_andamento",
+        homeScore: null,
+        awayScore: null,
       }),
     });
 
@@ -171,6 +183,8 @@ describe("MatchRoutes - Integração", () => {
       stadiumId: 1,
       date: validDate,
       status: "agendado",
+      homeScore: null,
+      awayScore: null,
     });
 
     const res = await req("/1", { method: "DELETE" });
