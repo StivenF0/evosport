@@ -60,6 +60,11 @@ A configuração principal do Biome está em `biome.json` na raiz do projeto. As
     };
     ```
 -   **Props:** O componente `<Image />` requer os atributos `width`, `height` ou `fill` e `alt`. Certifique-se de fornecer dimensões adequadas ou configurar o layout `fill` com um pai que tenha `position: relative`.
+-   **`priority` em imagens acima da dobra:** Imagens que estão visíveis no viewport inicial (acima da dobra) **DEVEM** receber a prop `priority` para evitar lazy loading e melhorar o LCP (Largest Contentful Paint). Exemplo: o logo do evento na Home (`apps/web/src/app/page.tsx`).
+    ```tsx
+    <Image src={event.logoUrl} alt="..." width={144} height={144} priority />
+    ```
+-   **Imagens abaixo da dobra** (cards de times, bandeiras na tabela, escudos nas partidas) **DEVEM** depender do lazy loading padrão do Next.js (sem `priority`), que já carrega sob demanda conforme o usuário scrolla.
 
 ### 5. ♿ Acessibilidade Web (a11y)
 
@@ -131,6 +136,24 @@ if (!data || data.length === 0) return <EmptyState />;
 return <Dados />;
 ```
 
+#### 🔍 Mensagens de erro dinâmicas
+
+Ao usar o padrão de 3 estados, **sempre desestruture `error`** do hook TanStack Query e passe `error?.message` para o `<ErrorMessage />`. Isso exibe mensagens reais da API (em Português) em vez de textos genéricos:
+
+```tsx
+const { data, isLoading, isError, error } = useMatches();
+
+if (isError) {
+  return <ErrorMessage message={error?.message || "Mensagem de fallback genérica."} />;
+}
+```
+
+O `api-client.ts` já extrai `error.message` das respostas da API e também trata erros de rede com a mensagem: *"Servidor indisponível. Verifique sua conexão e tente novamente."*
+
+#### 📄 Página 404
+
+Crie o arquivo `apps/web/src/app/not-found.tsx` para rotas inexistentes. Siga o design system do projeto (rounded-3xl, shadow-sm, centralizado, SVG inline com `<title>`, texto em Português, link "Voltar para Home"). O componente pode ser um Server Component (sem `"use client"`) por ser estático.
+
 ### 10. 🏷️ Exibição Condicional de Placares
 
 - Se o status da partida é `agendado`, nunca exiba `0 x 0`. Mostre apenas a letra **"X"** entre os times.
@@ -148,9 +171,47 @@ return <Dados />;
 
 Quando `logoUrl` (Evento) ou `flagUrl` (Time) forem `null`, renderize um círculo estilizado com a **primeira letra do nome** em destaque. Nunca quebre o layout ou exiba ícone de imagem quebrada.
 
-### 13. 📱 Responsividade na Tabela de Classificação
+### 13. 📱 Responsividade — Padrões Gerais
 
-Em telas pequenas (`< sm`), oculte as colunas **GP** e **GC** com `hidden sm:table-cell` para priorizar pontos, saldo de gols e histórico.
+#### Tabela de Classificação
+
+Em telas pequenas (`< sm`), oculte as colunas **GP** e **GC** com `hidden sm:table-cell` para priorizar pontos, saldo de gols e histórico. Use `overflow-x-auto` no container e `whitespace-nowrap` na tabela para permitir scroll horizontal quando necessário.
+
+#### Padding e Fontes Responsivos
+
+Use padding e fontes progressivos com breakpoints `sm:`, `md:`, `lg:` para evitar layouts espremidos em mobile:
+
+```tsx
+// Padding responsivo
+<div className="p-4 sm:p-6 md:p-8">
+
+// Fontes responsivas
+<span className="text-xs sm:text-sm md:text-base">
+
+// Tamanhos de elementos (escudos, logos, etc.)
+<div className="w-12 h-12 sm:w-16 sm:h-16 md:w-20 md:h-20">
+```
+
+#### Grids Responsivos
+
+- **Times:** `grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5` — 2 cols no mobile, até 5 em desktop.
+- **Partidas:** `grid-cols-1 lg:grid-cols-2` — 1 coluna no mobile/tablet, 2 em desktop largo.
+
+#### Header de Páginas
+
+Use `flex-col md:flex-row` nos cabeçalhos de seção para empilhar em mobile e lado a lado em desktop, com `text-center sm:text-left` para alinhamento.
+
+#### Viewport Height (`100dvh`)
+
+Para layouts que ocupam a tela inteira (ex: mapa), prefira `100dvh` (dynamic viewport height) em vez de `100vh` para melhor comportamento em mobile com barra de URL dinâmica.
+
+```tsx
+<div className="min-h-[calc(100dvh-8rem)]"> {/* header h-16 + main py-8 */}
+```
+
+#### Menu Mobile (Header)
+
+O Header possui um menu hambúrguer que alterna visibilidade via state `isOpen`. **Mantenha os links do menu mobile sempre sincronizados com o menu desktop** — ambos devem ter exatamente os mesmos itens de navegação.
 
 ### 14. 🗺️ Leaflet no Next.js (SSR)
 

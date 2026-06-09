@@ -34,6 +34,26 @@ Este documento lista as principais ferramentas, frameworks e bibliotecas utiliza
 -   **Compilador React (Experimental):** `babel-plugin-react-compiler@1.0.0` (presente em `devDependencies`, mas seu uso no `next.config.ts` está habilitado por `reactCompiler: true`).
 -   **Tipagem:** `@types/react@^19`, `@types/react-dom@^19`.
 
+### 📁 Estrutura de Dados e Requisições
+
+O fluxo de dados do frontend segue uma arquitetura em camadas:
+
+```
+Páginas (collections)
+  ↓ consome
+Hooks (TanStack React Query) — `src/hooks/`
+  ↓ chama
+Services — `src/services/`
+  ↓ usa
+api-client — `src/lib/api-client.ts`
+  ↓ faz fetch
+API Elysia (apps/api)
+```
+
+- **`api-client.ts`**: Função genérica `apiFetch<T>()` que gerencia `Content-Type`, tratamento de erros HTTP (status não-ok) e erros de rede (fetch falhou), ambos com mensagens em Português.
+- **`QueryClient`** configurado em `src/app/providers/index.tsx` com: `staleTime: 60_000`, `retry: 1`, `refetchOnWindowFocus: false`.
+- Cada **hook** é um `useQuery` (ou `useMutation`) que chama o service correspondente.
+
 ---
 
 ## 📦 Pacotes Compartilhados (`packages/types`)

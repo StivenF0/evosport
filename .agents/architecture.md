@@ -49,18 +49,30 @@ A aplicação de backend segue um padrão arquitetural que separa as responsabil
 Construído com Next.js App Router. As rotas principais são chamadas de **collections**.
 
 -   `src/app/`: Collections do App Router.
-    -   `/` (Home): Hero com dados do evento.
-    -   `/teams`: Grid de cards com escudos e nomes dos times.
-    -   `/matches`: Lista de `MatchCard` com times, placar e estádio.
-    -   `/ranking`: Tabela de classificação com `RankingTable`.
-    -   `/map`: Mapa interativo com Leaflet.
+    -   `/` (Home): Hero com dados do evento (usa `usePrimaryEvent`).
+    -   `/teams`: Grid de cards com escudos e nomes dos times (usa `useTeams`).
+    -   `/matches`: Lista de `MatchCard` em grid 1-col/2-col (usa `useMatches`).
+    -   `/rankings`: Tabela de classificação com `RankingTable` (usa `useRanking`).
+    -   `/venues`: Mapa interativo Leaflet com pins das sedes (usa `useVenues`).
+    -   `not-found.tsx`: Página 404 customizada.
+    -   `providers/`: `QueryClientProvider` do TanStack React Query.
+    -   `layout.tsx`: Layout raiz com `<Header />`, `<Footer />` e `<Providers />`.
 -   `src/components/`: Componentes React reutilizáveis.
-    -   `ui/`: `LoadingSpinner`, `ErrorMessage`, `EmptyState`, `MatchCard`, `RankingTable`.
-    -   `DynamicMap.tsx` / `Map.tsx`: Mapa Leaflet com SSR desabilitado via dynamic import.
+    -   `ui/`: `LoadingSpinner`, `ErrorMessage`, `EmptyState`, `RankingTable`, `Map`, `DynamicMap`.
+    -   `matches/MatchCard.tsx`: Card individual de partida (escudos, placar, status, data).
+    -   `teams/TeamCard.tsx`: Card individual de time (escudo ou fallback com inicial).
+    -   `Header.tsx`: Navbar responsiva com menu hambúrguer em mobile.
+    -   `Footer.tsx`: Rodapé simples com ano e direitos reservados.
 -   `src/hooks/`: Custom Hooks com TanStack React Query.
     -   `use-event.ts`, `use-teams.ts`, `use-matches.ts`, `use-ranking.ts`, `use-venues.ts`.
+    -   `use-match.ts` também exporta `useMatchesGrouped` e `useCreateMatch` (mutation).
+    -   `use-team.ts` também exporta `useCreateTeam` (mutation).
+-   `src/services/`: Camada de chamadas HTTP que consomem o `api-client`.
+    -   `event-service.ts`, `match-service.ts`, `team-service.ts`, `ranking-service.ts`, `venue-service.ts`.
+-   `src/lib/`: Utilitários.
+    -   `api-client.ts`: Cliente HTTP genérico (`get`, `post`, `put`, `delete`) que aponta para `NEXT_PUBLIC_API_URL`.
 -   `src/types/`: Tipos TypeScript específicos do frontend.
--   `next.config.ts`: Configuração do Next.js (`images.remotePatterns`, `reactCompiler`).
+-   `next.config.ts`: Configuração do Next.js (`images.remotePatterns` para `flagfeed.com` e `i.pinimg.com`, `reactCompiler: true`).
 
 ### 📦 Pacotes Compartilhados (`packages/types`)
 

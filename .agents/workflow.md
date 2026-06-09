@@ -95,6 +95,8 @@ O [Biome](https://biomejs.dev/) é a ferramenta unificada para linting e formata
     bun run format
     ```
 
+> **Nota:** O comando `format` **não** executa lint — apenas formata. Após editar arquivos, rode sempre `bun run format && bun run lint` para garantir que ambos passem.
+
 ---
 
 ## 📝 Padrões de Commit (Conventional Commits)
