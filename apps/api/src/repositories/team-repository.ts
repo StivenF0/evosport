@@ -22,7 +22,7 @@ export const teamRepository = {
   async findAll() {
     try {
       return await db.select().from(teams);
-    } catch (error) {
+    } catch {
       throw new Error("Erro ao buscar todos os times.");
     }
   },

@@ -6,7 +6,7 @@ export const eventService = {
   async createEvent(data: NewEvent) {
     try {
       return await eventRepository.create(data);
-    } catch (error) {
+    } catch {
       throw new Error("Erro ao criar o evento.");
     }
   },
@@ -15,7 +15,7 @@ export const eventService = {
   async getAllEvents() {
     try {
       return await eventRepository.findAll();
-    } catch (error) {
+    } catch {
       throw new Error("Erro ao buscar os eventos.");
     }
   },
@@ -24,7 +24,7 @@ export const eventService = {
   async getEventById(id: number) {
     try {
       return await eventRepository.findById(id);
-    } catch (error) {
+    } catch {
       throw new Error("Erro ao buscar o evento específico.");
     }
   },
@@ -33,7 +33,7 @@ export const eventService = {
   async updateEvent(id: number, data: UpdateEvent) {
     try {
       return await eventRepository.update(id, data);
-    } catch (error) {
+    } catch {
       throw new Error("Erro ao atualizar o evento.");
     }
   },
@@ -42,7 +42,7 @@ export const eventService = {
   async deleteEvent(id: number) {
     try {
       return await eventRepository.delete(id);
-    } catch (error) {
+    } catch {
       throw new Error("Erro ao excluir o evento.");
     }
   },

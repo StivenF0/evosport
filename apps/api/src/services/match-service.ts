@@ -17,7 +17,7 @@ export const matchService = {
   async createMatch(data: NewMatch) {
     try {
       return await matchRepository.create(data);
-    } catch (error) {
+    } catch {
       throw new Error("Erro ao criar a partida.");
     }
   },
@@ -30,7 +30,7 @@ export const matchService = {
         ...match,
         formattedDate: formatDateToBR(match.date),
       }));
-    } catch (error) {
+    } catch {
       throw new Error("Erro ao buscar as partidas.");
     }
   },
@@ -43,7 +43,7 @@ export const matchService = {
         ...match,
         formattedDate: formatDateToBR(match.date),
       };
-    } catch (error) {
+    } catch {
       throw new Error("Erro ao buscar a partida específica.");
     }
   },
@@ -52,7 +52,7 @@ export const matchService = {
   async updateMatch(id: number, data: UpdateMatch) {
     try {
       return await matchRepository.update(id, data);
-    } catch (error) {
+    } catch {
       throw new Error("Erro ao atualizar a partida.");
     }
   },
@@ -61,7 +61,7 @@ export const matchService = {
   async deleteMatch(id: number) {
     try {
       return await matchRepository.delete(id);
-    } catch (error) {
+    } catch {
       throw new Error("Erro ao excluir a partida.");
     }
   },
@@ -80,7 +80,7 @@ export const matchService = {
         },
         {} as Record<string, typeof allMatches>,
       );
-    } catch (error) {
+    } catch {
       throw new Error("Erro ao agrupar partidas por data.");
     }
   },
@@ -99,7 +99,7 @@ export const matchService = {
         },
         {} as Record<string, typeof allMatches>,
       );
-    } catch (error) {
+    } catch {
       throw new Error("Erro ao agrupar partidas por estádio.");
     }
   },

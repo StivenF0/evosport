@@ -7,7 +7,7 @@ export const teamService = {
   async createTeam(data: NewTeam) {
     try {
       return await teamRepository.create(data);
-    } catch (error) {
+    } catch {
       throw new Error("Erro ao criar o time.");
     }
   },
@@ -16,7 +16,7 @@ export const teamService = {
   async getAllTeams() {
     try {
       return await teamRepository.findAll();
-    } catch (error) {
+    } catch {
       throw new Error("Erro ao buscar os times.");
     }
   },
@@ -25,7 +25,7 @@ export const teamService = {
   async getTeamById(id: number) {
     try {
       return await teamRepository.findById(id);
-    } catch (error) {
+    } catch {
       throw new Error("Erro ao buscar o time específico.");
     }
   },
@@ -34,7 +34,7 @@ export const teamService = {
   async updateTeam(id: number, data: UpdateTeam) {
     try {
       return await teamRepository.update(id, data);
-    } catch (error) {
+    } catch {
       throw new Error("Erro ao atualizar o time.");
     }
   },
@@ -43,7 +43,7 @@ export const teamService = {
   async deleteTeam(id: number) {
     try {
       return await teamRepository.delete(id);
-    } catch (error) {
+    } catch {
       throw new Error("Erro ao excluir o time.");
     }
   },

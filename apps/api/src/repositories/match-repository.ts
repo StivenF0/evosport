@@ -29,7 +29,7 @@ export const matchRepository = {
           stadium: true,
         },
       });
-    } catch (error) {
+    } catch {
       throw new Error("Erro ao buscar as partidas e os times.");
     }
   },

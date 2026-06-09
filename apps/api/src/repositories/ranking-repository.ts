@@ -13,7 +13,7 @@ export const rankingRepository = {
           awayTeam: true,
         },
       });
-    } catch (error) {
+    } catch {
       throw new Error("Erro ao buscar partidas finalizadas para a classificação.");
     }
   },
@@ -30,7 +30,7 @@ export const rankingRepository = {
         },
       });
       return result;
-    } catch (error) {
+    } catch {
       throw new Error("Erro ao buscar partidas finalizadas por estádio.");
     }
   },

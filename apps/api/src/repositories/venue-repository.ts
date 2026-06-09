@@ -22,7 +22,7 @@ export const venueRepository = {
   async findAll() {
     try {
       return await db.select().from(stadiums);
-    } catch (error) {
+    } catch {
       throw new Error("Erro ao obter todas as sedes.");
     }
   },
