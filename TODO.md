@@ -189,7 +189,7 @@ Integrar o componente de mapa em um layout responsivo, garantindo que a visualiz
 Rodar os comandos de verificação do Biome (linting e formatação) em todo o monorepo para garantir consistência no código.
 Revisar os arquivos para remover `console.log` esquecidos, códigos comentados e importações não utilizadas.
 
-- [ ] Revisão de Responsividade.
+- [x] Revisão de Responsividade.
 Testar todas as páginas (Home, Jogos, Classificação, Sedes e Mapa) em resoluções de celular e tablet utilizando as ferramentas de desenvolvedor do navegador.
 Ajustar as classes do Tailwind CSS (usando os prefixos `sm:`, `md:`, `lg:`) para garantir que tabelas e grids não "quebrem" ou fiquem espremidos em telas menores.
 
