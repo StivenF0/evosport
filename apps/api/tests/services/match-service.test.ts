@@ -16,6 +16,8 @@ describe("MatchService - Create Match", () => {
       awayTeamId: 2,
       stadiumId: 1,
       date: new Date("2026-06-20"),
+      homeScore: null,
+      awayScore: null,
     });
 
     const match = await matchService.createMatch({
@@ -24,6 +26,8 @@ describe("MatchService - Create Match", () => {
       awayTeamId: 2,
       stadiumId: 1,
       date: new Date("2026-06-20"),
+      homeScore: null,
+      awayScore: null,
     });
 
     expect(match).not.toBeNull();
@@ -41,6 +45,8 @@ describe("MatchService - Create Match", () => {
       awayTeamId: 4,
       stadiumId: 2,
       date: new Date("2026-06-20"),
+      homeScore: null,
+      awayScore: null,
     });
 
     expect(match).rejects.toThrow("Erro ao criar a partida.");
@@ -60,6 +66,8 @@ describe("MatchService - Find By Id", () => {
       stadiumId: 2,
       date: new Date("2026-06-12"),
       status: "agendado",
+      homeScore: null,
+      awayScore: null,
       homeTeam: {
         id: 1,
         name: "Brasil",
@@ -111,6 +119,8 @@ describe("MatchService - Get All", () => {
         stadiumId: 2,
         date: new Date("2026-06-12"),
         status: "agendado",
+        homeScore: null,
+        awayScore: null,
         homeTeam: {
           id: 1,
           name: "Brasil",
@@ -161,6 +171,8 @@ describe("MatchService - Update Match", () => {
       awayTeamId: 2,
       stadiumId: 1,
       date: new Date("2026-06-20"),
+      homeScore: null,
+      awayScore: null,
     });
 
     const match = await matchService.updateMatch(1, { status: "encerrado" });
@@ -192,6 +204,8 @@ describe("MatchService - Delete Match", () => {
       awayTeamId: 2,
       stadiumId: 1,
       date: new Date("2026-06-20"),
+      homeScore: null,
+      awayScore: null,
     });
 
     const match = await matchService.deleteMatch(1);
@@ -225,6 +239,8 @@ describe("MatchService - Group By Date", () => {
         stadiumId: 2,
         date: new Date("2026-06-12"),
         status: "agendado",
+        homeScore: null,
+        awayScore: null,
         homeTeam: {
           id: 1,
           name: "Brasil",
@@ -275,6 +291,8 @@ describe("MatchService - Group By Stadium", () => {
         stadiumId: 2,
         date: new Date("2026-06-12"),
         status: "agendado",
+        homeScore: null,
+        awayScore: null,
         homeTeam: {
           id: 1,
           name: "Brasil",

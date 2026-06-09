@@ -7,6 +7,8 @@ export interface Match {
   stadiumId: number;
   date: Date;
   status: MatchStatus;
+  homeScore: number | null;
+  awayScore: number | null;
 }
 
 export type NewMatch = Omit<Match, "id" | "status"> & {

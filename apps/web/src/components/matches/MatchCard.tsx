@@ -1,11 +1,6 @@
 import { CalendarDays } from "lucide-react";
 import Image from "next/image";
-import type { Match as BaseMatch } from "../../types/api-types";
-
-export interface Match extends BaseMatch {
-  homeScore?: number;
-  awayScore?: number;
-}
+import type { Match } from "../../types/api-types";
 
 interface MatchCardProps {
   match: Match;
