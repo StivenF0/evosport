@@ -193,7 +193,7 @@ Revisar os arquivos para remover `console.log` esquecidos, códigos comentados e
 Testar todas as páginas (Home, Jogos, Classificação, Sedes e Mapa) em resoluções de celular e tablet utilizando as ferramentas de desenvolvedor do navegador.
 Ajustar as classes do Tailwind CSS (usando os prefixos `sm:`, `md:`, `lg:`) para garantir que tabelas e grids não "quebrem" ou fiquem espremidos em telas menores.
 
-- [ ] Tratamento de Erros e Página 404.
+- [x] Tratamento de Erros e Página 404.
 Criar uma página amigável para rotas inexistentes utilizando o arquivo padrão do Next.js (app/not-found.tsx).
 Revisar os hooks de requisição (TanStack Query) para garantir que mensagens de erro claras sejam exibidas caso a API do Elysia esteja offline ou demore a responder.
 
