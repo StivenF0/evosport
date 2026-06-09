@@ -185,22 +185,22 @@ Integrar o componente de mapa em um layout responsivo, garantindo que a visualiz
 
 ## Sprint 6
 
-- [ ] Padronização e Limpeza de Código.
+- [x] Padronização e Limpeza de Código.
 Rodar os comandos de verificação do Biome (linting e formatação) em todo o monorepo para garantir consistência no código.
 Revisar os arquivos para remover `console.log` esquecidos, códigos comentados e importações não utilizadas.
 
-- [ ] Revisão de Responsividade.
+- [x] Revisão de Responsividade.
 Testar todas as páginas (Home, Jogos, Classificação, Sedes e Mapa) em resoluções de celular e tablet utilizando as ferramentas de desenvolvedor do navegador.
 Ajustar as classes do Tailwind CSS (usando os prefixos `sm:`, `md:`, `lg:`) para garantir que tabelas e grids não "quebrem" ou fiquem espremidos em telas menores.
 
-- [ ] Tratamento de Erros e Página 404.
+- [x] Tratamento de Erros e Página 404.
 Criar uma página amigável para rotas inexistentes utilizando o arquivo padrão do Next.js (app/not-found.tsx).
 Revisar os hooks de requisição (TanStack Query) para garantir que mensagens de erro claras sejam exibidas caso a API do Elysia esteja offline ou demore a responder.
 
-- [ ] Otimização de Performance visual.
+- [x] Otimização de Performance visual.
 Revisar o carregamento de mídias, garantindo a utilização do componente `<Image />` nativo do Next.js (next/image) para logos, bandeiras e fotos de estádios.
 Certificar-se de que as imagens estão utilizando otimização e "lazy loading" para não pesar o carregamento inicial do site.
 
-- [ ] Elaboração da Documentação (README.md).
+- [x] Elaboração da Documentação (README.md).
 Atualizar o arquivo README.md na raiz do repositório com uma breve descrição do projeto (Evosport) e os nomes dos integrantes da equipe.
 Documentar o passo a passo claro para rodar o projeto localmente, incluindo os comandos de instalação (`bun install`), execução do banco de dados/seed (`bun run seed`) e inicialização do servidor (`bun dev`).

@@ -1,21 +1,28 @@
-'use client';
+"use client";
 
-import { useTeams } from '../../hooks/use-team';
-import { LoadingSpinner } from '../../components/ui/LoadingSpinner';
-import { ErrorMessage } from '../../components/ui/ErrorMessage';
-import { EmptyState } from '../../components/ui/EmptyState';
-import { TeamCard } from '../../components/teams/TeamCard';
-import { Shield } from 'lucide-react';
+import { Shield } from "lucide-react";
+import { TeamCard } from "../../components/teams/TeamCard";
+import { EmptyState } from "../../components/ui/EmptyState";
+import { ErrorMessage } from "../../components/ui/ErrorMessage";
+import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
+import { useTeams } from "../../hooks/use-team";
 
 export default function TeamsPage() {
-  const { data: teams, isLoading, isError } = useTeams();
+  const { data: teams, isLoading, isError, error } = useTeams();
 
   if (isLoading) {
     return <LoadingSpinner message="Carregando os times participantes..." />;
   }
 
   if (isError) {
-    return <ErrorMessage message="Não foi possível carregar a lista de times. Tente novamente mais tarde." />;
+    return (
+      <ErrorMessage
+        message={
+          error?.message ||
+          "Não foi possível carregar a lista de times. Tente novamente mais tarde."
+        }
+      />
+    );
   }
 
   return (

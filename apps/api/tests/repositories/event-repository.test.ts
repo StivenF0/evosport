@@ -1,79 +1,84 @@
-import { describe, expect, it, beforeEach, spyOn } from 'bun:test';
-import { eventRepository } from '@api/repositories/event-repository';
-import { db } from '@api/db';
+import { beforeEach, describe, expect, it, spyOn } from "bun:test";
+import { db } from "@api/db";
+import { eventRepository } from "@api/repositories/event-repository";
 
-describe('EventRepository - Create Event', () => {
+describe("EventRepository - Create Event", () => {
   beforeEach(() => {
-    spyOn(db, 'insert').mockRestore();
+    spyOn(db, "insert").mockRestore();
   });
 
-  it('should create a new event.', async () => {
-    spyOn(db, 'insert').mockReturnValue({
+  it("should create a new event.", async () => {
+    spyOn(db, "insert").mockReturnValue({
       values: () => ({
-        returning: () => Promise.resolve([{ id: 1, name: 'Copa Evosport' }])
-      })
+        returning: () => Promise.resolve([{ id: 1, name: "Copa Evosport" }]),
+      }),
+      // biome-ignore lint/suspicious/noExplicitAny: mock de Drizzle em teste
     } as any);
 
     const event = await eventRepository.create({
-      name: 'Copa Evosport',
-      startDate: new Date('2026-06-11'),
-      endDate: new Date('2026-07-19')
+      name: "Copa Evosport",
+      startDate: new Date("2026-06-11"),
+      endDate: new Date("2026-07-19"),
     });
 
     expect(event).not.toBeNull();
     expect(event?.id).toBe(1);
-    expect(event?.name).toBe('Copa Evosport');
+    expect(event?.name).toBe("Copa Evosport");
   });
 
-  it('should throw an error if event failed to be created.', async () => {
-    spyOn(db, 'insert').mockReturnValue({
+  it("should throw an error if event failed to be created.", async () => {
+    spyOn(db, "insert").mockReturnValue({
       values: () => ({
-        returning: () => Promise.resolve([])
-      })
+        returning: () => Promise.resolve([]),
+      }),
+      // biome-ignore lint/suspicious/noExplicitAny: mock de Drizzle em teste
     } as any);
 
     const event = eventRepository.create({
-      name: 'Copa Falha',
+      name: "Copa Falha",
       startDate: new Date(),
-      endDate: new Date()
+      endDate: new Date(),
     });
 
-    expect(event).rejects.toThrow('Falha ao criar o evento.');
+    expect(event).rejects.toThrow("Falha ao criar o evento.");
   });
 });
 
-describe('EventRepository - Find All', () => {
+describe("EventRepository - Find All", () => {
   beforeEach(() => {
-    spyOn(db, 'select').mockRestore();
+    spyOn(db, "select").mockRestore();
   });
 
-  it('should return all events.', async () => {
-    spyOn(db, 'select').mockReturnValue({
-      from: () => Promise.resolve([
-        { id: 1, name: 'Copa Evosport' },
-        { id: 2, name: 'Brasileirão' }
-      ])
+  it("should return all events.", async () => {
+    spyOn(db, "select").mockReturnValue({
+      from: () =>
+        Promise.resolve([
+          { id: 1, name: "Copa Evosport" },
+          { id: 2, name: "Brasileirão" },
+        ]),
+      // biome-ignore lint/suspicious/noExplicitAny: mock de Drizzle em teste
     } as any);
 
     const events = await eventRepository.findAll();
 
     expect(events).toBeArrayOfSize(2);
-    expect(events[0]?.name).toBe('Copa Evosport');
+    expect(events[0]?.name).toBe("Copa Evosport");
   });
 });
 
-describe('EventRepository - Find By Id', () => {
+describe("EventRepository - Find By Id", () => {
   beforeEach(() => {
-    spyOn(db, 'select').mockRestore();
+    spyOn(db, "select").mockRestore();
   });
 
-  it('should return an event by ID.', async () => {
-    spyOn(db, 'select').mockReturnValue({
+  it("should return an event by ID.", async () => {
+    spyOn(db, "select").mockReturnValue({
       from: () => ({
         where: () => ({
-          limit: () => Promise.resolve([{ id: 1, name: 'Copa Evosport' }])
-        })
-      })
+          limit: () => Promise.resolve([{ id: 1, name: "Copa Evosport" }]),
+        }),
+      }),
+      // biome-ignore lint/suspicious/noExplicitAny: mock de Drizzle em teste
     } as any);
 
     const event = await eventRepository.findById(1);
@@ -82,66 +87,70 @@ describe('EventRepository - Find By Id', () => {
     expect(event?.id).toBe(1);
   });
 
-  it('should throw an error if no event was found by ID.', async () => {
-    spyOn(db, 'select').mockReturnValue({
+  it("should throw an error if no event was found by ID.", async () => {
+    spyOn(db, "select").mockReturnValue({
       from: () => ({
         where: () => ({
-          limit: () => Promise.resolve([])
-        })
-      })
+          limit: () => Promise.resolve([]),
+        }),
+      }),
+      // biome-ignore lint/suspicious/noExplicitAny: mock de Drizzle em teste
     } as any);
 
     const event = eventRepository.findById(99);
 
-    expect(event).rejects.toThrow('Evento não encontrado.');
+    expect(event).rejects.toThrow("Evento não encontrado.");
   });
 });
 
-describe('EventRepository - Update Event', () => {
+describe("EventRepository - Update Event", () => {
   beforeEach(() => {
-    spyOn(db, 'update').mockRestore();
+    spyOn(db, "update").mockRestore();
   });
 
-  it('should update an event.', async () => {
-    spyOn(db, 'update').mockReturnValue({
+  it("should update an event.", async () => {
+    spyOn(db, "update").mockReturnValue({
       set: () => ({
         where: () => ({
-          returning: () => Promise.resolve([{ id: 1, name: 'Copa Evosport 2026' }])
-        })
-      })
+          returning: () => Promise.resolve([{ id: 1, name: "Copa Evosport 2026" }]),
+        }),
+      }),
+      // biome-ignore lint/suspicious/noExplicitAny: mock de Drizzle em teste
     } as any);
 
-    const event = await eventRepository.update(1, { name: 'Copa Evosport 2026' });
+    const event = await eventRepository.update(1, { name: "Copa Evosport 2026" });
 
     expect(event).not.toBeNull();
-    expect(event?.name).toBe('Copa Evosport 2026');
+    expect(event?.name).toBe("Copa Evosport 2026");
   });
 
-  it('should throw an error if event is not found for update.', async () => {
-    spyOn(db, 'update').mockReturnValue({
+  it("should throw an error if event is not found for update.", async () => {
+    spyOn(db, "update").mockReturnValue({
       set: () => ({
         where: () => ({
-          returning: () => Promise.resolve([])
-        })
-      })
+          returning: () => Promise.resolve([]),
+        }),
+      }),
+      // biome-ignore lint/suspicious/noExplicitAny: mock de Drizzle em teste
     } as any);
 
-    const event = eventRepository.update(99, { name: 'Teste' });
+    const event = eventRepository.update(99, { name: "Teste" });
 
-    expect(event).rejects.toThrow('Evento não encontrado para atualização.');
+    expect(event).rejects.toThrow("Evento não encontrado para atualização.");
   });
 });
 
-describe('EventRepository - Delete Event', () => {
+describe("EventRepository - Delete Event", () => {
   beforeEach(() => {
-    spyOn(db, 'delete').mockRestore();
+    spyOn(db, "delete").mockRestore();
   });
 
-  it('should delete an event.', async () => {
-    spyOn(db, 'delete').mockReturnValue({
+  it("should delete an event.", async () => {
+    spyOn(db, "delete").mockReturnValue({
       where: () => ({
-        returning: () => Promise.resolve([{ id: 1, name: 'Copa Evosport' }])
-      })
+        returning: () => Promise.resolve([{ id: 1, name: "Copa Evosport" }]),
+      }),
+      // biome-ignore lint/suspicious/noExplicitAny: mock de Drizzle em teste
     } as any);
 
     const event = await eventRepository.delete(1);
@@ -150,15 +159,16 @@ describe('EventRepository - Delete Event', () => {
     expect(event?.id).toBe(1);
   });
 
-  it('should throw an error if event is not found for delete.', async () => {
-    spyOn(db, 'delete').mockReturnValue({
+  it("should throw an error if event is not found for delete.", async () => {
+    spyOn(db, "delete").mockReturnValue({
       where: () => ({
-        returning: () => Promise.resolve([])
-      })
+        returning: () => Promise.resolve([]),
+      }),
+      // biome-ignore lint/suspicious/noExplicitAny: mock de Drizzle em teste
     } as any);
 
     const event = eventRepository.delete(99);
 
-    expect(event).rejects.toThrow('Evento não encontrado para exclusão.');
+    expect(event).rejects.toThrow("Evento não encontrado para exclusão.");
   });
 });

@@ -1,19 +1,14 @@
-import { apiClient } from '../lib/api-client';
-import type { Team, NewTeam, UpdateTeam } from '../types/api-types';
+import { apiClient } from "../lib/api-client";
+import type { NewTeam, Team, UpdateTeam } from "../types/api-types";
 
 export const teamService = {
-  getAllTeams: () =>
-    apiClient.get<Team[]>('/team'),
+  getAllTeams: () => apiClient.get<Team[]>("/team"),
 
-  getTeamById: (id: number) =>
-    apiClient.get<Team>(`/team/${id}`),
+  getTeamById: (id: number) => apiClient.get<Team>(`/team/${id}`),
 
-  createTeam: (data: NewTeam) =>
-    apiClient.post<Team>('/team', data),
+  createTeam: (data: NewTeam) => apiClient.post<Team>("/team", data),
 
-  updateTeam: (id: number, data: UpdateTeam) =>
-    apiClient.put<Team>(`/team/${id}`, data),
+  updateTeam: (id: number, data: UpdateTeam) => apiClient.put<Team>(`/team/${id}`, data),
 
-  deleteTeam: (id: number) =>
-    apiClient.delete<Team>(`/team/${id}`),
+  deleteTeam: (id: number) => apiClient.delete<Team>(`/team/${id}`),
 };

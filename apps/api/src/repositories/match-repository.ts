@@ -1,7 +1,7 @@
-import { eq } from 'drizzle-orm';
-import { db } from '../db';
-import type { NewMatch, UpdateMatch } from '@packages/types';
-import { matches } from '../db/schema';
+import type { NewMatch, UpdateMatch } from "@packages/types";
+import { eq } from "drizzle-orm";
+import { db } from "../db";
+import { matches } from "../db/schema";
 
 export const matchRepository = {
   // CREATE
@@ -9,12 +9,12 @@ export const matchRepository = {
     try {
       const [created] = await db.insert(matches).values(data).returning();
       if (!created) {
-        throw new Error('Falha ao criar a partida.');
+        throw new Error("Falha ao criar a partida.");
       }
       return created;
     } catch (error) {
       if (error instanceof Error) throw error;
-      throw new Error('Erro ao criar a partida.');
+      throw new Error("Erro ao criar a partida.");
     }
   },
 
@@ -29,8 +29,8 @@ export const matchRepository = {
           stadium: true,
         },
       });
-    } catch (error) {
-      throw new Error('Erro ao buscar as partidas e os times.');
+    } catch {
+      throw new Error("Erro ao buscar as partidas e os times.");
     }
   },
 
@@ -47,52 +47,45 @@ export const matchRepository = {
       });
 
       if (!result) {
-        throw new Error('Partida não encontrada.');
+        throw new Error("Partida não encontrada.");
       }
 
       return result;
     } catch (error) {
       if (error instanceof Error) throw error;
-      throw new Error('Erro interno ao buscar a partida.');
+      throw new Error("Erro interno ao buscar a partida.");
     }
   },
 
   // UPDATE
   async update(id: number, data: UpdateMatch) {
     try {
-      const [updated] = await db
-        .update(matches)
-        .set(data)
-        .where(eq(matches.id, id))
-        .returning();
+      const [updated] = await db.update(matches).set(data).where(eq(matches.id, id)).returning();
 
       if (!updated) {
-        throw new Error('Partida não encontrada para atualização.');
+        throw new Error("Partida não encontrada para atualização.");
       }
 
       return updated;
     } catch (error) {
       if (error instanceof Error) throw error;
-      throw new Error('Erro ao atualizar a partida.');
+      throw new Error("Erro ao atualizar a partida.");
     }
   },
 
   // DELETE
   async delete(id: number) {
     try {
-      const [deleted] = await db
-        .delete(matches)
-        .where(eq(matches.id, id))
-        .returning();
+      const [deleted] = await db.delete(matches).where(eq(matches.id, id)).returning();
 
       if (!deleted) {
-        throw new Error('Partida não encontrada para exclusão.');
+        throw new Error("Partida não encontrada para exclusão.");
       }
 
       return deleted;
     } catch (error) {
       if (error instanceof Error) throw error;
-      throw new Error('Erro ao excluir a partida.');
+      throw new Error("Erro ao excluir a partida.");
     }
-  }
+  },
 };

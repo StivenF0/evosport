@@ -1,5 +1,5 @@
-import { venueRepository } from '../repositories/venue-repository';
-import type { NewVenue, UpdateVenue } from '@packages/types/venue-types';
+import type { NewVenue, UpdateVenue } from "@packages/types/venue-types";
+import { venueRepository } from "../repositories/venue-repository";
 // import { stadiums } from '../db/schema';
 
 export const venueService = {
@@ -7,8 +7,8 @@ export const venueService = {
   async createVenue(data: NewVenue) {
     try {
       return await venueRepository.create(data);
-    } catch (error) {
-      throw new Error('Erro ao criar a sede.');
+    } catch {
+      throw new Error("Erro ao criar a sede.");
     }
   },
 
@@ -16,8 +16,8 @@ export const venueService = {
   async getAllVenues() {
     try {
       return await venueRepository.findAll();
-    } catch (error) {
-      throw new Error('Erro ao buscar as sedes.');
+    } catch {
+      throw new Error("Erro ao buscar as sedes.");
     }
   },
 
@@ -25,8 +25,8 @@ export const venueService = {
   async getVenueById(id: number) {
     try {
       return await venueRepository.findById(id);
-    } catch (error) {
-      throw new Error('Erro ao buscar a sede específica.');
+    } catch {
+      throw new Error("Erro ao buscar a sede específica.");
     }
   },
 
@@ -34,8 +34,8 @@ export const venueService = {
   async updateVenue(id: number, data: UpdateVenue) {
     try {
       return await venueRepository.update(id, data);
-    } catch (error) {
-      throw new Error('Erro ao atualizar a sede.');
+    } catch {
+      throw new Error("Erro ao atualizar a sede.");
     }
   },
 
@@ -43,8 +43,8 @@ export const venueService = {
   async deleteVenue(id: number) {
     try {
       return await venueRepository.delete(id);
-    } catch (error) {
-      throw new Error('Erro ao excluir a sede.');
+    } catch {
+      throw new Error("Erro ao excluir a sede.");
     }
   },
 
@@ -55,16 +55,16 @@ export const venueService = {
 
       // Filtra sedes sem coordenadas e padroniza o formato [lat, lng] exigido pelo Leaflet
       return venues
-        .filter(v => v.latitude !== null && v.longitude !== null)
-        .map(v => ({
+        .filter((v) => v.latitude !== null && v.longitude !== null)
+        .map((v) => ({
           id: v.id,
           name: v.name,
           city: v.city,
           capacity: v.capacity,
-          coordinates: [v.latitude, v.longitude] as [number, number]
+          coordinates: [v.latitude, v.longitude] as [number, number],
         }));
-    } catch (error) {
-      throw new Error('Erro ao consolidar os dados de geolocalização das sedes.');
+    } catch {
+      throw new Error("Erro ao consolidar os dados de geolocalização das sedes.");
     }
-  }
+  },
 };

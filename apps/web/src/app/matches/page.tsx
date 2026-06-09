@@ -1,21 +1,25 @@
-'use client';
+"use client";
 
-import { useMatches } from '../../hooks/use-match';
-import { LoadingSpinner } from '../../components/ui/LoadingSpinner';
-import { ErrorMessage } from '../../components/ui/ErrorMessage';
-import { EmptyState } from '../../components/ui/EmptyState';
-import { MatchCard } from '../../components/matches/MatchCard';
-import { CalendarDays } from 'lucide-react';
+import { CalendarDays } from "lucide-react";
+import { MatchCard } from "../../components/matches/MatchCard";
+import { EmptyState } from "../../components/ui/EmptyState";
+import { ErrorMessage } from "../../components/ui/ErrorMessage";
+import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
+import { useMatches } from "../../hooks/use-match";
 
 export default function MatchesPage() {
-  const { data: matches, isLoading, isError } = useMatches();
+  const { data: matches, isLoading, isError, error } = useMatches();
 
   if (isLoading) {
     return <LoadingSpinner message="Carregando o calendário de partidas..." />;
   }
 
   if (isError) {
-    return <ErrorMessage message="Não foi possível carregar as partidas. Tente novamente." />;
+    return (
+      <ErrorMessage
+        message={error?.message || "Não foi possível carregar as partidas. Tente novamente."}
+      />
+    );
   }
 
   return (
