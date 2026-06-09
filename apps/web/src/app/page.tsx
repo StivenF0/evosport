@@ -5,7 +5,7 @@ import { AlertCircle, Calendar, Loader2 } from "lucide-react";
 import Image from "next/image";
 
 export default function Home() {
-  const { data: event, isLoading, isError } = usePrimaryEvent();
+  const { data: event, isLoading, isError, error } = usePrimaryEvent();
 
   // ESTADO 1: CARREGAMENTO (LOADING)
   if (isLoading) {
@@ -31,8 +31,8 @@ export default function Home() {
         </div>
         <h2 className="text-xl font-bold text-red-900 mb-2">Ops! Algo deu errado.</h2>
         <p className="text-red-700 max-w-md">
-          Não foi possível carregar os dados do evento. Verifique se a API está online ou tente
-          atualizar a página.
+          {error?.message ||
+            "Não foi possível carregar os dados do evento. Verifique se a API está online ou tente atualizar a página."}
         </p>
       </div>
     );

@@ -7,7 +7,7 @@ import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
 import { useVenues } from "../../hooks/use-venue";
 
 export default function MapPage() {
-  const { data: venues, isLoading, isError } = useVenues();
+  const { data: venues, isLoading, isError, error } = useVenues();
 
   if (isLoading) {
     return <LoadingSpinner message="Carregando o mapa interativo..." />;
@@ -15,7 +15,12 @@ export default function MapPage() {
 
   if (isError) {
     return (
-      <ErrorMessage message="Não foi possível carregar as informações do mapa. Tente novamente mais tarde." />
+      <ErrorMessage
+        message={
+          error?.message ||
+          "Não foi possível carregar as informações do mapa. Tente novamente mais tarde."
+        }
+      />
     );
   }
 

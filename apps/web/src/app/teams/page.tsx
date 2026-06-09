@@ -8,7 +8,7 @@ import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
 import { useTeams } from "../../hooks/use-team";
 
 export default function TeamsPage() {
-  const { data: teams, isLoading, isError } = useTeams();
+  const { data: teams, isLoading, isError, error } = useTeams();
 
   if (isLoading) {
     return <LoadingSpinner message="Carregando os times participantes..." />;
@@ -16,7 +16,12 @@ export default function TeamsPage() {
 
   if (isError) {
     return (
-      <ErrorMessage message="Não foi possível carregar a lista de times. Tente novamente mais tarde." />
+      <ErrorMessage
+        message={
+          error?.message ||
+          "Não foi possível carregar a lista de times. Tente novamente mais tarde."
+        }
+      />
     );
   }
 

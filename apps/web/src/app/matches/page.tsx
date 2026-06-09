@@ -8,14 +8,18 @@ import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
 import { useMatches } from "../../hooks/use-match";
 
 export default function MatchesPage() {
-  const { data: matches, isLoading, isError } = useMatches();
+  const { data: matches, isLoading, isError, error } = useMatches();
 
   if (isLoading) {
     return <LoadingSpinner message="Carregando o calendário de partidas..." />;
   }
 
   if (isError) {
-    return <ErrorMessage message="Não foi possível carregar as partidas. Tente novamente." />;
+    return (
+      <ErrorMessage
+        message={error?.message || "Não foi possível carregar as partidas. Tente novamente."}
+      />
+    );
   }
 
   return (

@@ -7,7 +7,7 @@ import { RankingTable } from "../../components/ui/RankingTable";
 import { useRanking } from "../../hooks/use-ranking";
 
 export default function RankingPage() {
-  const { data: ranking, isLoading, isError } = useRanking();
+  const { data: ranking, isLoading, isError, error } = useRanking();
 
   if (isLoading) {
     return <LoadingSpinner message="Calculando a tabela de classificação..." />;
@@ -15,7 +15,11 @@ export default function RankingPage() {
 
   if (isError) {
     return (
-      <ErrorMessage message="Não foi possível carregar a classificação. Tente novamente mais tarde." />
+      <ErrorMessage
+        message={
+          error?.message || "Não foi possível carregar a classificação. Tente novamente mais tarde."
+        }
+      />
     );
   }
 
