@@ -1,6 +1,8 @@
 # Arquitetura do Projeto Evosport
 
-O projeto Evosport é estruturado como um **monorepo** utilizando [Bun Workspaces](https://bun.sh/docs/workspaces) para gerenciar múltiplas aplicações e pacotes de código de forma coesa. A estrutura principal é dividida em `apps/` para aplicações (backend e frontend) e `packages/` para pacotes compartilhados (ex: tipos, utilitários).
+O projeto Evosport é uma plataforma web (SaaS) para gestão de eventos e torneios esportivos. Permite administrar times, partidas, sedes (com mapa interativo) e gera automaticamente uma tabela de classificação (ranking) em tempo real.
+
+Estruturado como um **monorepo** utilizando [Bun Workspaces](https://bun.sh/docs/workspaces) para gerenciar múltiplas aplicações e pacotes de código de forma coesa.
 
 ## Estrutura do Monorepo
 
@@ -44,17 +46,27 @@ A aplicação de backend segue um padrão arquitetural que separa as responsabil
 
 ### 🌐 Frontend (`apps/web`)
 
-A aplicação de frontend, construída com Next.js, adota a estrutura do App Router:
+Construído com Next.js App Router. As rotas principais são chamadas de **collections**.
 
--   `src/app/`: Contém as rotas da aplicação Next.js (utilizando o App Router).
-    -   Arquivos `page.tsx` para páginas renderizadas, `layout.tsx` para layouts compartilhados, etc.
+-   `src/app/`: Collections do App Router.
+    -   `/` (Home): Hero com dados do evento.
+    -   `/teams`: Grid de cards com escudos e nomes dos times.
+    -   `/matches`: Lista de `MatchCard` com times, placar e estádio.
+    -   `/ranking`: Tabela de classificação com `RankingTable`.
+    -   `/map`: Mapa interativo com Leaflet.
 -   `src/components/`: Componentes React reutilizáveis.
-    -   Subdividido em categorias (ex: `teams/`, `matches/`, `ui/`) para organizar componentes específicos ou genéricos.
--   `src/hooks/`: Custom Hooks React para lógica de componente reutilizável (ex: `use-event.ts`).
+    -   `ui/`: `LoadingSpinner`, `ErrorMessage`, `EmptyState`, `MatchCard`, `RankingTable`.
+    -   `DynamicMap.tsx` / `Map.tsx`: Mapa Leaflet com SSR desabilitado via dynamic import.
+-   `src/hooks/`: Custom Hooks com TanStack React Query.
+    -   `use-event.ts`, `use-teams.ts`, `use-matches.ts`, `use-ranking.ts`, `use-venues.ts`.
 -   `src/types/`: Tipos TypeScript específicos do frontend.
--   `next.config.ts`: Configuração do Next.js, incluindo `images.remotePatterns` para otimização de imagens externas.
+-   `next.config.ts`: Configuração do Next.js (`images.remotePatterns`, `reactCompiler`).
 
-### 📦 Pacotes Compartilhados (`packages/`)
+### 📦 Pacotes Compartilhados (`packages/types`)
 
--   `types/`: Contém definições de tipos TypeScript que são compartilhadas entre o backend e o frontend. Isso garante consistência e segurança de tipo em todo o monorepo.
-    -   Ex: `api-types.ts`, `match-types.ts`, `team-types.ts`, `venue-types.ts`.
+Contratos de API compartilhados entre frontend e backend:
+- `Match` (id, homeTeamId, awayTeamId, stadiumId, date, status, homeScore, awayScore)
+- `Team` (id, name, flagUrl)
+- `Venue` (id, name, city, latitude, longitude — **sem** state/distrito)
+- `Event` (id, name, startDate, endDate, logoUrl)
+- `Ranking` / `TeamStats` (points, played, wins, draws, losses, goalsFor, goalsAgainst, goalDifference)
