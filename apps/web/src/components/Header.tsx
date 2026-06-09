@@ -121,6 +121,13 @@ export function Header() {
             Jogos
           </Link>
           <Link
+            href="/rankings"
+            onClick={() => setIsOpen(false)}
+            className="block px-4 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+          >
+            Classificações
+          </Link>
+          <Link
             href="/venues"
             onClick={() => setIsOpen(false)}
             className="block px-4 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
