@@ -14,7 +14,7 @@ async function seed() {
 
     // 2. Inserir Evento
     console.log("🏆 Inserindo evento...");
-    const [insertedEvent] = await db
+    await db
       .insert(event)
       .values({
         name: "Copa do Mundo Evosport 2026",
