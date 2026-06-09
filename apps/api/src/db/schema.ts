@@ -37,7 +37,9 @@ export const matches = sqliteTable("matches", {
     .notNull()
     .references(() => stadiums.id),
   date: integer("date", { mode: "timestamp" }).notNull(),
-  status: text("status").$type<MatchStatus>().notNull().default("agendado"), // status: 'agendado', 'em_andamento', 'encerrado'
+  status: text("status").$type<MatchStatus>().notNull().default("agendado"),
+  homeScore: integer("home_score"),
+  awayScore: integer("away_score"),
 });
 
 // Definição de relações para facilitar as consultas (joins) no Drizzle
