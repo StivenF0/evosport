@@ -185,7 +185,7 @@ Integrar o componente de mapa em um layout responsivo, garantindo que a visualiz
 
 ## Sprint 6
 
-- [ ] Padronização e Limpeza de Código.
+- [x] Padronização e Limpeza de Código.
 Rodar os comandos de verificação do Biome (linting e formatação) em todo o monorepo para garantir consistência no código.
 Revisar os arquivos para remover `console.log` esquecidos, códigos comentados e importações não utilizadas.
 
