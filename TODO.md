@@ -197,7 +197,7 @@ Ajustar as classes do Tailwind CSS (usando os prefixos `sm:`, `md:`, `lg:`) para
 Criar uma página amigável para rotas inexistentes utilizando o arquivo padrão do Next.js (app/not-found.tsx).
 Revisar os hooks de requisição (TanStack Query) para garantir que mensagens de erro claras sejam exibidas caso a API do Elysia esteja offline ou demore a responder.
 
-- [ ] Otimização de Performance visual.
+- [x] Otimização de Performance visual.
 Revisar o carregamento de mídias, garantindo a utilização do componente `<Image />` nativo do Next.js (next/image) para logos, bandeiras e fotos de estádios.
 Certificar-se de que as imagens estão utilizando otimização e "lazy loading" para não pesar o carregamento inicial do site.
 
