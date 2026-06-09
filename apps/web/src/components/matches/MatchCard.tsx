@@ -1,5 +1,5 @@
-import { CalendarDays } from 'lucide-react';
-import type { Match as BaseMatch } from '../../types/api-types';
+import { CalendarDays } from "lucide-react";
+import type { Match as BaseMatch } from "../../types/api-types";
 
 export interface Match extends BaseMatch {
   homeScore?: number;
@@ -13,19 +13,19 @@ interface MatchCardProps {
 export function MatchCard({ match }: MatchCardProps) {
   const getStatusBadge = (status: string) => {
     switch (status) {
-      case 'agendado':
+      case "agendado":
         return (
           <span className="bg-gray-100 text-gray-600 px-3 py-1 rounded-full text-xs font-bold uppercase">
             Em Breve
           </span>
         );
-      case 'em_andamento':
+      case "em_andamento":
         return (
           <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-bold uppercase animate-pulse">
             Em Andamento
           </span>
         );
-      case 'encerrado':
+      case "encerrado":
         return (
           <span className="bg-blue-100 text-blue-700 px-3 py-1 rounded-full text-xs font-bold uppercase">
             Encerrado
@@ -36,7 +36,7 @@ export function MatchCard({ match }: MatchCardProps) {
     }
   };
 
-  const showScore = match.status === 'encerrado' || match.status === 'em_andamento';
+  const showScore = match.status === "encerrado" || match.status === "em_andamento";
 
   return (
     <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:shadow-md transition-shadow">
@@ -64,7 +64,7 @@ export function MatchCard({ match }: MatchCardProps) {
             <div className="w-16 h-16 bg-gray-100 rounded-full mb-2" />
           )}
           <span className="font-bold text-gray-800 text-center line-clamp-1">
-            {match.homeTeam?.name || 'Time Desconhecido'}
+            {match.homeTeam?.name || "Time Desconhecido"}
           </span>
         </div>
 
@@ -95,7 +95,7 @@ export function MatchCard({ match }: MatchCardProps) {
             <div className="w-16 h-16 bg-gray-100 rounded-full mb-2" />
           )}
           <span className="font-bold text-gray-800 text-center line-clamp-1">
-            {match.awayTeam?.name || 'Time Desconhecido'}
+            {match.awayTeam?.name || "Time Desconhecido"}
           </span>
         </div>
       </div>

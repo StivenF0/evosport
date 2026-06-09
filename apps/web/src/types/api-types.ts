@@ -1,18 +1,18 @@
 import type {
   Event as BaseEvent,
+  Match as BaseMatch,
   Team as BaseTeam,
   Venue as BaseVenue,
-  Match as BaseMatch,
   MatchStatus,
   NewEvent,
-  UpdateEvent,
-  NewTeam,
-  UpdateTeam,
-  NewVenue,
-  UpdateVenue,
   NewMatch,
-  UpdateMatch
-} from '@packages/types';
+  NewTeam,
+  NewVenue,
+  UpdateEvent,
+  UpdateMatch,
+  UpdateTeam,
+  UpdateVenue,
+} from "@packages/types";
 
 /**
  * Re-exporting base types for convenience
@@ -20,19 +20,19 @@ import type {
 export type {
   MatchStatus,
   NewEvent,
-  UpdateEvent,
-  NewTeam,
-  UpdateTeam,
-  NewVenue,
-  UpdateVenue,
   NewMatch,
-  UpdateMatch
+  NewTeam,
+  NewVenue,
+  UpdateEvent,
+  UpdateMatch,
+  UpdateTeam,
+  UpdateVenue,
 };
 
 /**
  * API Responses often return Dates as strings (ISO format)
  */
-export interface Event extends Omit<BaseEvent, 'startDate' | 'endDate'> {
+export interface Event extends Omit<BaseEvent, "startDate" | "endDate"> {
   startDate: string;
   endDate: string;
 }
@@ -44,7 +44,7 @@ export interface Venue extends BaseVenue {}
 /**
  * Match response from API (with relations and formatted date)
  */
-export interface Match extends Omit<BaseMatch, 'date'> {
+export interface Match extends Omit<BaseMatch, "date"> {
   date: string;
   formattedDate: string;
   homeTeam: Team;

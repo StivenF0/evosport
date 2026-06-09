@@ -1,8 +1,8 @@
-import { useQuery } from '@tanstack/react-query';
-import { eventService } from '../services/event-service';
+import { useQuery } from "@tanstack/react-query";
+import { eventService } from "../services/event-service";
 
 export const eventKeys = {
-  all: ['event'] as const,
+  all: ["event"] as const,
 };
 
 export const usePrimaryEvent = () =>

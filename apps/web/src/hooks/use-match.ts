@@ -1,10 +1,10 @@
-import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { matchService } from '../services/match-service';
-import { rankingKeys } from './use-ranking';
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { matchService } from "../services/match-service";
+import { rankingKeys } from "./use-ranking";
 
 export const matchKeys = {
-  all: ['matches'] as const,
-  grouped: ['matches', 'grouped'] as const,
+  all: ["matches"] as const,
+  grouped: ["matches", "grouped"] as const,
 };
 
 export const useMatches = () =>
@@ -21,6 +21,6 @@ export const useCreateMatch = () => {
       qc.invalidateQueries({ queryKey: matchKeys.all });
       qc.invalidateQueries({ queryKey: matchKeys.grouped });
       qc.invalidateQueries({ queryKey: rankingKeys.all });
-    }
+    },
   });
 };

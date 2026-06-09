@@ -1,5 +1,5 @@
-import { rankingRepository } from '../repositories/ranking-repository';
-import { teams } from '../db/schema';
+import type { teams } from "../db/schema";
+import { rankingRepository } from "../repositories/ranking-repository";
 
 interface TeamStats {
   id: number;
@@ -86,9 +86,8 @@ export const rankingService = {
         if (b.wins !== a.wins) return b.wins - a.wins;
         return b.goalDifference - a.goalDifference;
       });
-
     } catch (error) {
-      throw new Error('Erro ao calcular a tabela de classificação.');
+      throw new Error("Erro ao calcular a tabela de classificação.");
     }
-  }
+  },
 };

@@ -1,7 +1,7 @@
-'use client';
+"use client";
 
-import { usePrimaryEvent } from '@web/hooks/use-event';
-import { Calendar, AlertCircle, Loader2 } from 'lucide-react';
+import { usePrimaryEvent } from "@web/hooks/use-event";
+import { AlertCircle, Calendar, Loader2 } from "lucide-react";
 
 export default function Home() {
   const { data: event, isLoading, isError } = usePrimaryEvent();
@@ -30,20 +30,21 @@ export default function Home() {
         </div>
         <h2 className="text-xl font-bold text-red-900 mb-2">Ops! Algo deu errado.</h2>
         <p className="text-red-700 max-w-md">
-          Não foi possível carregar os dados do evento. Verifique se a API está online ou tente atualizar a página.
+          Não foi possível carregar os dados do evento. Verifique se a API está online ou tente
+          atualizar a página.
         </p>
       </div>
     );
   }
 
   const formatDate = (isoString: string | Date) => {
-    if (!isoString) return '';
+    if (!isoString) return "";
     const date = new Date(isoString);
-    return new Intl.DateTimeFormat('pt-BR', {
-      day: '2-digit',
-      month: '2-digit',
-      year: 'numeric',
-      timeZone: 'UTC'
+    return new Intl.DateTimeFormat("pt-BR", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      timeZone: "UTC",
     }).format(date);
   };
 
@@ -51,7 +52,6 @@ export default function Home() {
   return (
     <div className="flex flex-col gap-10">
       <section className="bg-white rounded-3xl shadow-sm border border-gray-100 p-8 md:p-16 flex flex-col items-center text-center transition-all duration-500 ease-out">
-
         {/* Logo do Evento ou Fallback */}
         {event.logoUrl ? (
           <div className="w-28 h-28 md:w-36 md:h-36 mb-6 md:mb-8 rounded-2xl overflow-hidden shadow-sm border border-gray-100 bg-white p-2">
@@ -76,7 +76,8 @@ export default function Home() {
         <div className="inline-flex items-center gap-2 bg-blue-50 text-blue-700 px-5 py-2.5 rounded-full font-semibold text-sm md:text-base border border-blue-100/50 shadow-sm">
           <Calendar className="w-5 h-5 text-blue-500" />
           <span>
-            {formatDate(event.startDate)} <span className="mx-1 text-blue-400 font-normal">até</span> {formatDate(event.endDate)}
+            {formatDate(event.startDate)}{" "}
+            <span className="mx-1 text-blue-400 font-normal">até</span> {formatDate(event.endDate)}
           </span>
         </div>
       </section>

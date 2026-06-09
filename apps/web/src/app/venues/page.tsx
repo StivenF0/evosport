@@ -1,10 +1,10 @@
-'use client';
+"use client";
 
-import { useVenues } from '../../hooks/use-venue';
-import { LoadingSpinner } from '../../components/ui/LoadingSpinner';
-import { ErrorMessage } from '../../components/ui/ErrorMessage';
-import { DynamicMap } from '../../components/ui/DynamicMap';
-import { Map as MapIcon } from 'lucide-react';
+import { Map as MapIcon } from "lucide-react";
+import { DynamicMap } from "../../components/ui/DynamicMap";
+import { ErrorMessage } from "../../components/ui/ErrorMessage";
+import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
+import { useVenues } from "../../hooks/use-venue";
 
 export default function MapPage() {
   const { data: venues, isLoading, isError } = useVenues();
@@ -14,13 +14,14 @@ export default function MapPage() {
   }
 
   if (isError) {
-    return <ErrorMessage message="Não foi possível carregar as informações do mapa. Tente novamente mais tarde." />;
+    return (
+      <ErrorMessage message="Não foi possível carregar as informações do mapa. Tente novamente mais tarde." />
+    );
   }
 
   return (
     // Utilizamos h-[calc(100vh-100px)] para garantir que a página preencha a tela sem quebrar o header global
     <div className="flex flex-col h-[calc(100vh-120px)] min-h-150 gap-6 animate-in fade-in duration-500">
-
       {/* Header Responsivo */}
       <section className="bg-white rounded-3xl shadow-sm border border-gray-100 p-6 flex flex-col sm:flex-row items-center justify-between gap-4 shrink-0">
         <div className="text-center sm:text-left">
@@ -41,7 +42,6 @@ export default function MapPage() {
       <div className="grow w-full relative z-0 rounded-3xl overflow-hidden shadow-sm border border-gray-100 bg-gray-50">
         <DynamicMap venues={venues || []} />
       </div>
-
     </div>
   );
 }

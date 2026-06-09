@@ -1,5 +1,5 @@
-import { teamRepository } from '../repositories/team-repository';
-import type { NewTeam, UpdateTeam } from '@packages/types/team-types';
+import type { NewTeam, UpdateTeam } from "@packages/types/team-types";
+import { teamRepository } from "../repositories/team-repository";
 // import { teams } from '../db/schema';
 
 export const teamService = {
@@ -8,7 +8,7 @@ export const teamService = {
     try {
       return await teamRepository.create(data);
     } catch (error) {
-      throw new Error('Erro ao criar o time.');
+      throw new Error("Erro ao criar o time.");
     }
   },
 
@@ -17,7 +17,7 @@ export const teamService = {
     try {
       return await teamRepository.findAll();
     } catch (error) {
-      throw new Error('Erro ao buscar os times.');
+      throw new Error("Erro ao buscar os times.");
     }
   },
 
@@ -26,7 +26,7 @@ export const teamService = {
     try {
       return await teamRepository.findById(id);
     } catch (error) {
-      throw new Error('Erro ao buscar o time específico.');
+      throw new Error("Erro ao buscar o time específico.");
     }
   },
 
@@ -35,7 +35,7 @@ export const teamService = {
     try {
       return await teamRepository.update(id, data);
     } catch (error) {
-      throw new Error('Erro ao atualizar o time.');
+      throw new Error("Erro ao atualizar o time.");
     }
   },
 
@@ -44,7 +44,7 @@ export const teamService = {
     try {
       return await teamRepository.delete(id);
     } catch (error) {
-      throw new Error('Erro ao excluir o time.');
+      throw new Error("Erro ao excluir o time.");
     }
-  }
+  },
 };

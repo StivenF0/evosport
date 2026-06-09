@@ -1,17 +1,17 @@
-'use client';
+"use client";
 
-import { useEffect } from 'react';
-import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
-import L from 'leaflet';
-import Link from 'next/link';
-import type { Venue } from '../../types/api-types';
+import L from "leaflet";
+import Link from "next/link";
+import { useEffect } from "react";
+import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
+import type { Venue } from "../../types/api-types";
 
 const fixLeafletIcons = () => {
   delete (L.Icon.Default.prototype as any)._getIconUrl;
   L.Icon.Default.mergeOptions({
-    iconRetinaUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png',
-    iconUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png',
-    shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png',
+    iconRetinaUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png",
+    iconUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon.png",
+    shadowUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-shadow.png",
   });
 };
 
@@ -50,11 +50,7 @@ export default function Map({ venues }: MapProps) {
                   <div className="font-bold text-gray-800 text-base leading-tight">
                     {venue.name}
                   </div>
-                  {venue.city && (
-                    <div className="text-sm text-gray-500 mt-1">
-                      {venue.city}
-                    </div>
-                  )}
+                  {venue.city && <div className="text-sm text-gray-500 mt-1">{venue.city}</div>}
                 </div>
 
                 <div className="border-t border-gray-100 pt-2 mt-1">

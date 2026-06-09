@@ -1,5 +1,5 @@
-import { eventRepository } from '../repositories/event-repository';
-import type { NewEvent, UpdateEvent } from '@packages/types';
+import type { NewEvent, UpdateEvent } from "@packages/types";
+import { eventRepository } from "../repositories/event-repository";
 
 export const eventService = {
   // CREATE
@@ -7,7 +7,7 @@ export const eventService = {
     try {
       return await eventRepository.create(data);
     } catch (error) {
-      throw new Error('Erro ao criar o evento.');
+      throw new Error("Erro ao criar o evento.");
     }
   },
 
@@ -16,7 +16,7 @@ export const eventService = {
     try {
       return await eventRepository.findAll();
     } catch (error) {
-      throw new Error('Erro ao buscar os eventos.');
+      throw new Error("Erro ao buscar os eventos.");
     }
   },
 
@@ -25,7 +25,7 @@ export const eventService = {
     try {
       return await eventRepository.findById(id);
     } catch (error) {
-      throw new Error('Erro ao buscar o evento específico.');
+      throw new Error("Erro ao buscar o evento específico.");
     }
   },
 
@@ -34,7 +34,7 @@ export const eventService = {
     try {
       return await eventRepository.update(id, data);
     } catch (error) {
-      throw new Error('Erro ao atualizar o evento.');
+      throw new Error("Erro ao atualizar o evento.");
     }
   },
 
@@ -43,7 +43,7 @@ export const eventService = {
     try {
       return await eventRepository.delete(id);
     } catch (error) {
-      throw new Error('Erro ao excluir o evento.');
+      throw new Error("Erro ao excluir o evento.");
     }
-  }
+  },
 };
