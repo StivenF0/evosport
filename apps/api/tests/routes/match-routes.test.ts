@@ -58,6 +58,7 @@ describe("MatchRoutes - Integração", () => {
     });
 
     expect(res.status).toBe(200);
+    // biome-ignore lint/suspicious/noExplicitAny: resposta de rota sem tipo
     const json: any = await res.json();
     expect(json.id).toBe(1);
   });
@@ -81,6 +82,7 @@ describe("MatchRoutes - Integração", () => {
     const res = await req("/");
 
     expect(res.status).toBe(200);
+    // biome-ignore lint/suspicious/noExplicitAny: resposta de rota sem tipo
     const data: any = await res.json();
     expect(data).toBeArrayOfSize(1);
     expect(data[0].formattedDate).toBe("15/06/2026");
@@ -105,6 +107,7 @@ describe("MatchRoutes - Integração", () => {
     });
 
     const res = await req("/grouped-by-date");
+    // biome-ignore lint/suspicious/noExplicitAny: resposta de rota sem tipo
     const data: any = await res.json();
 
     expect(res.status).toBe(200);
@@ -127,6 +130,7 @@ describe("MatchRoutes - Integração", () => {
 
     const res = await req("/1");
     expect(res.status).toBe(200);
+    // biome-ignore lint/suspicious/noExplicitAny: resposta de rota sem tipo
     const json: any = await res.json();
     expect(json.id).toBe(1);
   });
@@ -154,6 +158,7 @@ describe("MatchRoutes - Integração", () => {
     });
 
     expect(res.status).toBe(200);
+    // biome-ignore lint/suspicious/noExplicitAny: resposta de rota sem tipo
     const json: any = await res.json();
     expect(json.status).toBe("em_andamento");
   });
@@ -170,6 +175,7 @@ describe("MatchRoutes - Integração", () => {
 
     const res = await req("/1", { method: "DELETE" });
     expect(res.status).toBe(200);
+    // biome-ignore lint/suspicious/noExplicitAny: resposta de rota sem tipo
     const json: any = await res.json();
     expect(json.id).toBe(1);
   });

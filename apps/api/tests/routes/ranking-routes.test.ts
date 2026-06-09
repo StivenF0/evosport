@@ -28,6 +28,7 @@ describe("RankingRoutes", () => {
     spyOn(rankingService, "getRanking").mockResolvedValue([validRankingStats]);
     const res = await req("/");
     expect(res.status).toBe(200);
+    // biome-ignore lint/suspicious/noExplicitAny: mock em teste
     const json: any = await res.json();
     expect(json[0].name).toBe("Brasil");
   });

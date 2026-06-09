@@ -9,7 +9,7 @@ describe("MatchService - Create Match", () => {
   });
 
   it("should create a new match.", async () => {
-    const mockCreateMatch = spyOn(matchRepository, "create").mockResolvedValue({
+    spyOn(matchRepository, "create").mockResolvedValue({
       id: 1,
       status: "em_andamento",
       homeTeamId: 1,
@@ -33,7 +33,7 @@ describe("MatchService - Create Match", () => {
   });
 
   it("should throw an error if match failed to be created.", async () => {
-    const mockCreateMatchError = spyOn(matchRepository, "create").mockRejectedValue(Error());
+    spyOn(matchRepository, "create").mockRejectedValue(Error());
 
     const match = matchService.createMatch({
       status: "em_andamento",
@@ -53,7 +53,7 @@ describe("MatchService - Find By Id", () => {
   });
 
   it("should find an match by id.", async () => {
-    const mockFindMatchById = spyOn(matchRepository, "findById").mockResolvedValue({
+    spyOn(matchRepository, "findById").mockResolvedValue({
       id: 1,
       homeTeamId: 1,
       awayTeamId: 2,
@@ -89,7 +89,7 @@ describe("MatchService - Find By Id", () => {
   });
 
   it("should throw an error if no match was found.", async () => {
-    const mockFindMatchByIdError = spyOn(matchRepository, "findById").mockRejectedValue(Error());
+    spyOn(matchRepository, "findById").mockRejectedValue(Error());
 
     const match = matchService.getMatchById(10);
 
@@ -103,7 +103,7 @@ describe("MatchService - Get All", () => {
   });
 
   it("should return all matches.", async () => {
-    const mockFindAllMatch = spyOn(matchRepository, "getAllWithTeams").mockResolvedValue([
+    spyOn(matchRepository, "getAllWithTeams").mockResolvedValue([
       {
         id: 1,
         homeTeamId: 1,
@@ -140,7 +140,7 @@ describe("MatchService - Get All", () => {
   });
 
   it("should throw an error if no match was found.", async () => {
-    const mockFindAllError = spyOn(matchRepository, "getAllWithTeams").mockRejectedValue(Error());
+    spyOn(matchRepository, "getAllWithTeams").mockRejectedValue(Error());
 
     const event = matchService.getAllMatches();
 
@@ -154,7 +154,7 @@ describe("MatchService - Update Match", () => {
   });
 
   it("should update an match.", async () => {
-    const mockUpdateMatch = spyOn(matchRepository, "update").mockResolvedValue({
+    spyOn(matchRepository, "update").mockResolvedValue({
       id: 1,
       status: "encerrado",
       homeTeamId: 1,
@@ -171,7 +171,7 @@ describe("MatchService - Update Match", () => {
   });
 
   it("should throw an error if no match was found for update.", async () => {
-    const mockUpdateMatchError = spyOn(matchRepository, "update").mockRejectedValue(Error());
+    spyOn(matchRepository, "update").mockRejectedValue(Error());
 
     const event = matchService.updateMatch(10, { status: "encerrado" });
 
@@ -185,7 +185,7 @@ describe("MatchService - Delete Match", () => {
   });
 
   it("should delete a new match.", async () => {
-    const mockDeleteMatch = spyOn(matchRepository, "delete").mockResolvedValue({
+    spyOn(matchRepository, "delete").mockResolvedValue({
       id: 1,
       status: "em_andamento",
       homeTeamId: 1,
@@ -203,7 +203,7 @@ describe("MatchService - Delete Match", () => {
   });
 
   it("should throw an error if no match was found for delete.", async () => {
-    const mockCreateMatchError = spyOn(matchRepository, "delete").mockRejectedValue(Error());
+    spyOn(matchRepository, "delete").mockRejectedValue(Error());
 
     const match = matchService.deleteMatch(1);
 
@@ -217,7 +217,7 @@ describe("MatchService - Group By Date", () => {
   });
 
   it("should return matches grouped by date.", async () => {
-    const mockGroupByDate = spyOn(matchService, "getAllMatches").mockResolvedValue([
+    spyOn(matchService, "getAllMatches").mockResolvedValue([
       {
         id: 1,
         homeTeamId: 1,
@@ -253,7 +253,7 @@ describe("MatchService - Group By Date", () => {
   });
 
   it("should throw an error if no match was found.", async () => {
-    const mockGroupByDateError = spyOn(matchService, "getMatchesGroupedByDate").mockRejectedValue(
+    spyOn(matchService, "getMatchesGroupedByDate").mockRejectedValue(
       Error(),
     );
 
@@ -269,7 +269,7 @@ describe("MatchService - Group By Stadium", () => {
   });
 
   it("should return matches grouped by stadium.", async () => {
-    const mockGroupByStadium = spyOn(matchService, "getAllMatches").mockResolvedValue([
+    spyOn(matchService, "getAllMatches").mockResolvedValue([
       {
         id: 1,
         homeTeamId: 1,
@@ -305,7 +305,7 @@ describe("MatchService - Group By Stadium", () => {
   });
 
   it("should throw an error if no match was found.", async () => {
-    const mockGroupByStadiumError = spyOn(
+    spyOn(
       matchService,
       "getMatchesGroupedByDate",
     ).mockRejectedValue(Error());

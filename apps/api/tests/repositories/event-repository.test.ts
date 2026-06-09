@@ -12,6 +12,7 @@ describe("EventRepository - Create Event", () => {
       values: () => ({
         returning: () => Promise.resolve([{ id: 1, name: "Copa Evosport" }]),
       }),
+      // biome-ignore lint/suspicious/noExplicitAny: mock de Drizzle em teste
     } as any);
 
     const event = await eventRepository.create({
@@ -30,6 +31,7 @@ describe("EventRepository - Create Event", () => {
       values: () => ({
         returning: () => Promise.resolve([]),
       }),
+      // biome-ignore lint/suspicious/noExplicitAny: mock de Drizzle em teste
     } as any);
 
     const event = eventRepository.create({
@@ -54,6 +56,7 @@ describe("EventRepository - Find All", () => {
           { id: 1, name: "Copa Evosport" },
           { id: 2, name: "Brasileirão" },
         ]),
+      // biome-ignore lint/suspicious/noExplicitAny: mock de Drizzle em teste
     } as any);
 
     const events = await eventRepository.findAll();
@@ -75,6 +78,7 @@ describe("EventRepository - Find By Id", () => {
           limit: () => Promise.resolve([{ id: 1, name: "Copa Evosport" }]),
         }),
       }),
+      // biome-ignore lint/suspicious/noExplicitAny: mock de Drizzle em teste
     } as any);
 
     const event = await eventRepository.findById(1);
@@ -90,6 +94,7 @@ describe("EventRepository - Find By Id", () => {
           limit: () => Promise.resolve([]),
         }),
       }),
+      // biome-ignore lint/suspicious/noExplicitAny: mock de Drizzle em teste
     } as any);
 
     const event = eventRepository.findById(99);
@@ -110,6 +115,7 @@ describe("EventRepository - Update Event", () => {
           returning: () => Promise.resolve([{ id: 1, name: "Copa Evosport 2026" }]),
         }),
       }),
+      // biome-ignore lint/suspicious/noExplicitAny: mock de Drizzle em teste
     } as any);
 
     const event = await eventRepository.update(1, { name: "Copa Evosport 2026" });
@@ -125,6 +131,7 @@ describe("EventRepository - Update Event", () => {
           returning: () => Promise.resolve([]),
         }),
       }),
+      // biome-ignore lint/suspicious/noExplicitAny: mock de Drizzle em teste
     } as any);
 
     const event = eventRepository.update(99, { name: "Teste" });
@@ -143,6 +150,7 @@ describe("EventRepository - Delete Event", () => {
       where: () => ({
         returning: () => Promise.resolve([{ id: 1, name: "Copa Evosport" }]),
       }),
+      // biome-ignore lint/suspicious/noExplicitAny: mock de Drizzle em teste
     } as any);
 
     const event = await eventRepository.delete(1);
@@ -156,6 +164,7 @@ describe("EventRepository - Delete Event", () => {
       where: () => ({
         returning: () => Promise.resolve([]),
       }),
+      // biome-ignore lint/suspicious/noExplicitAny: mock de Drizzle em teste
     } as any);
 
     const event = eventRepository.delete(99);

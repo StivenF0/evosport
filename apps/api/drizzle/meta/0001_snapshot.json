@@ -116,12 +116,8 @@
           "name": "matches_home_team_id_teams_id_fk",
           "tableFrom": "matches",
           "tableTo": "teams",
-          "columnsFrom": [
-            "home_team_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["home_team_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -129,12 +125,8 @@
           "name": "matches_away_team_id_teams_id_fk",
           "tableFrom": "matches",
           "tableTo": "teams",
-          "columnsFrom": [
-            "away_team_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["away_team_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         },
@@ -142,12 +134,8 @@
           "name": "matches_stadium_id_stadiums_id_fk",
           "tableFrom": "matches",
           "tableTo": "stadiums",
-          "columnsFrom": [
-            "stadium_id"
-          ],
-          "columnsTo": [
-            "id"
-          ],
+          "columnsFrom": ["stadium_id"],
+          "columnsTo": ["id"],
           "onDelete": "no action",
           "onUpdate": "no action"
         }

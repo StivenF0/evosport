@@ -9,7 +9,7 @@ describe("EventService - Create Event", () => {
   });
 
   it("should create a new event.", async () => {
-    const mockCreateEvent = spyOn(eventRepository, "create").mockResolvedValue({
+    spyOn(eventRepository, "create").mockResolvedValue({
       id: 1,
       name: "Brasileirão",
       startDate: new Date("2026-06-15"),
@@ -29,7 +29,7 @@ describe("EventService - Create Event", () => {
   });
 
   it("should throw an error if event failed to be created.", async () => {
-    const mockCreateEventError = spyOn(eventRepository, "create").mockRejectedValue(
+    spyOn(eventRepository, "create").mockRejectedValue(
       Error("Falha ao criar o evento."),
     );
 
@@ -50,7 +50,7 @@ describe("EventService - Find By Id", () => {
   });
 
   it("should return an event by ID.", async () => {
-    const mockFindById = spyOn(eventRepository, "findById").mockResolvedValue({
+    spyOn(eventRepository, "findById").mockResolvedValue({
       id: 1,
       name: "Brasileirão",
       startDate: new Date("2026-06-15"),
@@ -65,7 +65,7 @@ describe("EventService - Find By Id", () => {
   });
 
   it("should throw an error if no event was found by ID.", async () => {
-    const mockFindByIdError = spyOn(eventRepository, "findById").mockRejectedValue(
+    spyOn(eventRepository, "findById").mockRejectedValue(
       new Error("Evento não encontrado."),
     );
 
@@ -81,7 +81,7 @@ describe("EventService - Find All", () => {
   });
 
   it("should return all events.", async () => {
-    const mockFindAll = spyOn(eventRepository, "findAll").mockResolvedValue([
+    spyOn(eventRepository, "findAll").mockResolvedValue([
       {
         id: 1,
         name: "Brasileirão",
@@ -106,7 +106,7 @@ describe("EventService - Find All", () => {
   });
 
   it("should throw an error if no event was found.", async () => {
-    const mockFindAllError = spyOn(eventRepository, "findAll").mockRejectedValue(
+    spyOn(eventRepository, "findAll").mockRejectedValue(
       new Error("Falha ao encontrar o evento."),
     );
 
@@ -122,7 +122,7 @@ describe("EventService - Update Event", () => {
   });
 
   it("should update an event.", async () => {
-    const mockUpdateEvent = spyOn(eventRepository, "update").mockResolvedValue({
+    spyOn(eventRepository, "update").mockResolvedValue({
       id: 1,
       name: "Brasileirão - Série A",
       startDate: new Date("2026-06-15"),
@@ -139,7 +139,7 @@ describe("EventService - Update Event", () => {
   });
 
   it("should throw an error if no event was found for update.", async () => {
-    const mockUpdateEventError = spyOn(eventRepository, "update").mockRejectedValue(
+    spyOn(eventRepository, "update").mockRejectedValue(
       new Error("Evento não encontrado para atualização."),
     );
 
@@ -157,7 +157,7 @@ describe("EventService - Delete Event", () => {
   });
 
   it("should delete an event.", async () => {
-    const mockDeleteEvent = spyOn(eventRepository, "delete").mockResolvedValue({
+    spyOn(eventRepository, "delete").mockResolvedValue({
       id: 1,
       name: "Brasileirão",
       startDate: new Date("2026-06-15"),
@@ -172,7 +172,7 @@ describe("EventService - Delete Event", () => {
   });
 
   it("should throw an error if no event was found for delete.", async () => {
-    const mockDeleteEventError = spyOn(eventRepository, "delete").mockRejectedValue(
+    spyOn(eventRepository, "delete").mockRejectedValue(
       new Error("Evento não encontrado para exclusão."),
     );
 

@@ -14,6 +14,7 @@ describe("MatchRepository - Create Match", () => {
         returning: () =>
           Promise.resolve([{ id: 1, homeTeamId: 1, awayTeamId: 2, status: "agendado" }]),
       }),
+      // biome-ignore lint/suspicious/noExplicitAny: mock de Drizzle em teste
     } as any);
 
     const match = await matchRepository.create({
@@ -33,6 +34,7 @@ describe("MatchRepository - Create Match", () => {
       values: () => ({
         returning: () => Promise.resolve([]), // Array vazio simula a falha no Drizzle
       }),
+      // biome-ignore lint/suspicious/noExplicitAny: mock de Drizzle em teste
     } as any);
 
     const match = matchRepository.create({
@@ -49,11 +51,14 @@ describe("MatchRepository - Create Match", () => {
 describe("MatchRepository - Get All With Teams", () => {
   beforeEach(() => {
     // Configura o objeto db.query caso não exista no ambiente de teste isolado
+    // biome-ignore lint/suspicious/noExplicitAny: mock de Drizzle em teste
     if (!db.query) db.query = { matches: {} } as any;
+    // biome-ignore lint/suspicious/noExplicitAny: mock de Drizzle em teste
     spyOn(db.query.matches as any, "findMany").mockRestore();
   });
 
   it("should return all matches with their relations.", async () => {
+    // biome-ignore lint/suspicious/noExplicitAny: mock de Drizzle em teste
     spyOn(db.query.matches as any, "findMany").mockResolvedValue([
       {
         id: 1,
@@ -66,10 +71,12 @@ describe("MatchRepository - Get All With Teams", () => {
     const matches = await matchRepository.getAllWithTeams();
 
     expect(matches).toBeArrayOfSize(1);
+    // biome-ignore lint/suspicious/noExplicitAny: mock de Drizzle em teste
     expect((matches[0] as any)?.homeTeam?.name).toBe("Brasil");
   });
 
   it("should throw an error if the query fails.", async () => {
+    // biome-ignore lint/suspicious/noExplicitAny: mock de Drizzle em teste
     spyOn(db.query.matches as any, "findMany").mockRejectedValue(new Error());
 
     const matches = matchRepository.getAllWithTeams();
@@ -80,11 +87,14 @@ describe("MatchRepository - Get All With Teams", () => {
 
 describe("MatchRepository - Find By Id", () => {
   beforeEach(() => {
+    // biome-ignore lint/suspicious/noExplicitAny: mock de Drizzle em teste
     if (!db.query) db.query = { matches: {} } as any;
+    // biome-ignore lint/suspicious/noExplicitAny: mock de Drizzle em teste
     spyOn(db.query.matches as any, "findFirst").mockRestore();
   });
 
   it("should return a match by ID.", async () => {
+    // biome-ignore lint/suspicious/noExplicitAny: mock de Drizzle em teste
     spyOn(db.query.matches as any, "findFirst").mockResolvedValue({
       id: 1,
       status: "encerrado",
@@ -97,6 +107,7 @@ describe("MatchRepository - Find By Id", () => {
   });
 
   it("should throw an error if no match was found by ID.", async () => {
+    // biome-ignore lint/suspicious/noExplicitAny: mock de Drizzle em teste
     spyOn(db.query.matches as any, "findFirst").mockResolvedValue(undefined);
 
     const match = matchRepository.findById(99);
@@ -118,6 +129,7 @@ describe("MatchRepository - Update Match", () => {
           returning: () => Promise.resolve([{ id: 1, status: "em_andamento" }]),
         }),
       }),
+      // biome-ignore lint/suspicious/noExplicitAny: mock de Drizzle em teste
     } as any);
 
     const match = await matchRepository.update(1, { status: "em_andamento" });
@@ -133,6 +145,7 @@ describe("MatchRepository - Update Match", () => {
           returning: () => Promise.resolve([]),
         }),
       }),
+      // biome-ignore lint/suspicious/noExplicitAny: mock de Drizzle em teste
     } as any);
 
     const match = matchRepository.update(99, { status: "encerrado" });
@@ -152,6 +165,7 @@ describe("MatchRepository - Delete Match", () => {
       where: () => ({
         returning: () => Promise.resolve([{ id: 1, status: "agendado" }]),
       }),
+      // biome-ignore lint/suspicious/noExplicitAny: mock de Drizzle em teste
     } as any);
 
     const match = await matchRepository.delete(1);
@@ -165,6 +179,7 @@ describe("MatchRepository - Delete Match", () => {
       where: () => ({
         returning: () => Promise.resolve([]),
       }),
+      // biome-ignore lint/suspicious/noExplicitAny: mock de Drizzle em teste
     } as any);
 
     const match = matchRepository.delete(99);
