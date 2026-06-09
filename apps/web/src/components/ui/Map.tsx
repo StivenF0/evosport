@@ -7,6 +7,7 @@ import { MapContainer, Marker, Popup, TileLayer } from "react-leaflet";
 import type { Venue } from "../../types/api-types";
 
 const fixLeafletIcons = () => {
+  // biome-ignore lint/suspicious/noExplicitAny: necessário para Leaflet
   delete (L.Icon.Default.prototype as any)._getIconUrl;
   L.Icon.Default.mergeOptions({
     iconRetinaUrl: "https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/images/marker-icon-2x.png",
@@ -19,7 +20,7 @@ interface MapProps {
   venues: Venue[];
 }
 
-export default function Map({ venues }: MapProps) {
+export default function MapView({ venues }: MapProps) {
   useEffect(() => {
     fixLeafletIcons();
   }, []);

@@ -1,4 +1,5 @@
 import { Shield } from "lucide-react";
+import Image from "next/image";
 import type { Team } from "../../types/api-types";
 
 interface TeamCardProps {
@@ -10,9 +11,11 @@ export function TeamCard({ team }: TeamCardProps) {
     <div className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex flex-col items-center text-center hover:shadow-md hover:border-blue-100 transition-all cursor-default group">
       {team.flagUrl ? (
         <div className="w-24 h-24 mb-4 rounded-full overflow-hidden shadow-sm border-2 border-gray-50 group-hover:border-blue-100 transition-colors">
-          <img
+          <Image
             src={team.flagUrl}
             alt={`Escudo do ${team.name}`}
+            width={96}
+            height={96}
             className="w-full h-full object-cover"
           />
         </div>

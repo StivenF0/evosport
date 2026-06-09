@@ -1,4 +1,5 @@
 import { CalendarDays } from "lucide-react";
+import Image from "next/image";
 import type { Match as BaseMatch } from "../../types/api-types";
 
 export interface Match extends BaseMatch {
@@ -54,9 +55,11 @@ export function MatchCard({ match }: MatchCardProps) {
         <div className="flex flex-col items-center flex-1">
           {match.homeTeam?.flagUrl ? (
             <div className="w-16 h-16 mb-2 rounded-full overflow-hidden shadow-sm border border-gray-100">
-              <img
+              <Image
                 src={match.homeTeam.flagUrl}
                 alt={match.homeTeam.name}
+                width={64}
+                height={64}
                 className="w-full h-full object-cover"
               />
             </div>
@@ -85,9 +88,11 @@ export function MatchCard({ match }: MatchCardProps) {
         <div className="flex flex-col items-center flex-1">
           {match.awayTeam?.flagUrl ? (
             <div className="w-16 h-16 mb-2 rounded-full overflow-hidden shadow-sm border border-gray-100">
-              <img
+              <Image
                 src={match.awayTeam.flagUrl}
                 alt={match.awayTeam.name}
+                width={64}
+                height={64}
                 className="w-full h-full object-cover"
               />
             </div>

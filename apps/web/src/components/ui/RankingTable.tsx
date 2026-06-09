@@ -1,4 +1,5 @@
 import { Trophy } from "lucide-react";
+import Image from "next/image";
 import type { TeamStats } from "../../types/api-types";
 import { EmptyState } from "./EmptyState";
 
@@ -59,9 +60,11 @@ export function RankingTable({ ranking }: RankingTableProps) {
               <td className="px-4 py-3">
                 <div className="flex items-center gap-3">
                   {entry.flagUrl ? (
-                    <img
+                    <Image
                       src={entry.flagUrl}
                       alt={entry.name}
+                      width={28}
+                      height={28}
                       className="w-7 h-7 rounded-full object-cover border border-gray-100 shadow-sm"
                     />
                   ) : (

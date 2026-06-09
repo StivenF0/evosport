@@ -12,6 +12,7 @@ export function ErrorMessage({
           viewBox="0 0 24 24"
           stroke="currentColor"
         >
+          <title>Erro</title>
           <path
             strokeLinecap="round"
             strokeLinejoin="round"

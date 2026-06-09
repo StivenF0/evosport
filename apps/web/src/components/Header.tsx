@@ -53,6 +53,7 @@ export function Header() {
           {/* Mobile menu button */}
           <div className="flex items-center sm:hidden">
             <button
+              type="button"
               onClick={() => setIsOpen(!isOpen)}
               className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none"
               aria-expanded={isOpen}
@@ -66,6 +67,7 @@ export function Header() {
                 viewBox="0 0 24 24"
                 stroke="currentColor"
               >
+                <title>Abrir menu</title>
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"
@@ -81,6 +83,7 @@ export function Header() {
                 viewBox="0 0 24 24"
                 stroke="currentColor"
               >
+                <title>Fechar menu</title>
                 <path
                   strokeLinecap="round"
                   strokeLinejoin="round"

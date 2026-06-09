@@ -2,6 +2,7 @@
 
 import { usePrimaryEvent } from "@web/hooks/use-event";
 import { AlertCircle, Calendar, Loader2 } from "lucide-react";
+import Image from "next/image";
 
 export default function Home() {
   const { data: event, isLoading, isError } = usePrimaryEvent();
@@ -55,9 +56,11 @@ export default function Home() {
         {/* Logo do Evento ou Fallback */}
         {event.logoUrl ? (
           <div className="w-28 h-28 md:w-36 md:h-36 mb-6 md:mb-8 rounded-2xl overflow-hidden shadow-sm border border-gray-100 bg-white p-2">
-            <img
+            <Image
               src={event.logoUrl}
               alt={`Logo do evento ${event.name}`}
+              width={144}
+              height={144}
               className="w-full h-full object-cover rounded-xl"
             />
           </div>
