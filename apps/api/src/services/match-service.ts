@@ -1,8 +1,6 @@
 import type { NewMatch, UpdateMatch } from "@packages/types/match-types";
 import { matchRepository } from "../repositories/match-repository";
 
-// import { matches } from '../db/schema';
-
 const formatDateToBR = (date: Date | number | string): string => {
   return new Intl.DateTimeFormat("pt-BR", {
     day: "2-digit",
@@ -32,6 +30,19 @@ export const matchService = {
       }));
     } catch {
       throw new Error("Erro ao buscar as partidas.");
+    }
+  },
+
+  // READ (Partidas de um evento, formatadas)
+  async getMatchesByEvent(eventId: number) {
+    try {
+      const result = await matchRepository.getByEvent(eventId);
+      return result.map((match) => ({
+        ...match,
+        formattedDate: formatDateToBR(match.date),
+      }));
+    } catch {
+      throw new Error("Erro ao buscar as partidas do evento.");
     }
   },
 

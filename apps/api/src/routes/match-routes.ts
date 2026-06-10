@@ -1,4 +1,5 @@
 import { Elysia } from "elysia";
+import { authPlugin, requireAdmin } from "../plugins/auth";
 import {
   MatchBaseResponse,
   MatchBody,
@@ -10,7 +11,8 @@ import { ErrorResponse, IdParam } from "../schemas/shared-schemas";
 import { matchService } from "../services/match-service";
 
 export const matchRoutes = new Elysia({ prefix: "/match" })
-  // CREATE
+  .use(authPlugin)
+  // CREATE (admin)
   .post(
     "/",
     async ({ body }) => {
@@ -21,13 +23,16 @@ export const matchRoutes = new Elysia({ prefix: "/match" })
       }
     },
     {
+      beforeHandle: requireAdmin,
       body: MatchBody,
       response: {
         200: MatchBaseResponse,
+        401: ErrorResponse,
+        403: ErrorResponse,
         500: ErrorResponse,
       },
       detail: {
-        summary: "Criar uma nova partida",
+        summary: "Criar uma nova partida (admin)",
         tags: ["Matches"],
       },
     },
@@ -108,19 +113,22 @@ export const matchRoutes = new Elysia({ prefix: "/match" })
       }
     },
     {
+      beforeHandle: requireAdmin,
       params: IdParam,
       body: MatchBody,
       response: {
         200: MatchBaseResponse,
+        401: ErrorResponse,
+        403: ErrorResponse,
         500: ErrorResponse,
       },
       detail: {
-        summary: "Atualizar partida",
+        summary: "Atualizar partida (admin)",
         tags: ["Matches"],
       },
     },
   )
-  // DELETE
+  // DELETE (admin)
   .delete(
     "/:id",
     async ({ params: { id } }) => {
@@ -131,13 +139,16 @@ export const matchRoutes = new Elysia({ prefix: "/match" })
       }
     },
     {
+      beforeHandle: requireAdmin,
       params: IdParam,
       response: {
         200: MatchBaseResponse,
+        401: ErrorResponse,
+        403: ErrorResponse,
         500: ErrorResponse,
       },
       detail: {
-        summary: "Excluir partida",
+        summary: "Excluir partida (admin)",
         tags: ["Matches"],
       },
     },

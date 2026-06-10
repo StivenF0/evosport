@@ -12,6 +12,7 @@ describe("EventService - Create Event", () => {
     spyOn(eventRepository, "create").mockResolvedValue({
       id: 1,
       name: "Brasileirão",
+      description: null,
       startDate: new Date("2026-06-15"),
       endDate: new Date("2026-08-15"),
       logoUrl: "some-link.link",
@@ -19,6 +20,7 @@ describe("EventService - Create Event", () => {
 
     const event = await eventService.createEvent({
       name: "Brasileirão",
+      description: null,
       startDate: new Date("2026-06-15"),
       endDate: new Date("2026-08-15"),
       logoUrl: "some-link.link",
@@ -51,6 +53,7 @@ describe("EventService - Find By Id", () => {
     spyOn(eventRepository, "findById").mockResolvedValue({
       id: 1,
       name: "Brasileirão",
+      description: null,
       startDate: new Date("2026-06-15"),
       endDate: new Date("2026-08-15"),
       logoUrl: "some-link.link",
@@ -81,6 +84,7 @@ describe("EventService - Find All", () => {
       {
         id: 1,
         name: "Brasileirão",
+        description: null,
         startDate: new Date("2026-06-15"),
         endDate: new Date("2026-08-15"),
         logoUrl: "some-link.link",
@@ -88,6 +92,7 @@ describe("EventService - Find All", () => {
       {
         id: 2,
         name: "Champions",
+        description: null,
         startDate: new Date("2026-09-15"),
         endDate: new Date("2026-11-15"),
         logoUrl: "some-link-again.link",
@@ -119,6 +124,7 @@ describe("EventService - Update Event", () => {
     spyOn(eventRepository, "update").mockResolvedValue({
       id: 1,
       name: "Brasileirão - Série A",
+      description: null,
       startDate: new Date("2026-06-15"),
       endDate: new Date("2026-08-15"),
       logoUrl: "some-link.link",
@@ -154,6 +160,7 @@ describe("EventService - Delete Event", () => {
     spyOn(eventRepository, "delete").mockResolvedValue({
       id: 1,
       name: "Brasileirão",
+      description: null,
       startDate: new Date("2026-06-15"),
       endDate: new Date("2026-08-15"),
       logoUrl: "some-link.link",

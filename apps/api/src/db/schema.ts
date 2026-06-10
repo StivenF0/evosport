@@ -76,11 +76,39 @@ export const eventStadiums = sqliteTable("event_stadiums", {
     .references(() => stadiums.id),
 });
 
+// Favoritos: relação N:N entre usuários e eventos
+export const userFavorites = sqliteTable("user_favorites", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  userId: integer("user_id")
+    .notNull()
+    .references(() => users.id),
+  eventId: integer("event_id")
+    .notNull()
+    .references(() => event.id),
+  createdAt: integer("created_at", { mode: "timestamp" }).notNull().default(sql`(unixepoch())`),
+});
+
 // Definição de relações para facilitar as consultas (joins) no Drizzle
+export const usersRelations = relations(users, ({ many }) => ({
+  favorites: many(userFavorites),
+}));
+
 export const eventRelations = relations(event, ({ many }) => ({
   matches: many(matches),
   eventTeams: many(eventTeams),
   eventStadiums: many(eventStadiums),
+  favorites: many(userFavorites),
+}));
+
+export const userFavoritesRelations = relations(userFavorites, ({ one }) => ({
+  user: one(users, {
+    fields: [userFavorites.userId],
+    references: [users.id],
+  }),
+  event: one(event, {
+    fields: [userFavorites.eventId],
+    references: [event.id],
+  }),
 }));
 
 export const teamsRelations = relations(teams, ({ many }) => ({

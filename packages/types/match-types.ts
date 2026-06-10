@@ -12,8 +12,10 @@ export interface Match {
   awayScore: number | null;
 }
 
-export type NewMatch = Omit<Match, "id" | "status"> & {
+export type NewMatch = Omit<Match, "id" | "status" | "homeScore" | "awayScore"> & {
   status?: MatchStatus;
+  homeScore?: number | null;
+  awayScore?: number | null;
 };
 
 export type UpdateMatch = Partial<Omit<Match, "id">>;

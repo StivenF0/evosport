@@ -252,17 +252,17 @@ Guardas `requireAuth` (401) e `requireAdmin` (403) em `src/plugins/auth.ts`. See
 
 ## Sprint 9 — Favoritos e Escopo por Evento (Backend)
 
-- [ ] Tabela e CRUD de favoritos.
-Criar `user_favorites` (userId, eventId). Repository + service. Rotas: GET /favorites (do usuário logado), POST /favorites/:eventId, DELETE /favorites/:eventId. Protegidas por `requireAuth`.
+- [x] Tabela e CRUD de favoritos.
+Criada `user_favorites` (userId, eventId, createdAt) com relations — migration `0004_unique_timeslip.sql`. `favorite-repository` (findByUser, exists, add, remove), `favorite-service` (add idempotente valida o evento) e `favorite-routes` (GET /favorites, POST/DELETE /favorites/:eventId) sob `requireAuth`.
 
-- [ ] Escopar rotas existentes por evento.
-Ajustar matches/teams/ranking para filtrar por `eventId` (ex.: GET /events/:id/matches, /events/:id/teams, /events/:id/ranking, /events/:id/venues). Manter a listagem geral de eventos em GET /events.
+- [x] Escopar rotas existentes por evento.
+Novas rotas em `event-routes`: GET /event/:id/matches, /:id/teams, /:id/venues, /:id/ranking. `matchRepository.getByEvent`, `rankingRepository.getFinishedMatches(eventId?)`, `eventRepository.findTeamsByEvent/findStadiumsByEvent` via tabelas de junção. Mantidas GET /event (principal) e adicionada GET /event/list (feed multi-evento).
 
-- [ ] Endpoint de placar dinâmico.
-No event-service, expor a "partida em destaque": primeira `em_andamento`; senão `agendado` futura mais próxima. Usado pelo feed e pelo painel da página de evento.
+- [x] Endpoint de placar dinâmico.
+`eventService.getHighlightMatch` exposto em GET /event/:id/highlight: prioriza partida `em_andamento`; senão o `agendado` futuro mais próximo; `null` se não houver.
 
-- [ ] Rotas administrativas (CRUD completo).
-Garantir POST/PUT/DELETE para events, teams, stadiums e matches (incluindo vínculo nas tabelas de junção), todas sob `requireAdmin`. Atualizar testes.
+- [x] Rotas administrativas (CRUD completo).
+POST/PUT/DELETE de events, teams, venues e matches agora sob `requireAdmin` (401/403). Adicionado `eventId` em `MatchBody`/respostas. Vínculos N:N via POST/DELETE /event/:id/teams/:teamId e /event/:id/venues/:stadiumId (idempotentes). Testes atualizados — 149 testes passando.
 
 ## Sprint 10 — Fundação do Frontend (Auth, Layout, Design System)
 

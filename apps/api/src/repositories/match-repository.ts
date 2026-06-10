@@ -34,6 +34,22 @@ export const matchRepository = {
     }
   },
 
+  // READ (Partidas de um evento específico, com relações)
+  async getByEvent(eventId: number) {
+    try {
+      return await db.query.matches.findMany({
+        where: eq(matches.eventId, eventId),
+        with: {
+          homeTeam: true,
+          awayTeam: true,
+          stadium: true,
+        },
+      });
+    } catch {
+      throw new Error("Erro ao buscar as partidas do evento.");
+    }
+  },
+
   // READ (One)
   async findById(id: number) {
     try {

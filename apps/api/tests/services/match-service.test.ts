@@ -12,6 +12,7 @@ describe("MatchService - Create Match", () => {
     spyOn(matchRepository, "create").mockResolvedValue({
       id: 1,
       status: "em_andamento",
+      eventId: 1,
       homeTeamId: 1,
       awayTeamId: 2,
       stadiumId: 1,
@@ -22,6 +23,7 @@ describe("MatchService - Create Match", () => {
 
     const match = await matchService.createMatch({
       status: "em_andamento",
+      eventId: 1,
       homeTeamId: 1,
       awayTeamId: 2,
       stadiumId: 1,
@@ -41,6 +43,7 @@ describe("MatchService - Create Match", () => {
 
     const match = matchService.createMatch({
       status: "em_andamento",
+      eventId: 1,
       homeTeamId: 3,
       awayTeamId: 4,
       stadiumId: 2,
@@ -61,6 +64,7 @@ describe("MatchService - Find By Id", () => {
   it("should find an match by id.", async () => {
     spyOn(matchRepository, "findById").mockResolvedValue({
       id: 1,
+      eventId: 1,
       homeTeamId: 1,
       awayTeamId: 2,
       stadiumId: 2,
@@ -114,6 +118,7 @@ describe("MatchService - Get All", () => {
     spyOn(matchRepository, "getAllWithTeams").mockResolvedValue([
       {
         id: 1,
+        eventId: 1,
         homeTeamId: 1,
         awayTeamId: 2,
         stadiumId: 2,
@@ -167,6 +172,7 @@ describe("MatchService - Update Match", () => {
     spyOn(matchRepository, "update").mockResolvedValue({
       id: 1,
       status: "encerrado",
+      eventId: 1,
       homeTeamId: 1,
       awayTeamId: 2,
       stadiumId: 1,
@@ -200,6 +206,7 @@ describe("MatchService - Delete Match", () => {
     spyOn(matchRepository, "delete").mockResolvedValue({
       id: 1,
       status: "em_andamento",
+      eventId: 1,
       homeTeamId: 1,
       awayTeamId: 2,
       stadiumId: 1,
@@ -234,6 +241,7 @@ describe("MatchService - Group By Date", () => {
     spyOn(matchService, "getAllMatches").mockResolvedValue([
       {
         id: 1,
+        eventId: 1,
         homeTeamId: 1,
         awayTeamId: 2,
         stadiumId: 2,
@@ -286,6 +294,7 @@ describe("MatchService - Group By Stadium", () => {
     spyOn(matchService, "getAllMatches").mockResolvedValue([
       {
         id: 1,
+        eventId: 1,
         homeTeamId: 1,
         awayTeamId: 2,
         stadiumId: 2,

@@ -5,6 +5,7 @@ import { Elysia } from "elysia";
 
 import { authRoutes } from "./routes/auth-routes.ts";
 import { eventRoutes } from "./routes/event-routes.ts";
+import { favoriteRoutes } from "./routes/favorite-routes.ts";
 import { matchRoutes } from "./routes/match-routes.ts";
 import { rankingRoutes } from "./routes/ranking-routes.ts";
 import { teamRoutes } from "./routes/team-routes.ts";
@@ -39,6 +40,7 @@ const app = new Elysia({ prefix: "/api" })
           { name: "Matches", description: "Gerenciamento de partidas" },
           { name: "Ranking", description: "Tabela de classificação calculada" },
           { name: "Auth", description: "Autenticação e gestão de usuários" },
+          { name: "Favorites", description: "Eventos favoritados pelo usuário" },
         ],
       },
     }),
@@ -47,6 +49,7 @@ const app = new Elysia({ prefix: "/api" })
     detail: { hide: true },
   })
   .use(authRoutes)
+  .use(favoriteRoutes)
   .use(eventRoutes)
   .use(venueRoutes)
   .use(matchRoutes)
