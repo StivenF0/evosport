@@ -1,7 +1,9 @@
-import { afterEach, beforeEach, describe, expect, it, mock, spyOn } from "bun:test";
+import { afterEach, beforeAll, beforeEach, describe, expect, it, mock, spyOn } from "bun:test";
 import { matchRoutes } from "@api/routes/match-routes";
+import { authService } from "@api/services/auth-service";
 import { matchService } from "@api/services/match-service";
 import { Elysia } from "elysia";
+import { adminUser, getAdminCookie } from "../helpers/auth";
 
 // 1. Instância limpa do app contendo apenas as rotas de partida
 const app = new Elysia().use(matchRoutes);
@@ -10,7 +12,12 @@ const app = new Elysia().use(matchRoutes);
 const req = (path: string, options?: RequestInit) =>
   app.handle(new Request(`http://localhost/match${path}`, options));
 
+let adminCookie = "";
+
 describe("MatchRoutes - Integração", () => {
+  beforeAll(async () => {
+    adminCookie = await getAdminCookie();
+  });
   afterEach(() => {
     mock.restore();
   });
@@ -22,6 +29,8 @@ describe("MatchRoutes - Integração", () => {
     spyOn(matchService, "updateMatch").mockRestore();
     spyOn(matchService, "deleteMatch").mockRestore();
   });
+
+  const asAdmin = () => spyOn(authService, "getProfile").mockResolvedValue(adminUser);
 
   // Mocks completos para satisfazer a validação de Schema do Elysia (Evita Erro 422)
   const validHomeTeam = { id: 1, name: "Brasil", flagUrl: null };
@@ -37,8 +46,10 @@ describe("MatchRoutes - Integração", () => {
   const validDate = new Date("2026-06-15T00:00:00.000Z");
 
   it("POST / - should create a match and return 200", async () => {
+    asAdmin();
     spyOn(matchService, "createMatch").mockResolvedValue({
       id: 1,
+      eventId: 1,
       homeTeamId: 1,
       awayTeamId: 2,
       stadiumId: 1,
@@ -50,8 +61,9 @@ describe("MatchRoutes - Integração", () => {
 
     const res = await req("/", {
       method: "POST",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", cookie: adminCookie },
       body: JSON.stringify({
+        eventId: 1,
         homeTeamId: 1,
         awayTeamId: 2,
         stadiumId: 1,
@@ -65,10 +77,26 @@ describe("MatchRoutes - Integração", () => {
     expect(json.id).toBe(1);
   });
 
+  it("POST / sem autenticação retorna 401", async () => {
+    const res = await req("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        eventId: 1,
+        homeTeamId: 1,
+        awayTeamId: 2,
+        stadiumId: 1,
+        date: "2026-06-15T00:00:00.000Z",
+      }),
+    });
+    expect(res.status).toBe(401);
+  });
+
   it("GET / - should return all formatted matches", async () => {
     spyOn(matchService, "getAllMatches").mockResolvedValue([
       {
         id: 1,
+        eventId: 1,
         homeTeamId: 1,
         awayTeamId: 2,
         stadiumId: 1,
@@ -97,6 +125,7 @@ describe("MatchRoutes - Integração", () => {
       "15/06/2026": [
         {
           id: 1,
+          eventId: 1,
           homeTeamId: 1,
           awayTeamId: 2,
           stadiumId: 1,
@@ -123,6 +152,7 @@ describe("MatchRoutes - Integração", () => {
   it("GET /:id - should return specific match", async () => {
     spyOn(matchService, "getMatchById").mockResolvedValue({
       id: 1,
+      eventId: 1,
       homeTeamId: 1,
       awayTeamId: 2,
       stadiumId: 1,
@@ -144,8 +174,10 @@ describe("MatchRoutes - Integração", () => {
   });
 
   it("PUT /:id - should update match", async () => {
+    asAdmin();
     spyOn(matchService, "updateMatch").mockResolvedValue({
       id: 1,
+      eventId: 1,
       homeTeamId: 1,
       awayTeamId: 2,
       stadiumId: 1,
@@ -157,8 +189,9 @@ describe("MatchRoutes - Integração", () => {
 
     const res = await req("/1", {
       method: "PUT",
-      headers: { "Content-Type": "application/json" },
+      headers: { "Content-Type": "application/json", cookie: adminCookie },
       body: JSON.stringify({
+        eventId: 1,
         homeTeamId: 1,
         awayTeamId: 2,
         stadiumId: 1,
@@ -176,8 +209,10 @@ describe("MatchRoutes - Integração", () => {
   });
 
   it("DELETE /:id - should delete match", async () => {
+    asAdmin();
     spyOn(matchService, "deleteMatch").mockResolvedValue({
       id: 1,
+      eventId: 1,
       homeTeamId: 1,
       awayTeamId: 2,
       stadiumId: 1,
@@ -187,7 +222,7 @@ describe("MatchRoutes - Integração", () => {
       awayScore: null,
     });
 
-    const res = await req("/1", { method: "DELETE" });
+    const res = await req("/1", { method: "DELETE", headers: { cookie: adminCookie } });
     expect(res.status).toBe(200);
     // biome-ignore lint/suspicious/noExplicitAny: resposta de rota sem tipo
     const json: any = await res.json();
