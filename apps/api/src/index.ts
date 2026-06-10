@@ -14,7 +14,9 @@ import { venueRoutes } from "./routes/venue-routes.ts";
 const app = new Elysia({ prefix: "/api" })
   .use(
     cors({
-      origin: "*",
+      // Reflete a origem da requisição (necessário para cookies httpOnly
+      // com `credentials: include` — o navegador rejeita `*` nesse caso).
+      origin: true,
       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
       credentials: true,
     }),
