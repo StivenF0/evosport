@@ -22,7 +22,8 @@ Decisões técnicas cravadas (ver decisions.md):
 ## Progresso por Sprint
 
 - **Sprint 7 — Schema multi-evento: ✅ CONCLUÍDA** (branch `feat/sprint7`, 4 commits)
-- **Sprints 8–12: ⬜ pendentes** (ver TODO.md)
+- **Sprint 8 — Autenticação e Usuários (backend): ✅ CONCLUÍDA** (branch `feat/sprint8`, 6 commits)
+- **Sprints 9–12: ⬜ pendentes** (ver TODO.md)
 
 ### O que a Sprint 7 entregou
 - `apps/api/src/db/schema.ts`: `description` em `event`; `eventId` em `matches`; tabelas `event_teams` e `event_stadiums`; todas as `relations` Drizzle.
@@ -30,8 +31,18 @@ Decisões técnicas cravadas (ver decisions.md):
 - `apps/api/src/db/seed.ts`: 2 eventos globais (Copa do Mundo 2026 com partidas agendadas; Copa das Confederações 2025 com partidas **encerradas com placar**, alimentando a classificação). Vínculos via tabelas de junção.
 - `packages/types`: `description` em `Event`, `eventId` em `Match`, novos `user-types.ts` e `favorite-types.ts` (exportados em `index.ts`).
 
-### Próximo passo: Sprint 8 — Autenticação e Usuários (backend)
-Ver detalhes no TODO.md. Resumo: tabela `users` (+migration), `user-repository`, `auth-service` (`Bun.password`), `@elysiajs/jwt` em cookie httpOnly, plugin de auth (derive do usuário atual), rotas `/auth/{register,login,logout,me}`, middlewares `requireAuth`/`requireAdmin`, admin no seed, testes.
+### O que a Sprint 8 entregou
+- Tabela `users` (id, name, email único, passwordHash, role `'user'|'admin'`, createdAt) — migration `0003_boring_nebula.sql`.
+- `apps/api/src/repositories/user-repository.ts` (create, findByEmail, findById, update).
+- `apps/api/src/services/auth-service.ts` (register/login com `Bun.password`, getProfile, updateName; hash nunca exposto via `toPublicUser`).
+- `apps/api/src/plugins/auth.ts`: plugin `@elysiajs/jwt`, derive `currentUser` do cookie httpOnly, guardas `requireAuth` (401) e `requireAdmin` (403).
+- `apps/api/src/routes/auth-routes.ts`: `POST /auth/{register,login,logout}`, `GET/PUT /auth/me`. Schemas em `auth-schemas.ts`.
+- `JWT_SECRET` no `.env`/`.env.example`; rotas registradas no `index.ts` (tag OpenAPI "Auth").
+- Seed cria admin inicial: **admin@evosport.com / admin123**.
+- 19 testes novos (service/repository/rotas, incl. fluxo autenticado via cookie). Total: **132 passando**.
+
+### Próximo passo: Sprint 9 — Favoritos e Escopo por Evento (backend)
+Ver detalhes no TODO.md. Resumo: tabela `user_favorites` (+ repo/service/rotas sob `requireAuth`); escopar matches/teams/ranking/venues por evento (`/events/:id/...`); endpoint de "partida em destaque" (placar dinâmico) no event-service; CRUD admin completo (events/teams/stadiums/matches + junções) sob `requireAdmin`; testes.
 
 ---
 

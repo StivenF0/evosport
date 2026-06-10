@@ -42,6 +42,8 @@ A aplicação de backend segue um padrão arquitetural que separa as responsabil
     -   Contém a lógica de negócio principal da aplicação. Utiliza os *repositories* para acessar os dados e aplica validações, transformações e coordenação entre diferentes entidades.
 -   `src/routes/`: Camada de API (Endpoints ElysiaJS).
     -   Define os endpoints da API usando ElysiaJS. Cada arquivo representa um grupo de rotas relacionadas e interage com os *services* para processar as requisições HTTP e retornar as respostas.
+-   `src/schemas/`: Schemas de validação de entrada/saída (TypeBox via `t` do Elysia).
+-   `src/plugins/`: Plugins transversais do Elysia. `auth.ts` configura o `@elysiajs/jwt`, deriva `currentUser` a partir do cookie httpOnly e expõe as guardas `requireAuth` (401) e `requireAdmin` (403) usadas no `beforeHandle` das rotas.
 -   `tests/`: Testes unitários e de integração para o backend.
 
 ### 🌐 Frontend (`apps/web`)
