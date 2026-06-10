@@ -24,7 +24,8 @@ Decisões técnicas cravadas (ver decisions.md):
 - **Sprint 7 — Schema multi-evento: ✅ CONCLUÍDA** (branch `feat/sprint7`, 4 commits)
 - **Sprint 8 — Autenticação e Usuários (backend): ✅ CONCLUÍDA** (branch `feat/sprint8`, 6 commits)
 - **Sprint 9 — Favoritos e Escopo por Evento (backend): ✅ CONCLUÍDA** (branch `feat/sprint9`)
-- **Sprints 10–12: ⬜ pendentes** (ver TODO.md)
+- **Sprint 10 — Fundação do Frontend (auth, layout, design system): ✅ CONCLUÍDA** (branch `feat/sprint10`)
+- **Sprints 11–12: ⬜ pendentes** (ver TODO.md)
 
 ### O que a Sprint 7 entregou
 - `apps/api/src/db/schema.ts`: `description` em `event`; `eventId` em `matches`; tabelas `event_teams` e `event_stadiums`; todas as `relations` Drizzle.
@@ -51,8 +52,16 @@ Decisões técnicas cravadas (ver decisions.md):
 - Testes: novos para favoritos (service/rotas) e highlight; rotas de escrita autenticam via helper `tests/helpers/auth.ts` (cookie admin assinado). **149 testes passando**, lint limpo.
   - Obs.: `bunx tsc --noEmit` aponta erros pré-existentes em `auth.ts`/`auth-routes.ts` (Sprint 8) — o projeto valida por Biome + Bun, não por `tsc`.
 
-### Próximo passo: Sprint 10 — Fundação do Frontend (Auth, Layout, Design System)
-Ver detalhes no TODO.md. Resumo: design system minimalista (majoritariamente branco), contexto de auth no front (`use-auth` com `credentials: "include"`), páginas de Login/Cadastro (`react-hook-form`), dropdown do usuário e proteção de páginas.
+### O que a Sprint 10 entregou (frontend `apps/web`)
+- **Auth no front**: `services/auth-service.ts` (register/login/logout/me/updateProfile), `hooks/use-auth.ts` (TanStack Query, chave `['auth','me']`, expõe `user/isAuthenticated/isAdmin` + mutations), `hooks/use-require-auth.ts` (proteção de páginas, opção `admin`). Tipos de usuário/auth em `types/api-types.ts`.
+- **Cookies cross-origin**: `lib/api-client.ts` envia `credentials: "include"`; CORS da API mudou de `origin: "*"` para `origin: true` em `apps/api/src/index.ts` (navegador rejeita `*` com credenciais). Validado: preflight/login refletem `http://localhost:3000` e gravam o cookie httpOnly.
+- **Páginas**: `/login` e `/register` com `react-hook-form` + `zod` (`schemas/auth-schemas.ts`); cadastro confirma senha e auto-loga ao concluir.
+- **UI**: `components/auth/UserMenu.tsx` (dropdown: avatar com inicial, Perfil/Favoritos/Admin-se-admin/Sair) no `Header` (agora `sticky` com borda fina); design majoritariamente branco em `globals.css` (gray-50/gray-900). `layout.tsx` usa `flex-col`.
+- Validação: `bun run lint` limpo (resta só o warning pré-existente `auth.ts:19`), `tsc --noEmit` do web limpo e `next build` com sucesso (rotas `/login` e `/register` geradas).
+  - Pendências conhecidas para a Sprint 11/12: as rotas `/profile`, `/favorites`, `/admin` ainda não existem (links já apontam para elas); o feed multi-evento da home ainda usa o evento único antigo.
+
+### Próximo passo: Sprint 11 — Páginas Principais (Feed, Evento, Perfil, Favoritos)
+Ver detalhes no TODO.md. Resumo: homepage como feed de eventos (consumir `GET /event/list` + `/:id/highlight`), página de evento em 2 colunas (abas Sobre/Classificação/Times + painel com placar dinâmico), layout compartilhado Perfil/Favoritos com sidebar, página de Favoritos (integrada ao backend) e Meu Perfil (avatar + alterar nome).
 
 ---
 

@@ -2,6 +2,7 @@ import type {
   Event as BaseEvent,
   Match as BaseMatch,
   Team as BaseTeam,
+  User as BaseUser,
   Venue as BaseVenue,
   MatchStatus,
   NewEvent,
@@ -12,6 +13,7 @@ import type {
   UpdateMatch,
   UpdateTeam,
   UpdateVenue,
+  UserRole,
 } from "@packages/types";
 
 /**
@@ -27,7 +29,30 @@ export type {
   UpdateMatch,
   UpdateTeam,
   UpdateVenue,
+  UserRole,
 };
+
+/**
+ * Authenticated user (API returns createdAt as ISO string)
+ */
+export interface User extends Omit<BaseUser, "createdAt"> {
+  createdAt: string;
+}
+
+export interface LoginPayload {
+  email: string;
+  password: string;
+}
+
+export interface RegisterPayload {
+  name: string;
+  email: string;
+  password: string;
+}
+
+export interface MessageResponse {
+  message: string;
+}
 
 /**
  * API Responses often return Dates as strings (ISO format)

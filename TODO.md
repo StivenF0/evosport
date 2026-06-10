@@ -266,17 +266,17 @@ POST/PUT/DELETE de events, teams, venues e matches agora sob `requireAdmin` (401
 
 ## Sprint 10 — Fundação do Frontend (Auth, Layout, Design System)
 
-- [ ] Design system minimalista (majoritariamente branco).
-Revisar `globals.css`/tokens Tailwind para um visual de linhas limpas, predominantemente branco, com verde, amarelo e azul em tons claros como acentos. Ajustar Header/Footer ao novo visual.
+- [x] Design system minimalista (majoritariamente branco).
+`globals.css` com base branca/cinza-clara (gray-50) e texto gray-900; Header com borda fina + `sticky`, acentos em azul/verde claros. Cards com cantos arredondados e bordas suaves. (Tailwind v4 — `@theme` evitado por incompatibilidade com o parser do Biome; acentos aplicados via utilitários.)
 
-- [ ] Contexto de autenticação no front.
-`use-auth` (hooks de login, register, logout, me) consumindo as rotas de auth via `api-client`. Garantir envio de cookies (`credentials: "include"`).
+- [x] Contexto de autenticação no front.
+`hooks/use-auth.ts` (TanStack Query: query `me` + mutations login/register/logout/updateProfile, chave `['auth','me']`), `services/auth-service.ts`, tipos em `types/api-types.ts`. `api-client` agora envia `credentials: "include"`; CORS da API ajustado para `origin: true` (cookies httpOnly exigem origem refletida, não `*`).
 
-- [ ] Páginas de Login e Cadastro.
-Formulários com `react-hook-form` (Login: email/senha; Cadastro: nome/email/senha/confirmar senha) com validação e mensagens em Português.
+- [x] Páginas de Login e Cadastro.
+`/login` e `/register` com `react-hook-form` + `zod` (`schemas/auth-schemas.ts`); validação e mensagens em Português; cadastro confirma senha e faz auto-login ao concluir.
 
-- [ ] Dropdown do usuário e proteção de páginas.
-Dropdown no canto superior (Perfil, Favoritos, Admin se admin, Sair). Redirecionar páginas restritas quando não autenticado.
+- [x] Dropdown do usuário e proteção de páginas.
+`components/auth/UserMenu.tsx` (avatar com inicial, itens Perfil/Favoritos/Admin-se-admin/Sair, fecha ao clicar fora) integrado ao Header. `hooks/use-require-auth.ts` redireciona visitantes não autenticados (e não-admins) — pronto para as páginas restritas da Sprint 11/12.
 
 ## Sprint 11 — Páginas Principais (Feed, Evento, Perfil, Favoritos)
 
