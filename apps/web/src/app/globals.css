@@ -1,2 +1,12 @@
 @import "tailwindcss";
 @import "leaflet/dist/leaflet.css";
+
+/*
+ * Design system Evosport — minimalista e majoritariamente branco.
+ * Base preto/branco com verde, amarelo e azul (tons claros) como acentos,
+ * aplicados via utilitários do Tailwind nos componentes.
+ */
+body {
+  background-color: #f9fafb; /* gray-50 */
+  color: #111827; /* gray-900 */
+}
