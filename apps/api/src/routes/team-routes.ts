@@ -1,10 +1,12 @@
 import { Elysia } from "elysia";
+import { authPlugin, requireAdmin } from "../plugins/auth";
 import { ErrorResponse, IdParam } from "../schemas/shared-schemas";
 import { TeamBody, TeamListResponse, TeamResponse } from "../schemas/team-schemas";
 import { teamService } from "../services/team-service";
 
 export const teamRoutes = new Elysia({ prefix: "/team" })
-  // CREATE
+  .use(authPlugin)
+  // CREATE (admin)
   .post(
     "/",
     async ({ body }) => {
@@ -15,13 +17,16 @@ export const teamRoutes = new Elysia({ prefix: "/team" })
       }
     },
     {
+      beforeHandle: requireAdmin,
       body: TeamBody,
       response: {
         200: TeamResponse,
+        401: ErrorResponse,
+        403: ErrorResponse,
         500: ErrorResponse,
       },
       detail: {
-        summary: "Criar um novo time",
+        summary: "Criar um novo time (admin)",
         tags: ["Teams"],
       },
     },
@@ -81,19 +86,22 @@ export const teamRoutes = new Elysia({ prefix: "/team" })
       }
     },
     {
+      beforeHandle: requireAdmin,
       params: IdParam,
       body: TeamBody,
       response: {
         200: TeamResponse,
+        401: ErrorResponse,
+        403: ErrorResponse,
         500: ErrorResponse,
       },
       detail: {
-        summary: "Atualizar time",
+        summary: "Atualizar time (admin)",
         tags: ["Teams"],
       },
     },
   )
-  // DELETE
+  // DELETE (admin)
   .delete(
     "/:id",
     async ({ params: { id } }) => {
@@ -104,13 +112,16 @@ export const teamRoutes = new Elysia({ prefix: "/team" })
       }
     },
     {
+      beforeHandle: requireAdmin,
       params: IdParam,
       response: {
         200: TeamResponse,
+        401: ErrorResponse,
+        403: ErrorResponse,
         500: ErrorResponse,
       },
       detail: {
-        summary: "Excluir time",
+        summary: "Excluir time (admin)",
         tags: ["Teams"],
       },
     },

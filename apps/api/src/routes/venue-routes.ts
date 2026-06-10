@@ -1,10 +1,12 @@
 import { Elysia } from "elysia";
+import { authPlugin, requireAdmin } from "../plugins/auth";
 import { ErrorResponse, IdParam } from "../schemas/shared-schemas";
 import { VenueBody, VenueListResponse, VenueResponse } from "../schemas/venue-schemas";
 import { venueService } from "../services/venue-service";
 
 export const venueRoutes = new Elysia({ prefix: "/venue" })
-  // CREATE
+  .use(authPlugin)
+  // CREATE (admin)
   .post(
     "/",
     async ({ body }) => {
@@ -15,13 +17,16 @@ export const venueRoutes = new Elysia({ prefix: "/venue" })
       }
     },
     {
+      beforeHandle: requireAdmin,
       body: VenueBody,
       response: {
         200: VenueResponse,
+        401: ErrorResponse,
+        403: ErrorResponse,
         500: ErrorResponse,
       },
       detail: {
-        summary: "Criar uma nova sede/estádio",
+        summary: "Criar uma nova sede/estádio (admin)",
         tags: ["Venues"],
       },
     },
@@ -80,19 +85,22 @@ export const venueRoutes = new Elysia({ prefix: "/venue" })
       }
     },
     {
+      beforeHandle: requireAdmin,
       params: IdParam,
       body: VenueBody,
       response: {
         200: VenueResponse,
+        401: ErrorResponse,
+        403: ErrorResponse,
         500: ErrorResponse,
       },
       detail: {
-        summary: "Atualizar sede",
+        summary: "Atualizar sede (admin)",
         tags: ["Venues"],
       },
     },
   )
-  // DELETE
+  // DELETE (admin)
   .delete(
     "/:id",
     async ({ params: { id } }) => {
@@ -103,13 +111,16 @@ export const venueRoutes = new Elysia({ prefix: "/venue" })
       }
     },
     {
+      beforeHandle: requireAdmin,
       params: IdParam,
       response: {
         200: VenueResponse,
+        401: ErrorResponse,
+        403: ErrorResponse,
         500: ErrorResponse,
       },
       detail: {
-        summary: "Excluir sede",
+        summary: "Excluir sede (admin)",
         tags: ["Venues"],
       },
     },
