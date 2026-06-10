@@ -204,3 +204,104 @@ Certificar-se de que as imagens estão utilizando otimização e "lazy loading" 
 - [x] Elaboração da Documentação (README.md).
 Atualizar o arquivo README.md na raiz do repositório com uma breve descrição do projeto (Evosport) e os nomes dos integrantes da equipe.
 Documentar o passo a passo claro para rodar o projeto localmente, incluindo os comandos de instalação (`bun install`), execução do banco de dados/seed (`bun run seed`) e inicialização do servidor (`bun dev`).
+
+---
+
+# Reformulação v2 — Sistema Multi-Evento
+
+> Contexto e decisões técnicas em [.agents/decisions.md](./.agents/decisions.md). Referência visual: `esboco_novo.png`.
+> Decisões-chave: junção N:N (`event_teams`/`event_stadiums`), JWT em cookie httpOnly, coluna `role` em `users`, placar dinâmico por status+data.
+
+## Sprint 7 — Schema Multi-Evento e Migração de Dados
+
+- [x] Atualizar o `schema.ts` para multi-evento.
+Adicionar coluna `description` em `event`.
+Criar tabela de junção `event_teams` (eventId, teamId) para relação N:N entre eventos e times.
+Criar tabela de junção `event_stadiums` (eventId, stadiumId) para relação N:N entre eventos e sedes.
+Adicionar coluna `eventId` (FK → event) na tabela `matches`.
+Definir as `relations` do Drizzle para todas as novas associações.
+
+- [x] Gerar e aplicar a migration.
+Migration `0002_smooth_marauders.sql` gerada. Criado `src/db/migrate.ts` (+ script `db:migrate`) para aplicar migrations via Drizzle migrator.
+
+- [x] Atualizar o seed para múltiplos eventos.
+Seed popula 2 eventos globais (Copa do Mundo 2026 e Copa das Confederações 2025), vinculando times e sedes via `event_teams`/`event_stadiums` e partidas com `eventId`.
+
+- [x] Atualizar `packages/types`.
+Adicionado `description` em `Event` e `eventId` em `Match`; criados `user-types.ts` (`User`, `UserRole`, `NewUser`, `UpdateUser`) e `favorite-types.ts` (`Favorite`, `NewFavorite`).
+
+## Sprint 8 — Autenticação e Usuários (Backend)
+
+- [ ] Criar tabela `users`.
+Campos: id, name, email (único), passwordHash, role ('user' | 'admin'), createdAt. Gerar migration.
+
+- [ ] Repository e Service de usuários.
+`user-repository.ts` (CRUD) e `auth-service.ts` (registro com `Bun.password.hash`, login com `Bun.password.verify`, validação de email único).
+
+- [ ] Configurar JWT.
+Instalar e configurar `@elysiajs/jwt`. Emitir token no login e gravar em cookie httpOnly. Criar plugin/derive de autenticação que injeta o usuário atual a partir do cookie.
+
+- [ ] Rotas de autenticação.
+POST /auth/register, POST /auth/login, POST /auth/logout, GET /auth/me. Mensagens de erro em Português.
+
+- [ ] Middleware de autorização.
+Guarda `requireAuth` (usuário logado) e `requireAdmin` (role admin) para proteger rotas. Atualizar o seed para criar um usuário admin inicial.
+
+- [ ] Testes da camada de auth.
+Cobrir register/login/me, hashing de senha e bloqueio de rotas protegidas (401/403).
+
+## Sprint 9 — Favoritos e Escopo por Evento (Backend)
+
+- [ ] Tabela e CRUD de favoritos.
+Criar `user_favorites` (userId, eventId). Repository + service. Rotas: GET /favorites (do usuário logado), POST /favorites/:eventId, DELETE /favorites/:eventId. Protegidas por `requireAuth`.
+
+- [ ] Escopar rotas existentes por evento.
+Ajustar matches/teams/ranking para filtrar por `eventId` (ex.: GET /events/:id/matches, /events/:id/teams, /events/:id/ranking, /events/:id/venues). Manter a listagem geral de eventos em GET /events.
+
+- [ ] Endpoint de placar dinâmico.
+No event-service, expor a "partida em destaque": primeira `em_andamento`; senão `agendado` futura mais próxima. Usado pelo feed e pelo painel da página de evento.
+
+- [ ] Rotas administrativas (CRUD completo).
+Garantir POST/PUT/DELETE para events, teams, stadiums e matches (incluindo vínculo nas tabelas de junção), todas sob `requireAdmin`. Atualizar testes.
+
+## Sprint 10 — Fundação do Frontend (Auth, Layout, Design System)
+
+- [ ] Design system minimalista (majoritariamente branco).
+Revisar `globals.css`/tokens Tailwind para um visual de linhas limpas, predominantemente branco, com verde, amarelo e azul em tons claros como acentos. Ajustar Header/Footer ao novo visual.
+
+- [ ] Contexto de autenticação no front.
+`use-auth` (hooks de login, register, logout, me) consumindo as rotas de auth via `api-client`. Garantir envio de cookies (`credentials: "include"`).
+
+- [ ] Páginas de Login e Cadastro.
+Formulários com `react-hook-form` (Login: email/senha; Cadastro: nome/email/senha/confirmar senha) com validação e mensagens em Português.
+
+- [ ] Dropdown do usuário e proteção de páginas.
+Dropdown no canto superior (Perfil, Favoritos, Admin se admin, Sair). Redirecionar páginas restritas quando não autenticado.
+
+## Sprint 11 — Páginas Principais (Feed, Evento, Perfil, Favoritos)
+
+- [ ] Homepage (Feed de Eventos).
+Listagem estilo blog: logo à esquerda do título, ícone de corrente/link, descrição e placar dinâmico (partida atual ou próximo confronto) por evento.
+
+- [ ] Página de Evento (layout 2 colunas).
+Coluna esquerda: breadcrumb (Home + título), botão Favoritar e abas Sobre (descrição + mapa Leaflet), Classificação (RankingTable) e Times (grid de cards). Coluna direita: painel fixo com partida atual/próximo jogo + placar e sumário (ToC) da página.
+
+- [ ] Layout compartilhado Perfil/Favoritos.
+Sidebar fixa à esquerda com links Perfil / Favoritos.
+
+- [ ] Página de Favoritos.
+Seção estilo blog com os eventos favoritados, com ícone de bandeira/marcador. Ações de favoritar/desfavoritar integradas ao backend.
+
+- [ ] Página Meu Perfil.
+Avatar com a inicial do nome, campo para alterar o nome e botão salvar (mutation PUT /auth/me ou /users/:id).
+
+## Sprint 12 — Painel Administrativo e Fechamento
+
+- [ ] Páginas administrativas (CRUD).
+Áreas restritas (visíveis apenas para admin) para gerenciar eventos, times, partidas e estádios (com localização lat/long). Formulários com `react-hook-form`.
+
+- [ ] Revisão de responsividade e estados.
+Aplicar padrão de 3 estados nas novas páginas, revisar mobile/tablet e o design minimalista em todas as telas.
+
+- [ ] Linting, testes e documentação.
+Rodar `bun run format && bun run lint` e `bun test`. Atualizar README e os docs de `.agents/` (arquitetura/tech-stack) com o novo escopo.

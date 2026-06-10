@@ -1,12 +1,14 @@
 export interface Event {
   id: number;
   name: string;
+  description: string | null;
   startDate: Date;
   endDate: Date;
   logoUrl: string | null;
 }
 
-export type NewEvent = Omit<Event, "id" | "logoUrl"> & {
+export type NewEvent = Omit<Event, "id" | "logoUrl" | "description"> & {
+  description?: string | null;
   logoUrl?: string | null;
 };
 

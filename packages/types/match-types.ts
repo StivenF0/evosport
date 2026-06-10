@@ -2,6 +2,7 @@ export type MatchStatus = "agendado" | "em_andamento" | "encerrado";
 
 export interface Match {
   id: number;
+  eventId: number;
   homeTeamId: number;
   awayTeamId: number;
   stadiumId: number;
