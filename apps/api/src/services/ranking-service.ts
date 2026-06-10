@@ -19,9 +19,10 @@ type Team = typeof teams.$inferSelect;
 
 export const rankingService = {
   // READ (Calculated Ranking)
-  async getRanking() {
+  // `eventId` opcional restringe a classificação a um único evento.
+  async getRanking(eventId?: number) {
     try {
-      const matches = await rankingRepository.getFinishedMatches();
+      const matches = await rankingRepository.getFinishedMatches(eventId);
       const rankingMap = new Map<number, TeamStats>();
 
       // Helper to initialize team stats

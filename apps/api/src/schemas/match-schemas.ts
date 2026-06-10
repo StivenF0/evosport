@@ -16,6 +16,9 @@ export const MatchStatus = t.Union(
  * Schema para o corpo da requisição de criação/atualização de partida.
  */
 export const MatchBody = t.Object({
+  eventId: t.Number({
+    description: "ID do evento ao qual a partida pertence",
+  }),
   homeTeamId: t.Number({
     description: "ID do time da casa",
   }),
@@ -29,6 +32,8 @@ export const MatchBody = t.Object({
     description: "Data e hora da partida",
   }),
   status: t.Optional(MatchStatus),
+  homeScore: t.Optional(t.Nullable(t.Number({ description: "Placar do time da casa" }))),
+  awayScore: t.Optional(t.Nullable(t.Number({ description: "Placar do time visitante" }))),
 });
 
 /**
@@ -37,11 +42,14 @@ export const MatchBody = t.Object({
  */
 export const MatchBaseResponse = t.Object({
   id: t.Number({ description: "ID único da partida" }),
+  eventId: t.Number(),
   homeTeamId: t.Number(),
   awayTeamId: t.Number(),
   stadiumId: t.Number(),
   date: t.Date(),
   status: MatchStatus,
+  homeScore: t.Nullable(t.Number()),
+  awayScore: t.Nullable(t.Number()),
 });
 
 /**
@@ -50,11 +58,14 @@ export const MatchBaseResponse = t.Object({
  */
 export const MatchWithRelationsResponse = t.Object({
   id: t.Number({ description: "ID único da partida" }),
+  eventId: t.Number(),
   homeTeamId: t.Number(),
   awayTeamId: t.Number(),
   stadiumId: t.Number(),
   date: t.Date(),
   status: MatchStatus,
+  homeScore: t.Nullable(t.Number()),
+  awayScore: t.Nullable(t.Number()),
   formattedDate: t.String({
     description: "Data formatada em pt-BR (DD/MM/AAAA)",
   }),

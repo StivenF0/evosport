@@ -1,13 +1,16 @@
-import { eq } from "drizzle-orm";
+import { and, eq } from "drizzle-orm";
 import { db } from "../db";
 import { matches } from "../db/schema";
 
 export const rankingRepository = {
   // READ (All Finished Matches for Ranking Calculation)
-  async getFinishedMatches() {
+  // Quando `eventId` é informado, restringe a classificação ao evento.
+  async getFinishedMatches(eventId?: number) {
     try {
       return await db.query.matches.findMany({
-        where: eq(matches.status, "encerrado"),
+        where: eventId
+          ? and(eq(matches.status, "encerrado"), eq(matches.eventId, eventId))
+          : eq(matches.status, "encerrado"),
         with: {
           homeTeam: true,
           awayTeam: true,
