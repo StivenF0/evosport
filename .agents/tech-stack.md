@@ -18,6 +18,7 @@ Este documento lista as principais ferramentas, frameworks e bibliotecas utiliza
 -   **Driver SQLite:** [`@libsql/client@^0.17.2`](https://github.com/libsql/libsql-client-ts) - Cliente TypeScript para SQLite.
 -   **ORM (Object-Relational Mapper):** [Drizzle ORM](https://orm.drizzle.team/) (`drizzle-orm@^0.45.1`, `drizzle-kit@^0.31.9`) - Utilizado para definição de schema, queries e migrations.
 -   **Variáveis de Ambiente:** [`dotenv@^17.3.1`](https://www.npmjs.com/package/dotenv) - Para carregar variáveis de ambiente.
+-   **Autenticação:** [`@elysiajs/jwt`](https://elysiajs.com/plugins/jwt.html) - Emissão/verificação de JWT em cookie httpOnly. Hash de senha com `Bun.password` (bcrypt nativo do Bun).
 -   **Testes:** Bun's embutido `bun:test`.
 
 ---

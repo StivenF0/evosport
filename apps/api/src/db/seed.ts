@@ -1,5 +1,5 @@
 import { db } from "./index";
-import { event, eventStadiums, eventTeams, matches, stadiums, teams } from "./schema";
+import { event, eventStadiums, eventTeams, matches, stadiums, teams, users } from "./schema";
 
 function ensure<T>(value: T | undefined): T {
   if (value == null) throw new Error("Unexpected undefined value");
@@ -18,6 +18,16 @@ async function seed() {
     await db.delete(stadiums);
     await db.delete(teams);
     await db.delete(event);
+    await db.delete(users);
+
+    // Inserir usuário administrador inicial
+    console.log("👤 Inserindo usuário admin...");
+    await db.insert(users).values({
+      name: "Administrador",
+      email: "admin@evosport.com",
+      passwordHash: await Bun.password.hash("admin123"),
+      role: "admin",
+    });
 
     // 2. Inserir Eventos globais
     console.log("🏆 Inserindo eventos...");

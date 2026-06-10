@@ -1,6 +1,15 @@
-import type { MatchStatus } from "@packages/types";
-import { relations } from "drizzle-orm";
+import type { MatchStatus, UserRole } from "@packages/types";
+import { relations, sql } from "drizzle-orm";
 import { integer, real, sqliteTable, text } from "drizzle-orm/sqlite-core";
+
+export const users = sqliteTable("users", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  name: text("name").notNull(),
+  email: text("email").notNull().unique(),
+  passwordHash: text("password_hash").notNull(),
+  role: text("role").$type<UserRole>().notNull().default("user"),
+  createdAt: integer("created_at", { mode: "timestamp" }).notNull().default(sql`(unixepoch())`),
+});
 
 export const event = sqliteTable("event", {
   id: integer("id").primaryKey({ autoIncrement: true }),

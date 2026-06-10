@@ -232,23 +232,23 @@ Adicionado `description` em `Event` e `eventId` em `Match`; criados `user-types.
 
 ## Sprint 8 — Autenticação e Usuários (Backend)
 
-- [ ] Criar tabela `users`.
-Campos: id, name, email (único), passwordHash, role ('user' | 'admin'), createdAt. Gerar migration.
+- [x] Criar tabela `users`.
+Campos id, name, email (único), passwordHash, role ('user' | 'admin', default 'user'), createdAt. Migration `0003_boring_nebula.sql`.
 
-- [ ] Repository e Service de usuários.
-`user-repository.ts` (CRUD) e `auth-service.ts` (registro com `Bun.password.hash`, login com `Bun.password.verify`, validação de email único).
+- [x] Repository e Service de usuários.
+`user-repository.ts` (create, findByEmail, findById, update) e `auth-service.ts` (register com `Bun.password.hash`, login com `Bun.password.verify`, validação de email único, `getProfile`, `updateName`). O hash de senha nunca é exposto (helper `toPublicUser`).
 
-- [ ] Configurar JWT.
-Instalar e configurar `@elysiajs/jwt`. Emitir token no login e gravar em cookie httpOnly. Criar plugin/derive de autenticação que injeta o usuário atual a partir do cookie.
+- [x] Configurar JWT.
+`@elysiajs/jwt` configurado em `src/plugins/auth.ts`. Token emitido no login e gravado em cookie httpOnly (`sameSite: lax`, 7 dias). Derive `currentUser` a partir do cookie. `JWT_SECRET` no `.env`.
 
-- [ ] Rotas de autenticação.
-POST /auth/register, POST /auth/login, POST /auth/logout, GET /auth/me. Mensagens de erro em Português.
+- [x] Rotas de autenticação.
+POST /auth/register, POST /auth/login, POST /auth/logout, GET /auth/me, PUT /auth/me. Mensagens de erro em Português. Validação de entrada via TypeBox (`auth-schemas.ts`).
 
-- [ ] Middleware de autorização.
-Guarda `requireAuth` (usuário logado) e `requireAdmin` (role admin) para proteger rotas. Atualizar o seed para criar um usuário admin inicial.
+- [x] Middleware de autorização.
+Guardas `requireAuth` (401) e `requireAdmin` (403) em `src/plugins/auth.ts`. Seed cria admin inicial (admin@evosport.com / admin123).
 
-- [ ] Testes da camada de auth.
-Cobrir register/login/me, hashing de senha e bloqueio de rotas protegidas (401/403).
+- [x] Testes da camada de auth.
+19 testes novos cobrindo service (register/login/updateName + email duplicado + senha inválida), repository e rotas (incl. /me 401 sem cookie e 200 autenticado). Total: 132 testes passando.
 
 ## Sprint 9 — Favoritos e Escopo por Evento (Backend)
 
