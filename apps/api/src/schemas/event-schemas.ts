@@ -5,6 +5,13 @@ export const EventBody = t.Object({
     description: "Nome do evento esportivo",
     examples: ["Copa do Mundo 2026"],
   }),
+  description: t.Optional(
+    t.Nullable(
+      t.String({
+        description: "Descrição do evento",
+      }),
+    ),
+  ),
   startDate: t.Date({
     description: "Data de início do evento",
   }),
@@ -24,6 +31,7 @@ export const EventBody = t.Object({
 export const EventResponse = t.Object({
   id: t.Number({ description: "ID único do evento" }),
   name: t.String(),
+  description: t.Nullable(t.String()),
   startDate: t.Date(),
   endDate: t.Date(),
   logoUrl: t.Nullable(t.String()),
