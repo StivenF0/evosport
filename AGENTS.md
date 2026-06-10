@@ -9,6 +9,7 @@ O contexto do projeto foi dividido de forma modular para facilitar a sua compree
 - ⚠️ **[Diretrizes de Código e Linting](./.agents/coding-guidelines.md)**: Regras essenciais do Biome, padrões para testes com Drizzle, tratamento de erros e acessibilidade no Next.js.
 - 🔄 **[Workflow e Comandos](./.agents/workflow.md)**: Como rodar a aplicação, testes, migrations do banco de dados e padrões de commit.
 - 🧭 **[Decisões de Arquitetura e Escopo](./.agents/decisions.md)**: Registro de decisões de produto e técnicas (ex.: reformulação multi-evento, autenticação, papéis).
+- 📍 **[Estado do Desenvolvimento](./.agents/progress.md)**: Handoff entre sessões — progresso por sprint, o que está feito e como continuar. **Comece por aqui ao retomar o projeto.**
 
 > **Nota:** Por convenção, toda a documentação, nomes de tabelas principais, e textos para o usuário final estão em **Português**. Mensagens de commit seguem o formato *Conventional Commits* e geralmente são escritas em Inglês.
 >
