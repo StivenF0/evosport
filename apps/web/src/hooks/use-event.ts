@@ -1,5 +1,6 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { eventService } from "../services/event-service";
+import type { NewEvent, UpdateEvent } from "../types/api-types";
 
 export const eventKeys = {
   all: ["event"] as const,
@@ -59,3 +60,36 @@ export const useEventHighlight = (id: number) =>
     queryFn: () => eventService.getEventHighlight(id),
     enabled: Number.isFinite(id),
   });
+
+const invalidateEvents = (qc: ReturnType<typeof useQueryClient>) => {
+  qc.invalidateQueries({ queryKey: eventKeys.list });
+  qc.invalidateQueries({ queryKey: eventKeys.all });
+};
+
+export const useCreateEvent = () => {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (data: NewEvent) => eventService.createEvent(data),
+    onSuccess: () => invalidateEvents(qc),
+  });
+};
+
+export const useUpdateEvent = () => {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: ({ id, data }: { id: number; data: UpdateEvent }) =>
+      eventService.updateEvent(id, data),
+    onSuccess: (_res, { id }) => {
+      invalidateEvents(qc);
+      qc.invalidateQueries({ queryKey: eventKeys.detail(id) });
+    },
+  });
+};
+
+export const useDeleteEvent = () => {
+  const qc = useQueryClient();
+  return useMutation({
+    mutationFn: (id: number) => eventService.deleteEvent(id),
+    onSuccess: () => invalidateEvents(qc),
+  });
+};
