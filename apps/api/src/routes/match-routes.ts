@@ -5,6 +5,7 @@ import {
   MatchBody,
   MatchGroupedByDateResponse,
   MatchListResponse,
+  MatchQuery,
   MatchWithRelationsResponse,
 } from "../schemas/match-schemas";
 import { ErrorResponse, IdParam } from "../schemas/shared-schemas";
@@ -37,23 +38,28 @@ export const matchRoutes = new Elysia({ prefix: "/match" })
       },
     },
   )
-  // READ (All - UC02 e UC03 listagem com datas formatadas)
+  // READ (All - UC02 e UC03 listagem com datas formatadas, filtros opcionais)
   .get(
     "/",
-    async () => {
+    async ({ query }) => {
       try {
-        return await matchService.getAllMatches();
+        return await matchService.getAllMatches({
+          eventId: query.eventId,
+          status: query.status,
+          order: query.sort,
+        });
       } catch {
         throw new Error("Erro ao buscar as partidas.");
       }
     },
     {
+      query: MatchQuery,
       response: {
         200: MatchListResponse,
         500: ErrorResponse,
       },
       detail: {
-        summary: "Listar todas as partidas",
+        summary: "Listar partidas (com filtros por evento/status e ordenação)",
         description: "Retorna a listagem de partidas com datas formatadas em pt-BR (UC02, UC03).",
         tags: ["Matches"],
       },
