@@ -1,5 +1,6 @@
 @import "tailwindcss";
-@import "leaflet/dist/leaflet.css";
+/* O CSS do Leaflet é importado diretamente em components/ui/Map.tsx
+   (o Tailwind v4 descarta o @import de CSS de node_modules aqui). */
 
 /*
  * Design system Evosport — minimalista e majoritariamente branco.
