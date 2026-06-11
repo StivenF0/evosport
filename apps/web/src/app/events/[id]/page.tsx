@@ -101,7 +101,7 @@ export default function EventPage() {
                 Sedes
               </h3>
               {mappableVenues.length > 0 ? (
-                <div className="h-80">
+                <div className="w-full aspect-4/3">
                   <DynamicMap venues={mappableVenues} />
                 </div>
               ) : (
