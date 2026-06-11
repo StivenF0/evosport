@@ -6,9 +6,7 @@ import { UserMenu } from "./auth/UserMenu";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
-  { href: "/teams", label: "Times" },
   { href: "/matches", label: "Jogos" },
-  { href: "/rankings", label: "Classificações" },
   { href: "/venues", label: "Sedes" },
 ];
 
