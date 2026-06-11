@@ -44,7 +44,7 @@ export default function MapPage() {
       </section>
 
       {/* Container do Mapa - flex-grow faz ele ocupar todo o espaço restante */}
-      <div className="grow w-full relative z-0 rounded-3xl overflow-hidden shadow-sm border border-gray-100 bg-gray-50">
+      <div className="grow w-full aspect-4/3 relative z-0 rounded-3xl overflow-hidden shadow-sm border border-gray-100 bg-gray-50">
         <DynamicMap venues={venues || []} />
       </div>
     </div>
