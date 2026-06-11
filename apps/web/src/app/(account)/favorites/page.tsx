@@ -5,7 +5,7 @@ import { EmptyState } from "@web/components/ui/EmptyState";
 import { ErrorMessage } from "@web/components/ui/ErrorMessage";
 import { LoadingSpinner } from "@web/components/ui/LoadingSpinner";
 import { useFavorites } from "@web/hooks/use-favorite";
-import { Heart, MapPin } from "lucide-react";
+import { Flag } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -26,7 +26,7 @@ export default function FavoritesPage() {
         <EmptyState
           title="Nenhum favorito ainda"
           message="Explore os eventos e toque em Favoritar para salvá-los aqui."
-          icon={<Heart className="w-16 h-16 opacity-50" />}
+          icon={<Flag className="w-16 h-16 opacity-50" />}
         />
       )}
 
@@ -49,7 +49,7 @@ export default function FavoritesPage() {
                 </div>
               ) : (
                 <div className="w-14 h-14 shrink-0 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
-                  <MapPin className="w-6 h-6" />
+                  <Flag className="w-6 h-6" />
                 </div>
               )}
 

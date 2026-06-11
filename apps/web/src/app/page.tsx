@@ -34,7 +34,7 @@ export default function Home() {
       )}
 
       {!isLoading && !isError && events && events.length > 0 && (
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col divide-y divide-gray-200">
           {events.map((event) => (
             <EventFeedItem key={event.id} event={event} />
           ))}

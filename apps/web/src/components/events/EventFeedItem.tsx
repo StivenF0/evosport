@@ -19,7 +19,7 @@ function formatDate(value: string) {
 
 export function EventFeedItem({ event }: EventFeedItemProps) {
   return (
-    <article className="bg-white rounded-3xl border border-gray-100 shadow-sm p-6 md:p-8">
+    <article className="py-8 first:pt-0">
       <div className="grid gap-6 md:grid-cols-[1fr_20rem]">
         {/* Conteúdo principal */}
         <div className="flex gap-4">
