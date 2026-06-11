@@ -25,7 +25,8 @@ Decisões técnicas cravadas (ver decisions.md):
 - **Sprint 8 — Autenticação e Usuários (backend): ✅ CONCLUÍDA** (branch `feat/sprint8`, 6 commits)
 - **Sprint 9 — Favoritos e Escopo por Evento (backend): ✅ CONCLUÍDA** (branch `feat/sprint9`)
 - **Sprint 10 — Fundação do Frontend (auth, layout, design system): ✅ CONCLUÍDA** (branch `feat/sprint10`)
-- **Sprints 11–12: ⬜ pendentes** (ver TODO.md)
+- **Sprint 11 — Páginas Principais (feed, evento, perfil, favoritos): ✅ CONCLUÍDA** (branch `feat/sprint11`)
+- **Sprint 12: ⬜ pendente** (ver TODO.md)
 
 ### O que a Sprint 7 entregou
 - `apps/api/src/db/schema.ts`: `description` em `event`; `eventId` em `matches`; tabelas `event_teams` e `event_stadiums`; todas as `relations` Drizzle.
@@ -60,8 +61,16 @@ Decisões técnicas cravadas (ver decisions.md):
 - Validação: `bun run lint` limpo (resta só o warning pré-existente `auth.ts:19`), `tsc --noEmit` do web limpo e `next build` com sucesso (rotas `/login` e `/register` geradas).
   - Pendências conhecidas para a Sprint 11/12: as rotas `/profile`, `/favorites`, `/admin` ainda não existem (links já apontam para elas); o feed multi-evento da home ainda usa o evento único antigo.
 
-### Próximo passo: Sprint 11 — Páginas Principais (Feed, Evento, Perfil, Favoritos)
-Ver detalhes no TODO.md. Resumo: homepage como feed de eventos (consumir `GET /event/list` + `/:id/highlight`), página de evento em 2 colunas (abas Sobre/Classificação/Times + painel com placar dinâmico), layout compartilhado Perfil/Favoritos com sidebar, página de Favoritos (integrada ao backend) e Meu Perfil (avatar + alterar nome).
+### O que a Sprint 11 entregou (frontend `apps/web`)
+- **Dados escopados**: `services/event-service.ts` (+getAllEvents/getEventMatches/Teams/Venues/Ranking/Highlight), `services/favorite-service.ts`; hooks `use-event.ts` (queries por evento) e `use-favorite.ts` (lista + add/remove com invalidação).
+- **Home (feed)**: `app/page.tsx` lista eventos (`useEvents`) com `components/events/EventFeedItem` (logo + título + ícone de link + descrição + `EventScoreboard`).
+- **Página de evento**: `app/events/[id]/page.tsx` em 2 colunas — abas Sobre (descrição + `DynamicMap`), Classificação (`RankingTable`), Times (grid `TeamCard`); painel `lg:sticky` com `EventScoreboard` + ToC. `FavoriteButton` (favoritar/desfavoritar; visitante vai para /login).
+- **Conta**: route group `app/(account)/` com `layout.tsx` (sidebar + `useRequireAuth`), `favorites/page.tsx` (lista estilo blog) e `profile/page.tsx` (avatar de inicial + alterar nome via `updateProfile`).
+- **Componentes novos**: `events/EventScoreboard`, `events/EventFeedItem`, `events/FavoriteButton`.
+- Validação: `bun run lint` limpo (só o warning pré-existente `auth.ts:19`), `tsc --noEmit` do web limpo, `next build` com sucesso (12 páginas; `/events/[id]` dinâmica). Domínios de imagem (`flagfeed.com`, `i.pinimg.com`) já configurados em `next.config`.
+
+### Próximo passo: Sprint 12 — Painel Administrativo e Fechamento
+Ver detalhes no TODO.md. Resumo: páginas admin (CRUD de eventos/times/partidas/estádios sob `/admin`, visíveis só para admin, `react-hook-form`); revisão de responsividade e estados; rodar lint/test/build, atualizar README e docs de `.agents/`.
 
 ---
 

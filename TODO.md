@@ -280,20 +280,20 @@ POST/PUT/DELETE de events, teams, venues e matches agora sob `requireAdmin` (401
 
 ## Sprint 11 — Páginas Principais (Feed, Evento, Perfil, Favoritos)
 
-- [ ] Homepage (Feed de Eventos).
-Listagem estilo blog: logo à esquerda do título, ícone de corrente/link, descrição e placar dinâmico (partida atual ou próximo confronto) por evento.
+- [x] Homepage (Feed de Eventos).
+`app/page.tsx` consome `useEvents` (GET /event/list). `EventFeedItem`: logo à esquerda do título, ícone de link (`Link2`), descrição e `EventScoreboard` (placar dinâmico via GET /event/:id/highlight) por evento. Padrão de 3 estados.
 
-- [ ] Página de Evento (layout 2 colunas).
-Coluna esquerda: breadcrumb (Home + título), botão Favoritar e abas Sobre (descrição + mapa Leaflet), Classificação (RankingTable) e Times (grid de cards). Coluna direita: painel fixo com partida atual/próximo jogo + placar e sumário (ToC) da página.
+- [x] Página de Evento (layout 2 colunas).
+`app/events/[id]/page.tsx`. Esquerda: breadcrumb (Home + título), `FavoriteButton` e abas Sobre (descrição + `DynamicMap` das sedes), Classificação (`RankingTable`) e Times (grid de `TeamCard`). Direita: painel `lg:sticky` com `EventScoreboard` + sumário (ToC) que controla as abas. Hooks escopados em `use-event.ts` (matches/teams/venues/ranking/highlight).
 
-- [ ] Layout compartilhado Perfil/Favoritos.
-Sidebar fixa à esquerda com links Perfil / Favoritos.
+- [x] Layout compartilhado Perfil/Favoritos.
+Route group `app/(account)/layout.tsx` com sidebar (Perfil / Favoritos) e proteção via `useRequireAuth` (redireciona visitantes).
 
-- [ ] Página de Favoritos.
-Seção estilo blog com os eventos favoritados, com ícone de bandeira/marcador. Ações de favoritar/desfavoritar integradas ao backend.
+- [x] Página de Favoritos.
+`app/(account)/favorites/page.tsx` — lista estilo blog com `useFavorites`, ícone de marcador, ação favoritar/desfavoritar via `FavoriteButton` (hooks `use-favorite.ts` → /favorites).
 
-- [ ] Página Meu Perfil.
-Avatar com a inicial do nome, campo para alterar o nome e botão salvar (mutation PUT /auth/me ou /users/:id).
+- [x] Página Meu Perfil.
+`app/(account)/profile/page.tsx` — avatar com a inicial do nome, campo de nome (`react-hook-form` + `zod`) e botão salvar (mutation PUT /auth/me via `useAuth().updateProfile`), com feedback de sucesso/erro.
 
 ## Sprint 12 — Painel Administrativo e Fechamento
 
