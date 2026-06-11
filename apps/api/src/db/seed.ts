@@ -1,5 +1,14 @@
 import { db } from "./index";
-import { event, eventStadiums, eventTeams, matches, stadiums, teams, users } from "./schema";
+import {
+  event,
+  eventStadiums,
+  eventTeams,
+  matches,
+  stadiums,
+  teams,
+  userFavorites,
+  users,
+} from "./schema";
 
 function ensure<T>(value: T | undefined): T {
   if (value == null) throw new Error("Unexpected undefined value");
@@ -12,6 +21,7 @@ async function seed() {
   try {
     // 1. Limpeza do banco de dados (evita duplicatas ao re-executar)
     console.log("🧹 Limpando dados antigos...");
+    await db.delete(userFavorites);
     await db.delete(matches);
     await db.delete(eventTeams);
     await db.delete(eventStadiums);
