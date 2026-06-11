@@ -26,7 +26,9 @@ Decisões técnicas cravadas (ver decisions.md):
 - **Sprint 9 — Favoritos e Escopo por Evento (backend): ✅ CONCLUÍDA** (branch `feat/sprint9`)
 - **Sprint 10 — Fundação do Frontend (auth, layout, design system): ✅ CONCLUÍDA** (branch `feat/sprint10`)
 - **Sprint 11 — Páginas Principais (feed, evento, perfil, favoritos): ✅ CONCLUÍDA** (branch `feat/sprint11`)
-- **Sprint 12: ⬜ pendente** (ver TODO.md)
+- **Sprint 12 — Painel Administrativo e Fechamento: ✅ CONCLUÍDA** (branch `feat/sprint12`)
+
+> 🎉 Reformulação v2 concluída (Sprints 7–12). Backlog do TODO.md inteiramente marcado.
 
 ### O que a Sprint 7 entregou
 - `apps/api/src/db/schema.ts`: `description` em `event`; `eventId` em `matches`; tabelas `event_teams` e `event_stadiums`; todas as `relations` Drizzle.
@@ -69,8 +71,13 @@ Decisões técnicas cravadas (ver decisions.md):
 - **Componentes novos**: `events/EventScoreboard`, `events/EventFeedItem`, `events/FavoriteButton`.
 - Validação: `bun run lint` limpo (só o warning pré-existente `auth.ts:19`), `tsc --noEmit` do web limpo, `next build` com sucesso (12 páginas; `/events/[id]` dinâmica). Domínios de imagem (`flagfeed.com`, `i.pinimg.com`) já configurados em `next.config`.
 
-### Próximo passo: Sprint 12 — Painel Administrativo e Fechamento
-Ver detalhes no TODO.md. Resumo: páginas admin (CRUD de eventos/times/partidas/estádios sob `/admin`, visíveis só para admin, `react-hook-form`); revisão de responsividade e estados; rodar lint/test/build, atualizar README e docs de `.agents/`.
+### O que a Sprint 12 entregou (frontend `apps/web`)
+- **Painel admin**: route group `app/admin/` restrito por `useRequireAuth({ admin: true })`, com `layout.tsx` (sidebar), `page.tsx` (visão geral com contadores) e CRUD em `events/`, `teams/`, `venues/`, `matches/`. Formulários em `components/admin/Modal` com `react-hook-form` + `zod` (`schemas/admin-schemas.ts`) e `components/admin/FormField`.
+- **Hooks**: adicionadas mutations de update/delete a `use-event`, `use-team`, `use-venue`, `use-match` (com invalidação de listas/ranking/eventos).
+- **Detalhe técnico**: schemas admin com `z.coerce`/`z.preprocess` exigem `useForm<z.input, unknown, z.output>` (tipos `*FormInput`/`*FormData`) para o `zodResolver` casar input/output.
+- **Fechamento**: README atualizado para a v2; `bun run format && lint` limpo (só o warning pré-existente `auth.ts:19`), `bun test` 149/149, `next build` com type-check (17 páginas). Smoke test do CRUD admin via cookie de admin validado (create/update/delete de evento e create de partida com `eventId`).
+
+> **Reformulação v2 concluída.** Todas as Sprints 7–12 entregues. Possíveis melhorias futuras (fora do escopo): testes de frontend, corrigir o warning `auth.ts:19`, e endereçar os erros de `tsc --noEmit` pré-existentes do backend (o gate do projeto é Biome + `bun test` + `next build`).
 
 ---
 

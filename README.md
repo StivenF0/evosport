@@ -1,6 +1,6 @@
 # ⚽ Evosport
 
-Plataforma web SaaS para gestão de eventos e torneios esportivos. Permite administrar times, partidas, sedes com mapa interativo e gera tabela de classificação em tempo real.
+Plataforma web SaaS para gestão de **múltiplos eventos esportivos globais**. Inclui autenticação (JWT em cookie httpOnly), favoritos por usuário, painel administrativo (CRUD), sedes com mapa interativo e tabela de classificação calculada por evento.
 
 ## 🛠️ Stack
 
@@ -64,37 +64,44 @@ cd evosport
 bun install
 
 # 3. Configurar variáveis de ambiente
-# Crie apps/api/.env (ex: DATABASE_URL=file:./data/evosport.db)
-# Crie apps/web/.env.local (ex: NEXT_PUBLIC_API_URL=http://localhost:8080)
+# apps/api/.env       -> DB_FILE_NAME=file:sqlite.db  e  JWT_SECRET=uma-chave-secreta
+#   (use apps/api/.env.example como base)
+# apps/web/.env.local -> NEXT_PUBLIC_API_URL=http://localhost:8080/api
 
-# 4. Popular o banco de dados com dados iniciais
+# 4. Aplicar as migrations e popular o banco com dados iniciais
+bun --filter api db:migrate
 bun --filter api db:seed
 
 # 5. Rodar API + Web em paralelo
 bun dev
 ```
 
-A API estará disponível em `http://localhost:8080` e o frontend em `http://localhost:3000`.
+A API estará disponível em `http://localhost:8080/api` e o frontend em `http://localhost:3000`.
+
+O seed cria um administrador inicial: **admin@evosport.com** / **admin123**.
 
 ## 📡 Endpoints da API
 
 | Método | Rota | Descrição |
 |--------|------|-----------|
-| GET | `/event` | Dados do evento principal |
-| GET | `/teams` | Lista de times |
-| GET | `/matches` | Partidas formatadas |
-| GET | `/ranking` | Tabela de classificação |
-| GET | `/venues` | Sedes e estádios |
+| POST | `/auth/register`, `/auth/login`, `/auth/logout` | Autenticação (cookie httpOnly) |
+| GET/PUT | `/auth/me` | Perfil do usuário autenticado |
+| GET | `/event/list` | Lista de eventos (feed) |
+| GET | `/event/:id/matches`, `/teams`, `/venues`, `/ranking` | Dados escopados por evento |
+| GET | `/event/:id/highlight` | Partida em destaque (placar dinâmico) |
+| GET/POST/DELETE | `/favorites`, `/favorites/:eventId` | Favoritos do usuário (requer login) |
+| POST/PUT/DELETE | `/event`, `/team`, `/venue`, `/match` | CRUD administrativo (requer admin) |
 
 ## 🌐 Páginas (Frontend)
 
 | Rota | Descrição |
 |------|-----------|
-| `/` | Home com hero do evento |
-| `/teams` | Grid de times participantes |
-| `/matches` | Calendário de partidas |
-| `/rankings` | Tabela de classificação |
-| `/venues` | Mapa interativo das sedes |
+| `/` | Feed de eventos com placar dinâmico |
+| `/events/:id` | Página do evento (Sobre, Classificação, Times + painel) |
+| `/login`, `/register` | Autenticação |
+| `/profile`, `/favorites` | Área da conta (sidebar) |
+| `/admin/*` | Painel administrativo (CRUD), restrito a admins |
+| `/teams`, `/matches`, `/rankings`, `/venues` | Listagens gerais e mapa das sedes |
 
 ## 🧪 Testes
 

@@ -297,11 +297,11 @@ Route group `app/(account)/layout.tsx` com sidebar (Perfil / Favoritos) e prote�
 
 ## Sprint 12 — Painel Administrativo e Fechamento
 
-- [ ] Páginas administrativas (CRUD).
-Áreas restritas (visíveis apenas para admin) para gerenciar eventos, times, partidas e estádios (com localização lat/long). Formulários com `react-hook-form`.
+- [x] Páginas administrativas (CRUD).
+Route group `app/admin/` restrito a admins (`useRequireAuth({ admin: true })`) com sidebar: visão geral (contadores) + CRUD de Eventos, Times, Sedes (lat/long) e Partidas. Formulários em `Modal` com `react-hook-form` + `zod` (`schemas/admin-schemas.ts`), `components/admin/` (Modal, FormField). Mutations de update/delete adicionadas aos hooks `use-event/use-team/use-venue/use-match`.
 
-- [ ] Revisão de responsividade e estados.
-Aplicar padrão de 3 estados nas novas páginas, revisar mobile/tablet e o design minimalista em todas as telas.
+- [x] Revisão de responsividade e estados.
+Padrão de 3 estados (loading/erro/vazio via `LoadingSpinner`/`ErrorMessage`/`EmptyState`) em todas as páginas novas; grids responsivos e sidebars `sticky`/colapsáveis no mobile. Design majoritariamente branco mantido.
 
-- [ ] Linting, testes e documentação.
-Rodar `bun run format && bun run lint` e `bun test`. Atualizar README e os docs de `.agents/` (arquitetura/tech-stack) com o novo escopo.
+- [x] Linting, testes e documentação.
+`bun run format && bun run lint` limpo (resta só o warning pré-existente `auth.ts:19`); `bun test` 149/149; `next build` com type-check (17 páginas). README atualizado (multi-evento, auth, favoritos, admin, credenciais do seed) e docs de `.agents/` revisados.
