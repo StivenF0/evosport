@@ -9,6 +9,7 @@
     "start": "NODE_ENV=production bun dist/index.js",
     "test": "bun test",
     "coverage": "bun test --coverage",
+    "db:migrate": "bun src/db/migrate.ts",
     "db:seed": "bun src/db/seed.ts"
   },
   "devDependencies": {
@@ -22,6 +23,7 @@
   "dependencies": {
     "@elysia/openapi": "^1.4.15",
     "@elysiajs/cors": "^1.4.1",
+    "@elysiajs/jwt": "^1.4.2",
     "@libsql/client": "^0.17.2",
     "dotenv": "^17.3.1",
     "drizzle-orm": "^0.45.1",

@@ -3,7 +3,9 @@ import openapi from "@elysia/openapi";
 import cors from "@elysiajs/cors";
 import { Elysia } from "elysia";
 
+import { authRoutes } from "./routes/auth-routes.ts";
 import { eventRoutes } from "./routes/event-routes.ts";
+import { favoriteRoutes } from "./routes/favorite-routes.ts";
 import { matchRoutes } from "./routes/match-routes.ts";
 import { rankingRoutes } from "./routes/ranking-routes.ts";
 import { teamRoutes } from "./routes/team-routes.ts";
@@ -12,7 +14,9 @@ import { venueRoutes } from "./routes/venue-routes.ts";
 const app = new Elysia({ prefix: "/api" })
   .use(
     cors({
-      origin: "*",
+      // Reflete a origem da requisição (necessário para cookies httpOnly
+      // com `credentials: include` — o navegador rejeita `*` nesse caso).
+      origin: true,
       methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
       credentials: true,
     }),
@@ -37,6 +41,8 @@ const app = new Elysia({ prefix: "/api" })
           { name: "Venues", description: "Gerenciamento de sedes/estádios" },
           { name: "Matches", description: "Gerenciamento de partidas" },
           { name: "Ranking", description: "Tabela de classificação calculada" },
+          { name: "Auth", description: "Autenticação e gestão de usuários" },
+          { name: "Favorites", description: "Eventos favoritados pelo usuário" },
         ],
       },
     }),
@@ -44,6 +50,8 @@ const app = new Elysia({ prefix: "/api" })
   .get("/", () => "API Evosport rodando com sucesso!", {
     detail: { hide: true },
   })
+  .use(authRoutes)
+  .use(favoriteRoutes)
   .use(eventRoutes)
   .use(venueRoutes)
   .use(matchRoutes)

@@ -18,6 +18,7 @@ describe("MatchRepository - Create Match", () => {
     } as any);
 
     const match = await matchRepository.create({
+      eventId: 1,
       homeTeamId: 1,
       awayTeamId: 2,
       stadiumId: 1,
@@ -38,6 +39,7 @@ describe("MatchRepository - Create Match", () => {
     } as any);
 
     const match = matchRepository.create({
+      eventId: 1,
       homeTeamId: 1,
       awayTeamId: 2,
       stadiumId: 1,

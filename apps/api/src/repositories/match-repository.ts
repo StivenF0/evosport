@@ -1,7 +1,13 @@
-import type { NewMatch, UpdateMatch } from "@packages/types";
+import type { MatchStatus, NewMatch, UpdateMatch } from "@packages/types";
 import { eq } from "drizzle-orm";
 import { db } from "../db";
 import { matches } from "../db/schema";
+
+export interface MatchFilters {
+  eventId?: number;
+  status?: MatchStatus;
+  order?: "asc" | "desc";
+}
 
 export const matchRepository = {
   // CREATE
@@ -18,11 +24,20 @@ export const matchRepository = {
     }
   },
 
-  // READ (Custom Join: Partidas + Times + Estádio)
-  async getAllWithTeams() {
+  // READ (Custom Join: Partidas + Times + Estádio, com filtros opcionais)
+  async getAllWithTeams(filters: MatchFilters = {}) {
     try {
       // Utiliza a API Relacional do Drizzle (configurada via "relations" no schema)
       return await db.query.matches.findMany({
+        where: (match, { and, eq }) => {
+          const conditions = [];
+          if (filters.eventId) conditions.push(eq(match.eventId, filters.eventId));
+          if (filters.status) conditions.push(eq(match.status, filters.status));
+          return conditions.length ? and(...conditions) : undefined;
+        },
+        orderBy: (match, { asc, desc }) => [
+          filters.order === "desc" ? desc(match.date) : asc(match.date),
+        ],
         with: {
           homeTeam: true,
           awayTeam: true,
@@ -31,6 +46,22 @@ export const matchRepository = {
       });
     } catch {
       throw new Error("Erro ao buscar as partidas e os times.");
+    }
+  },
+
+  // READ (Partidas de um evento específico, com relações)
+  async getByEvent(eventId: number) {
+    try {
+      return await db.query.matches.findMany({
+        where: eq(matches.eventId, eventId),
+        with: {
+          homeTeam: true,
+          awayTeam: true,
+          stadium: true,
+        },
+      });
+    } catch {
+      throw new Error("Erro ao buscar as partidas do evento.");
     }
   },
 

@@ -1,5 +1,6 @@
 "use client";
 
+import "leaflet/dist/leaflet.css";
 import L from "leaflet";
 import Link from "next/link";
 import { useEffect } from "react";
@@ -57,7 +58,7 @@ export default function MapView({ venues }: MapProps) {
                 <div className="border-t border-gray-100 pt-2 mt-1">
                   <Link
                     href={`/venues/${venue.id}`}
-                    className="text-sm text-blue-600 hover:text-blue-800 font-semibold transition-colors inline-flex items-center gap-1"
+                    className="text-sm text-brand-600 hover:text-brand-800 font-semibold transition-colors inline-flex items-center gap-1"
                   >
                     Ver detalhes do estádio &rarr;
                   </Link>

@@ -1,7 +1,5 @@
 import type { NewMatch, UpdateMatch } from "@packages/types/match-types";
-import { matchRepository } from "../repositories/match-repository";
-
-// import { matches } from '../db/schema';
+import { type MatchFilters, matchRepository } from "../repositories/match-repository";
 
 const formatDateToBR = (date: Date | number | string): string => {
   return new Intl.DateTimeFormat("pt-BR", {
@@ -22,16 +20,29 @@ export const matchService = {
     }
   },
 
-  // READ (All formatted)
-  async getAllMatches() {
+  // READ (All formatted, com filtros opcionais por evento/status e ordenação)
+  async getAllMatches(filters: MatchFilters = {}) {
     try {
-      const result = await matchRepository.getAllWithTeams();
+      const result = await matchRepository.getAllWithTeams(filters);
       return result.map((match) => ({
         ...match,
         formattedDate: formatDateToBR(match.date),
       }));
     } catch {
       throw new Error("Erro ao buscar as partidas.");
+    }
+  },
+
+  // READ (Partidas de um evento, formatadas)
+  async getMatchesByEvent(eventId: number) {
+    try {
+      const result = await matchRepository.getByEvent(eventId);
+      return result.map((match) => ({
+        ...match,
+        formattedDate: formatDateToBR(match.date),
+      }));
+    } catch {
+      throw new Error("Erro ao buscar as partidas do evento.");
     }
   },
 

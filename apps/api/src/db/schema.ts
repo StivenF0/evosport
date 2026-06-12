@@ -1,10 +1,20 @@
-import type { MatchStatus } from "@packages/types";
-import { relations } from "drizzle-orm";
+import type { MatchStatus, UserRole } from "@packages/types";
+import { relations, sql } from "drizzle-orm";
 import { integer, real, sqliteTable, text } from "drizzle-orm/sqlite-core";
+
+export const users = sqliteTable("users", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  name: text("name").notNull(),
+  email: text("email").notNull().unique(),
+  passwordHash: text("password_hash").notNull(),
+  role: text("role").$type<UserRole>().notNull().default("user"),
+  createdAt: integer("created_at", { mode: "timestamp" }).notNull().default(sql`(unixepoch())`),
+});
 
 export const event = sqliteTable("event", {
   id: integer("id").primaryKey({ autoIncrement: true }),
   name: text("name").notNull(),
+  description: text("description"),
   startDate: integer("start_date", { mode: "timestamp" }).notNull(),
   endDate: integer("end_date", { mode: "timestamp" }).notNull(),
   logoUrl: text("logo_url"),
@@ -27,6 +37,9 @@ export const stadiums = sqliteTable("stadiums", {
 
 export const matches = sqliteTable("matches", {
   id: integer("id").primaryKey({ autoIncrement: true }),
+  eventId: integer("event_id")
+    .notNull()
+    .references(() => event.id),
   homeTeamId: integer("home_team_id")
     .notNull()
     .references(() => teams.id),
@@ -42,8 +55,75 @@ export const matches = sqliteTable("matches", {
   awayScore: integer("away_score"),
 });
 
+// Tabelas de junção (N:N) — times e sedes são compartilhados entre eventos
+export const eventTeams = sqliteTable("event_teams", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  eventId: integer("event_id")
+    .notNull()
+    .references(() => event.id),
+  teamId: integer("team_id")
+    .notNull()
+    .references(() => teams.id),
+});
+
+export const eventStadiums = sqliteTable("event_stadiums", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  eventId: integer("event_id")
+    .notNull()
+    .references(() => event.id),
+  stadiumId: integer("stadium_id")
+    .notNull()
+    .references(() => stadiums.id),
+});
+
+// Favoritos: relação N:N entre usuários e eventos
+export const userFavorites = sqliteTable("user_favorites", {
+  id: integer("id").primaryKey({ autoIncrement: true }),
+  userId: integer("user_id")
+    .notNull()
+    .references(() => users.id),
+  eventId: integer("event_id")
+    .notNull()
+    .references(() => event.id),
+  createdAt: integer("created_at", { mode: "timestamp" }).notNull().default(sql`(unixepoch())`),
+});
+
 // Definição de relações para facilitar as consultas (joins) no Drizzle
+export const usersRelations = relations(users, ({ many }) => ({
+  favorites: many(userFavorites),
+}));
+
+export const eventRelations = relations(event, ({ many }) => ({
+  matches: many(matches),
+  eventTeams: many(eventTeams),
+  eventStadiums: many(eventStadiums),
+  favorites: many(userFavorites),
+}));
+
+export const userFavoritesRelations = relations(userFavorites, ({ one }) => ({
+  user: one(users, {
+    fields: [userFavorites.userId],
+    references: [users.id],
+  }),
+  event: one(event, {
+    fields: [userFavorites.eventId],
+    references: [event.id],
+  }),
+}));
+
+export const teamsRelations = relations(teams, ({ many }) => ({
+  eventTeams: many(eventTeams),
+}));
+
+export const stadiumsRelations = relations(stadiums, ({ many }) => ({
+  eventStadiums: many(eventStadiums),
+}));
+
 export const matchesRelations = relations(matches, ({ one }) => ({
+  event: one(event, {
+    fields: [matches.eventId],
+    references: [event.id],
+  }),
   homeTeam: one(teams, {
     fields: [matches.homeTeamId],
     references: [teams.id],
@@ -56,6 +136,28 @@ export const matchesRelations = relations(matches, ({ one }) => ({
   }),
   stadium: one(stadiums, {
     fields: [matches.stadiumId],
+    references: [stadiums.id],
+  }),
+}));
+
+export const eventTeamsRelations = relations(eventTeams, ({ one }) => ({
+  event: one(event, {
+    fields: [eventTeams.eventId],
+    references: [event.id],
+  }),
+  team: one(teams, {
+    fields: [eventTeams.teamId],
+    references: [teams.id],
+  }),
+}));
+
+export const eventStadiumsRelations = relations(eventStadiums, ({ one }) => ({
+  event: one(event, {
+    fields: [eventStadiums.eventId],
+    references: [event.id],
+  }),
+  stadium: one(stadiums, {
+    fields: [eventStadiums.stadiumId],
     references: [stadiums.id],
   }),
 }));

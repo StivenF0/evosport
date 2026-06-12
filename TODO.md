@@ -204,3 +204,119 @@ Certificar-se de que as imagens estão utilizando otimização e "lazy loading" 
 - [x] Elaboração da Documentação (README.md).
 Atualizar o arquivo README.md na raiz do repositório com uma breve descrição do projeto (Evosport) e os nomes dos integrantes da equipe.
 Documentar o passo a passo claro para rodar o projeto localmente, incluindo os comandos de instalação (`bun install`), execução do banco de dados/seed (`bun run seed`) e inicialização do servidor (`bun dev`).
+
+---
+
+# Reformulação v2 — Sistema Multi-Evento
+
+> Contexto e decisões técnicas em [.agents/decisions.md](./.agents/decisions.md). Referência visual: `esboco_novo.png`.
+> Decisões-chave: junção N:N (`event_teams`/`event_stadiums`), JWT em cookie httpOnly, coluna `role` em `users`, placar dinâmico por status+data.
+
+## Sprint 7 — Schema Multi-Evento e Migração de Dados
+
+- [x] Atualizar o `schema.ts` para multi-evento.
+Adicionar coluna `description` em `event`.
+Criar tabela de junção `event_teams` (eventId, teamId) para relação N:N entre eventos e times.
+Criar tabela de junção `event_stadiums` (eventId, stadiumId) para relação N:N entre eventos e sedes.
+Adicionar coluna `eventId` (FK → event) na tabela `matches`.
+Definir as `relations` do Drizzle para todas as novas associações.
+
+- [x] Gerar e aplicar a migration.
+Migration `0002_smooth_marauders.sql` gerada. Criado `src/db/migrate.ts` (+ script `db:migrate`) para aplicar migrations via Drizzle migrator.
+
+- [x] Atualizar o seed para múltiplos eventos.
+Seed popula 2 eventos globais (Copa do Mundo 2026 e Copa das Confederações 2025), vinculando times e sedes via `event_teams`/`event_stadiums` e partidas com `eventId`.
+
+- [x] Atualizar `packages/types`.
+Adicionado `description` em `Event` e `eventId` em `Match`; criados `user-types.ts` (`User`, `UserRole`, `NewUser`, `UpdateUser`) e `favorite-types.ts` (`Favorite`, `NewFavorite`).
+
+## Sprint 8 — Autenticação e Usuários (Backend)
+
+- [x] Criar tabela `users`.
+Campos id, name, email (único), passwordHash, role ('user' | 'admin', default 'user'), createdAt. Migration `0003_boring_nebula.sql`.
+
+- [x] Repository e Service de usuários.
+`user-repository.ts` (create, findByEmail, findById, update) e `auth-service.ts` (register com `Bun.password.hash`, login com `Bun.password.verify`, validação de email único, `getProfile`, `updateName`). O hash de senha nunca é exposto (helper `toPublicUser`).
+
+- [x] Configurar JWT.
+`@elysiajs/jwt` configurado em `src/plugins/auth.ts`. Token emitido no login e gravado em cookie httpOnly (`sameSite: lax`, 7 dias). Derive `currentUser` a partir do cookie. `JWT_SECRET` no `.env`.
+
+- [x] Rotas de autenticação.
+POST /auth/register, POST /auth/login, POST /auth/logout, GET /auth/me, PUT /auth/me. Mensagens de erro em Português. Validação de entrada via TypeBox (`auth-schemas.ts`).
+
+- [x] Middleware de autorização.
+Guardas `requireAuth` (401) e `requireAdmin` (403) em `src/plugins/auth.ts`. Seed cria admin inicial (admin@evosport.com / admin123).
+
+- [x] Testes da camada de auth.
+19 testes novos cobrindo service (register/login/updateName + email duplicado + senha inválida), repository e rotas (incl. /me 401 sem cookie e 200 autenticado). Total: 132 testes passando.
+
+## Sprint 9 — Favoritos e Escopo por Evento (Backend)
+
+- [x] Tabela e CRUD de favoritos.
+Criada `user_favorites` (userId, eventId, createdAt) com relations — migration `0004_unique_timeslip.sql`. `favorite-repository` (findByUser, exists, add, remove), `favorite-service` (add idempotente valida o evento) e `favorite-routes` (GET /favorites, POST/DELETE /favorites/:eventId) sob `requireAuth`.
+
+- [x] Escopar rotas existentes por evento.
+Novas rotas em `event-routes`: GET /event/:id/matches, /:id/teams, /:id/venues, /:id/ranking. `matchRepository.getByEvent`, `rankingRepository.getFinishedMatches(eventId?)`, `eventRepository.findTeamsByEvent/findStadiumsByEvent` via tabelas de junção. Mantidas GET /event (principal) e adicionada GET /event/list (feed multi-evento).
+
+- [x] Endpoint de placar dinâmico.
+`eventService.getHighlightMatch` exposto em GET /event/:id/highlight: prioriza partida `em_andamento`; senão o `agendado` futuro mais próximo; `null` se não houver.
+
+- [x] Rotas administrativas (CRUD completo).
+POST/PUT/DELETE de events, teams, venues e matches agora sob `requireAdmin` (401/403). Adicionado `eventId` em `MatchBody`/respostas. Vínculos N:N via POST/DELETE /event/:id/teams/:teamId e /event/:id/venues/:stadiumId (idempotentes). Testes atualizados — 149 testes passando.
+
+## Sprint 10 — Fundação do Frontend (Auth, Layout, Design System)
+
+- [x] Design system minimalista (majoritariamente branco).
+`globals.css` com base branca/cinza-clara (gray-50) e texto gray-900; Header com borda fina + `sticky`, acentos em azul/verde claros. Cards com cantos arredondados e bordas suaves. (Tailwind v4 — `@theme` evitado por incompatibilidade com o parser do Biome; acentos aplicados via utilitários.)
+
+- [x] Contexto de autenticação no front.
+`hooks/use-auth.ts` (TanStack Query: query `me` + mutations login/register/logout/updateProfile, chave `['auth','me']`), `services/auth-service.ts`, tipos em `types/api-types.ts`. `api-client` agora envia `credentials: "include"`; CORS da API ajustado para `origin: true` (cookies httpOnly exigem origem refletida, não `*`).
+
+- [x] Páginas de Login e Cadastro.
+`/login` e `/register` com `react-hook-form` + `zod` (`schemas/auth-schemas.ts`); validação e mensagens em Português; cadastro confirma senha e faz auto-login ao concluir.
+
+- [x] Dropdown do usuário e proteção de páginas.
+`components/auth/UserMenu.tsx` (avatar com inicial, itens Perfil/Favoritos/Admin-se-admin/Sair, fecha ao clicar fora) integrado ao Header. `hooks/use-require-auth.ts` redireciona visitantes não autenticados (e não-admins) — pronto para as páginas restritas da Sprint 11/12.
+
+## Sprint 11 — Páginas Principais (Feed, Evento, Perfil, Favoritos)
+
+- [x] Homepage (Feed de Eventos).
+`app/page.tsx` consome `useEvents` (GET /event/list). `EventFeedItem`: logo à esquerda do título, ícone de link (`Link2`), descrição e `EventScoreboard` (placar dinâmico via GET /event/:id/highlight) por evento. Padrão de 3 estados.
+
+- [x] Página de Evento (layout 2 colunas).
+`app/events/[id]/page.tsx`. Esquerda: breadcrumb (Home + título), `FavoriteButton` e abas Sobre (descrição + `DynamicMap` das sedes), Classificação (`RankingTable`) e Times (grid de `TeamCard`). Direita: painel `lg:sticky` com `EventScoreboard` + sumário (ToC) que controla as abas. Hooks escopados em `use-event.ts` (matches/teams/venues/ranking/highlight).
+
+- [x] Layout compartilhado Perfil/Favoritos.
+Route group `app/(account)/layout.tsx` com sidebar (Perfil / Favoritos) e proteção via `useRequireAuth` (redireciona visitantes).
+
+- [x] Página de Favoritos.
+`app/(account)/favorites/page.tsx` — lista estilo blog com `useFavorites`, ícone de marcador, ação favoritar/desfavoritar via `FavoriteButton` (hooks `use-favorite.ts` → /favorites).
+
+- [x] Página Meu Perfil.
+`app/(account)/profile/page.tsx` — avatar com a inicial do nome, campo de nome (`react-hook-form` + `zod`) e botão salvar (mutation PUT /auth/me via `useAuth().updateProfile`), com feedback de sucesso/erro.
+
+## Sprint 12 — Painel Administrativo e Fechamento
+
+- [x] Páginas administrativas (CRUD).
+Route group `app/admin/` restrito a admins (`useRequireAuth({ admin: true })`) com sidebar: visão geral (contadores) + CRUD de Eventos, Times, Sedes (lat/long) e Partidas. Formulários em `Modal` com `react-hook-form` + `zod` (`schemas/admin-schemas.ts`), `components/admin/` (Modal, FormField). Mutations de update/delete adicionadas aos hooks `use-event/use-team/use-venue/use-match`.
+
+- [x] Revisão de responsividade e estados.
+Padrão de 3 estados (loading/erro/vazio via `LoadingSpinner`/`ErrorMessage`/`EmptyState`) em todas as páginas novas; grids responsivos e sidebars `sticky`/colapsáveis no mobile. Design majoritariamente branco mantido.
+
+- [x] Linting, testes e documentação.
+`bun run format && bun run lint` limpo (resta só o warning pré-existente `auth.ts:19`); `bun test` 149/149; `next build` com type-check (17 páginas). README atualizado (multi-evento, auth, favoritos, admin, credenciais do seed) e docs de `.agents/` revisados.
+
+---
+
+# Ajustes pós-v2
+
+- [x] Feed sem cards: eventos separados por divider cinza (`divide-y`).
+- [x] **Bug do mapa corrigido**: o CSS do Leaflet era descartado pelo Tailwind v4 no `@import` do `globals.css`; movido para `import "leaflet/dist/leaflet.css"` em `components/ui/Map.tsx`.
+- [x] Página de Jogos com filtros e ordenação no backend: `GET /match?eventId=&status=&sort=` (`MatchQuery` + `matchRepository.getAllWithTeams(filters)`); UI com selects de evento/status/ordenação.
+- [x] Página de evento: nova aba **Jogos** (todas as partidas) e painel lateral com **Próximas partidas** no lugar do ToC redundante.
+- [x] Favoritos: ícone de coração trocado por **bandeira** (`Flag`).
+- [x] Remoção das páginas gerais `/teams` e `/rankings` (sem sentido no multi-evento) + links do Header. `TeamCard`/`RankingTable` permanecem (usados na página de evento).
+- [x] **Bug do seed corrigido**: `seed.ts` não limpava `user_favorites`, quebrando o reseed por FK quando havia favoritos.
+
+## Backlog / planejado
+- [ ] Remover endpoint global `GET /ranking` e o hook `useRanking` (órfãos após a remoção da página de classificações geral).

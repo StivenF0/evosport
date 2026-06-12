@@ -5,6 +5,8 @@ async function apiFetch<T>(path: string, init?: RequestInit): Promise<T> {
 
   try {
     res = await fetch(`${BASE_URL}${path}`, {
+      // Envia/recebe o cookie httpOnly de sessão (JWT) em todas as requisições
+      credentials: "include",
       headers: {
         "Content-Type": "application/json",
         ...init?.headers,
