@@ -1,10 +1,10 @@
 "use client";
 
+import { DynamicMap } from "@web/components/ui/DynamicMap";
+import { ErrorMessage } from "@web/components/ui/ErrorMessage";
+import { LoadingSpinner } from "@web/components/ui/LoadingSpinner";
+import { useVenues } from "@web/hooks/use-venue";
 import { Map as MapIcon } from "lucide-react";
-import { DynamicMap } from "../../components/ui/DynamicMap";
-import { ErrorMessage } from "../../components/ui/ErrorMessage";
-import { LoadingSpinner } from "../../components/ui/LoadingSpinner";
-import { useVenues } from "../../hooks/use-venue";
 
 export default function MapPage() {
   const { data: venues, isLoading, isError, error } = useVenues();
