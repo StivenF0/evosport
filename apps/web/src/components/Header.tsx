@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { UserMenu } from "./auth/UserMenu";
@@ -19,7 +20,14 @@ export function Header() {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link href="/" className="shrink-0 flex items-center">
-              <span className="font-bold text-xl text-blue-600">Evosport</span>
+              <Image
+                src="/evosport_brand.png"
+                alt="Evosport"
+                width={629}
+                height={103}
+                priority
+                className="h-8 w-auto"
+              />
             </Link>
           </div>
 
