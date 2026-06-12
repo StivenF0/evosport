@@ -72,7 +72,7 @@ export default function EventPage() {
         </div>
 
         {/* Abas */}
-        <div className="flex gap-2 border-b border-gray-100 mb-6 overflow-x-auto">
+        <div className="flex gap-2 border-b border-gray-100 mb-6 overflow-x-auto overflow-y-hidden">
           {TABS.map(({ id: tabId, label, icon: Icon }) => (
             <button
               key={tabId}
