@@ -2,7 +2,7 @@
 
 import { useAuth } from "@web/hooks/use-auth";
 import { useAddFavorite, useFavorites, useRemoveFavorite } from "@web/hooks/use-favorite";
-import { Heart } from "lucide-react";
+import { Bookmark } from "lucide-react";
 import Link from "next/link";
 
 interface FavoriteButtonProps {
@@ -22,7 +22,7 @@ export function FavoriteButton({ eventId }: FavoriteButtonProps) {
         href="/login"
         className="inline-flex items-center gap-2 rounded-full border border-gray-200 px-4 py-2 text-sm font-semibold text-gray-600 hover:border-blue-200 hover:text-blue-600 transition-colors"
       >
-        <Heart className="w-4 h-4" />
+        <Bookmark className="w-4 h-4" />
         Favoritar
       </Link>
     );
@@ -50,7 +50,7 @@ export function FavoriteButton({ eventId }: FavoriteButtonProps) {
           : "border border-gray-200 text-gray-600 hover:border-red-200 hover:text-red-600"
       }`}
     >
-      <Heart className={`w-4 h-4 ${isFavorited ? "fill-current" : ""}`} />
+      <Bookmark className={`w-4 h-4 ${isFavorited ? "fill-current" : ""}`} />
       {isFavorited ? "Favoritado" : "Favoritar"}
     </button>
   );

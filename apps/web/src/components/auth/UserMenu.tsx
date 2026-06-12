@@ -1,7 +1,7 @@
 "use client";
 
 import { useAuth } from "@web/hooks/use-auth";
-import { ChevronDown, Heart, LogOut, Shield, User as UserIcon } from "lucide-react";
+import { Bookmark, ChevronDown, LogOut, Shield, User as UserIcon } from "lucide-react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
@@ -95,7 +95,7 @@ export function UserMenu() {
             className="flex items-center gap-3 px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
             role="menuitem"
           >
-            <Heart className="w-4 h-4 text-gray-400" />
+            <Bookmark className="w-4 h-4 text-gray-400" />
             Favoritos
           </Link>
           {isAdmin && (

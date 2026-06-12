@@ -2,13 +2,13 @@
 
 import { LoadingSpinner } from "@web/components/ui/LoadingSpinner";
 import { useRequireAuth } from "@web/hooks/use-require-auth";
-import { Heart, User } from "lucide-react";
+import { Bookmark, User } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
 const LINKS = [
   { href: "/profile", label: "Meu perfil", icon: User },
-  { href: "/favorites", label: "Favoritos", icon: Heart },
+  { href: "/favorites", label: "Favoritos", icon: Bookmark },
 ];
 
 export default function AccountLayout({ children }: { children: React.ReactNode }) {
