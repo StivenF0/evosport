@@ -38,19 +38,19 @@ export default function ProfilePage() {
   const initial = user?.name.charAt(0).toUpperCase() ?? "?";
 
   return (
-    <div className="flex flex-col gap-6 max-w-xl">
+    <div className="flex flex-col gap-6">
       <header>
         <h1 className="text-2xl md:text-3xl font-bold text-gray-900">Meu perfil</h1>
         <p className="mt-1 text-gray-500 text-sm">Gerencie suas informações pessoais.</p>
       </header>
 
-      <div className="flex items-center gap-4 bg-white rounded-2xl border border-gray-100 shadow-sm p-6">
-        <span className="w-16 h-16 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-2xl font-bold">
+      <div className="flex flex-col items-center gap-4 bg-white rounded-2xl border border-gray-100 shadow-sm p-12">
+        <span className="w-32 aspect-square rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-2xl font-bold">
           {initial}
         </span>
-        <div className="min-w-0">
-          <p className="font-bold text-gray-900 truncate">{user?.name}</p>
-          <p className="text-sm text-gray-500 truncate">{user?.email}</p>
+        <div className="min-w-0 flex flex-col items-center">
+          <p className="font-bold text-3xl text-gray-900 truncate">{user?.name}</p>
+          <p className="text-xl text-gray-500 truncate">{user?.email}</p>
         </div>
       </div>
 
