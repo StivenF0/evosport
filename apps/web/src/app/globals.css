@@ -4,9 +4,22 @@
 
 /*
  * Design system Evosport — minimalista e majoritariamente branco.
- * Base preto/branco com verde, amarelo e azul (tons claros) como acentos,
- * aplicados via utilitários do Tailwind nos componentes.
+ * Base preto/branco com o laranja da brand (#d45500) como cor de ação,
+ * aplicada via utilitários `brand-*` nos componentes.
  */
+@theme {
+  --color-brand-50: #fff4ec;
+  --color-brand-100: #ffe6d5;
+  --color-brand-200: #ffc9a8;
+  --color-brand-300: #ffa76e;
+  --color-brand-400: #f57c1f;
+  --color-brand-500: #e66300;
+  --color-brand-600: #d45500;
+  --color-brand-700: #aa4400;
+  --color-brand-800: #8c3a05;
+  --color-brand-900: #73300a;
+}
+
 body {
   background-color: #f9fafb; /* gray-50 */
   color: #111827; /* gray-900 */
