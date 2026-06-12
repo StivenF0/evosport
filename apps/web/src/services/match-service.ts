@@ -1,8 +1,27 @@
 import { apiClient } from "../lib/api-client";
-import type { Match, MatchGroupedByDate, NewMatch, UpdateMatch } from "../types/api-types";
+import type {
+  Match,
+  MatchGroupedByDate,
+  MatchStatus,
+  NewMatch,
+  UpdateMatch,
+} from "../types/api-types";
+
+export interface MatchFilters {
+  eventId?: number;
+  status?: MatchStatus;
+  sort?: "asc" | "desc";
+}
 
 export const matchService = {
-  getAllMatches: () => apiClient.get<Match[]>("/match"),
+  getAllMatches: (filters: MatchFilters = {}) => {
+    const params = new URLSearchParams();
+    if (filters.eventId) params.set("eventId", String(filters.eventId));
+    if (filters.status) params.set("status", filters.status);
+    if (filters.sort) params.set("sort", filters.sort);
+    const qs = params.toString();
+    return apiClient.get<Match[]>(`/match${qs ? `?${qs}` : ""}`);
+  },
 
   getMatchById: (id: number) => apiClient.get<Match>(`/match/${id}`),
 

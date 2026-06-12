@@ -1,7 +1,5 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { Footer } from "@web/components/Footer";
-import { Header } from "@web/components/Header";
 import { Providers } from "./providers";
 
 export const metadata: Metadata = {
@@ -17,13 +15,7 @@ export default function RootLayout({
   return (
     <html lang="pt-BR">
       <body className={`min-h-screen antialiased flex flex-col`}>
-        <Providers>
-          <Header />
-          <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 min-h-[calc(100vh-4rem)]">
-            {children}
-          </main>
-          <Footer />
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );

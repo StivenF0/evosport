@@ -305,3 +305,18 @@ Padrão de 3 estados (loading/erro/vazio via `LoadingSpinner`/`ErrorMessage`/`Em
 
 - [x] Linting, testes e documentação.
 `bun run format && bun run lint` limpo (resta só o warning pré-existente `auth.ts:19`); `bun test` 149/149; `next build` com type-check (17 páginas). README atualizado (multi-evento, auth, favoritos, admin, credenciais do seed) e docs de `.agents/` revisados.
+
+---
+
+# Ajustes pós-v2
+
+- [x] Feed sem cards: eventos separados por divider cinza (`divide-y`).
+- [x] **Bug do mapa corrigido**: o CSS do Leaflet era descartado pelo Tailwind v4 no `@import` do `globals.css`; movido para `import "leaflet/dist/leaflet.css"` em `components/ui/Map.tsx`.
+- [x] Página de Jogos com filtros e ordenação no backend: `GET /match?eventId=&status=&sort=` (`MatchQuery` + `matchRepository.getAllWithTeams(filters)`); UI com selects de evento/status/ordenação.
+- [x] Página de evento: nova aba **Jogos** (todas as partidas) e painel lateral com **Próximas partidas** no lugar do ToC redundante.
+- [x] Favoritos: ícone de coração trocado por **bandeira** (`Flag`).
+- [x] Remoção das páginas gerais `/teams` e `/rankings` (sem sentido no multi-evento) + links do Header. `TeamCard`/`RankingTable` permanecem (usados na página de evento).
+- [x] **Bug do seed corrigido**: `seed.ts` não limpava `user_favorites`, quebrando o reseed por FK quando havia favoritos.
+
+## Backlog / planejado
+- [ ] Remover endpoint global `GET /ranking` e o hook `useRanking` (órfãos após a remoção da página de classificações geral).

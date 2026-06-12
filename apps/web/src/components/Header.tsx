@@ -1,14 +1,13 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { useState } from "react";
 import { UserMenu } from "./auth/UserMenu";
 
 const NAV_LINKS = [
   { href: "/", label: "Home" },
-  { href: "/teams", label: "Times" },
   { href: "/matches", label: "Jogos" },
-  { href: "/rankings", label: "Classificações" },
   { href: "/venues", label: "Sedes" },
 ];
 
@@ -21,7 +20,14 @@ export function Header() {
         <div className="flex justify-between h-16">
           <div className="flex items-center">
             <Link href="/" className="shrink-0 flex items-center">
-              <span className="font-bold text-xl text-blue-600">Evosport</span>
+              <Image
+                src="/evosport_brand.png"
+                alt="Evosport"
+                width={629}
+                height={103}
+                priority
+                className="h-8 w-auto"
+              />
             </Link>
           </div>
 
@@ -31,7 +37,7 @@ export function Header() {
               <Link
                 key={link.href}
                 href={link.href}
-                className="text-gray-700 hover:text-blue-600 px-2 py-2 rounded-md text-sm font-medium transition-colors"
+                className="text-gray-700 hover:text-brand-600 px-2 py-2 rounded-md text-sm font-medium transition-colors"
               >
                 {link.label}
               </Link>
@@ -90,7 +96,7 @@ export function Header() {
               key={link.href}
               href={link.href}
               onClick={() => setIsOpen(false)}
-              className="block px-4 py-2 text-base font-medium text-gray-700 hover:text-blue-600 hover:bg-gray-50"
+              className="block px-4 py-2 text-base font-medium text-gray-700 hover:text-brand-600 hover:bg-gray-50"
             >
               {link.label}
             </Link>

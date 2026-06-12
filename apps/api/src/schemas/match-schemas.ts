@@ -13,6 +13,19 @@ export const MatchStatus = t.Union(
 );
 
 /**
+ * Schema para os filtros (query string) da listagem de partidas.
+ */
+export const MatchQuery = t.Object({
+  eventId: t.Optional(t.Numeric({ description: "Filtra por evento" })),
+  status: t.Optional(MatchStatus),
+  sort: t.Optional(
+    t.Union([t.Literal("asc"), t.Literal("desc")], {
+      description: "Ordenação por data (asc = mais antigas primeiro)",
+    }),
+  ),
+});
+
+/**
  * Schema para o corpo da requisição de criação/atualização de partida.
  */
 export const MatchBody = t.Object({

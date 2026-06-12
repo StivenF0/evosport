@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh] animate-in fade-in duration-500">
+    <div className="flex flex-col items-center justify-center min-h-screen px-4 animate-in fade-in duration-500">
       <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-12 md:p-16 flex flex-col items-center text-center max-w-lg">
         <div className="bg-gray-50 p-4 rounded-full mb-6">
           <svg
@@ -31,7 +31,7 @@ export default function NotFound() {
 
         <Link
           href="/"
-          className="inline-flex items-center gap-2 bg-blue-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-blue-700 transition-colors shadow-sm"
+          className="inline-flex items-center gap-2 bg-brand-600 text-white px-6 py-3 rounded-full font-semibold hover:bg-brand-700 transition-colors shadow-sm"
         >
           <svg className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
             <title>Voltar</title>

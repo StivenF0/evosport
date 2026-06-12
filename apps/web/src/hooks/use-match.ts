@@ -1,10 +1,11 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
-import { matchService } from "../services/match-service";
+import { type MatchFilters, matchService } from "../services/match-service";
 import type { UpdateMatch } from "../types/api-types";
 import { rankingKeys } from "./use-ranking";
 
 export const matchKeys = {
   all: ["matches"] as const,
+  list: (filters: MatchFilters) => ["matches", "list", filters] as const,
   grouped: ["matches", "grouped"] as const,
 };
 
@@ -15,8 +16,11 @@ const invalidateMatches = (qc: ReturnType<typeof useQueryClient>) => {
   qc.invalidateQueries({ queryKey: ["event"] });
 };
 
-export const useMatches = () =>
-  useQuery({ queryKey: matchKeys.all, queryFn: matchService.getAllMatches });
+export const useMatches = (filters: MatchFilters = {}) =>
+  useQuery({
+    queryKey: matchKeys.list(filters),
+    queryFn: () => matchService.getAllMatches(filters),
+  });
 
 export const useMatchesGrouped = () =>
   useQuery({ queryKey: matchKeys.grouped, queryFn: matchService.getMatchesGroupedByDate });
