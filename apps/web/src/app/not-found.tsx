@@ -2,7 +2,7 @@ import Link from "next/link";
 
 export default function NotFound() {
   return (
-    <div className="flex flex-col items-center justify-center min-h-[60vh] animate-in fade-in duration-500">
+    <div className="flex flex-col items-center justify-center min-h-screen px-4 animate-in fade-in duration-500">
       <div className="bg-white rounded-3xl shadow-sm border border-gray-100 p-12 md:p-16 flex flex-col items-center text-center max-w-lg">
         <div className="bg-gray-50 p-4 rounded-full mb-6">
           <svg
