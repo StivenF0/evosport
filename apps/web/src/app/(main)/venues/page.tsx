@@ -37,8 +37,8 @@ export default function MapPage() {
             Navegue pelo mapa para encontrar todas as sedes do torneio.
           </p>
         </div>
-        <div className="bg-blue-50 text-blue-700 px-4 py-2 rounded-full font-semibold text-sm border border-blue-100 shadow-sm flex items-center gap-2">
-          <MapIcon className="w-5 h-5 text-blue-500" />
+        <div className="bg-brand-50 text-brand-700 px-4 py-2 rounded-full font-semibold text-sm border border-brand-100 shadow-sm flex items-center gap-2">
+          <MapIcon className="w-5 h-5 text-brand-500" />
           {venues?.length || 0} sedes encontradas
         </div>
       </section>

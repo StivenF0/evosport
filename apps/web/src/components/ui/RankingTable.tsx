@@ -87,7 +87,7 @@ export function RankingTable({ ranking }: RankingTableProps) {
                   <span className="font-bold text-gray-800 text-xs sm:text-sm">{entry.name}</span>
                 </div>
               </td>
-              <td className="px-1 sm:px-3 py-2.5 sm:py-3 text-center font-black text-blue-600 text-sm sm:text-base">
+              <td className="px-1 sm:px-3 py-2.5 sm:py-3 text-center font-black text-brand-600 text-sm sm:text-base">
                 {entry.points}
               </td>
               <td className="px-1 sm:px-3 py-2.5 sm:py-3 text-center text-gray-600 font-medium">

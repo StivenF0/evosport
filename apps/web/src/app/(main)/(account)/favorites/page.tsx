@@ -48,7 +48,7 @@ export default function FavoritesPage() {
                   />
                 </div>
               ) : (
-                <div className="w-14 h-14 shrink-0 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center">
+                <div className="w-14 h-14 shrink-0 rounded-xl bg-brand-50 text-brand-600 flex items-center justify-center">
                   <Bookmark className="w-6 h-6" />
                 </div>
               )}
@@ -56,7 +56,7 @@ export default function FavoritesPage() {
               <div className="min-w-0 flex-1">
                 <Link
                   href={`/events/${event.id}`}
-                  className="text-lg font-bold text-gray-900 hover:text-blue-600 transition-colors"
+                  className="text-lg font-bold text-gray-900 hover:text-brand-600 transition-colors"
                 >
                   {event.name}
                 </Link>

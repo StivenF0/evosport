@@ -56,7 +56,7 @@ export default function RegisterPage() {
               type="text"
               autoComplete="name"
               {...register("name")}
-              className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition"
+              className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-gray-900 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none transition"
               placeholder="Seu nome"
             />
             {errors.name && <p className="text-sm text-red-600 mt-1">{errors.name.message}</p>}
@@ -71,7 +71,7 @@ export default function RegisterPage() {
               type="email"
               autoComplete="email"
               {...register("email")}
-              className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition"
+              className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-gray-900 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none transition"
               placeholder="voce@exemplo.com"
             />
             {errors.email && <p className="text-sm text-red-600 mt-1">{errors.email.message}</p>}
@@ -86,7 +86,7 @@ export default function RegisterPage() {
               type="password"
               autoComplete="new-password"
               {...register("password")}
-              className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition"
+              className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-gray-900 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none transition"
               placeholder="Mínimo de 6 caracteres"
             />
             {errors.password && (
@@ -106,7 +106,7 @@ export default function RegisterPage() {
               type="password"
               autoComplete="new-password"
               {...register("confirmPassword")}
-              className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition"
+              className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-gray-900 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none transition"
               placeholder="Repita a senha"
             />
             {errors.confirmPassword && (
@@ -123,7 +123,7 @@ export default function RegisterPage() {
           <button
             type="submit"
             disabled={isPending}
-            className="w-full bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white font-semibold py-2.5 rounded-xl transition-colors"
+            className="w-full bg-brand-600 hover:bg-brand-700 disabled:opacity-60 text-white font-semibold py-2.5 rounded-xl transition-colors"
           >
             {isPending ? "Criando conta..." : "Criar conta"}
           </button>
@@ -131,7 +131,7 @@ export default function RegisterPage() {
 
         <p className="text-center text-sm text-gray-500 mt-6">
           Já tem uma conta?{" "}
-          <Link href="/login" className="text-blue-600 font-semibold hover:underline">
+          <Link href="/login" className="text-brand-600 font-semibold hover:underline">
             Entrar
           </Link>
         </p>

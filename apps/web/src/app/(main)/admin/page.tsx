@@ -32,11 +32,11 @@ export default function AdminDashboard() {
           <Link
             key={href}
             href={href}
-            className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 hover:border-blue-200 hover:shadow-md transition-all"
+            className="bg-white rounded-2xl border border-gray-100 shadow-sm p-5 hover:border-brand-200 hover:shadow-md transition-all"
           >
             <div className="flex items-center justify-between">
               <span className="text-3xl font-black text-gray-900">{count ?? "—"}</span>
-              <Icon className="w-6 h-6 text-blue-500" />
+              <Icon className="w-6 h-6 text-brand-500" />
             </div>
             <p className="mt-2 text-sm font-medium text-gray-600">{label}</p>
           </Link>

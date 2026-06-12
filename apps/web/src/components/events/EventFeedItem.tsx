@@ -34,7 +34,7 @@ export function EventFeedItem({ event }: EventFeedItemProps) {
               />
             </div>
           ) : (
-            <div className="w-16 h-16 shrink-0 rounded-2xl bg-blue-50 text-blue-600 flex items-center justify-center text-2xl font-extrabold">
+            <div className="w-16 h-16 shrink-0 rounded-2xl bg-brand-50 text-brand-600 flex items-center justify-center text-2xl font-extrabold">
               {event.name.charAt(0).toUpperCase()}
             </div>
           )}
@@ -42,10 +42,10 @@ export function EventFeedItem({ event }: EventFeedItemProps) {
           <div className="min-w-0">
             <Link
               href={`/events/${event.id}`}
-              className="group inline-flex items-center gap-2 text-gray-900 hover:text-blue-600 transition-colors"
+              className="group inline-flex items-center gap-2 text-gray-900 hover:text-brand-600 transition-colors"
             >
               <h2 className="text-xl md:text-2xl font-bold tracking-tight">{event.name}</h2>
-              <Link2 className="w-4 h-4 text-gray-300 group-hover:text-blue-500" />
+              <Link2 className="w-4 h-4 text-gray-300 group-hover:text-brand-500" />
             </Link>
             <p className="mt-1 text-xs text-gray-400">
               {formatDate(event.startDate)} até {formatDate(event.endDate)}
@@ -57,7 +57,7 @@ export function EventFeedItem({ event }: EventFeedItemProps) {
             )}
             <Link
               href={`/events/${event.id}`}
-              className="mt-4 inline-block text-sm font-semibold text-blue-600 hover:underline"
+              className="mt-4 inline-block text-sm font-semibold text-brand-600 hover:underline"
             >
               Ver evento &rarr;
             </Link>

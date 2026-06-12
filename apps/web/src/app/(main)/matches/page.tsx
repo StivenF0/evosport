@@ -11,7 +11,7 @@ import { CalendarDays } from "lucide-react";
 import { useState } from "react";
 
 const selectClass =
-  "rounded-xl border border-gray-200 px-3 py-2 text-sm text-gray-700 bg-white focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition";
+  "rounded-xl border border-gray-200 px-3 py-2 text-sm text-gray-700 bg-white focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none transition";
 
 export default function MatchesPage() {
   const [eventId, setEventId] = useState<number | undefined>(undefined);

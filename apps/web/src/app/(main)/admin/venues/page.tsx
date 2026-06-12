@@ -76,7 +76,7 @@ export default function AdminVenuesPage() {
         <button
           type="button"
           onClick={openCreate}
-          className="inline-flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-colors"
+          className="inline-flex items-center gap-2 bg-brand-600 hover:bg-brand-700 text-white px-4 py-2 rounded-xl text-sm font-semibold transition-colors"
         >
           <Plus className="w-4 h-4" />
           Nova sede
@@ -106,7 +106,7 @@ export default function AdminVenuesPage() {
                 <button
                   type="button"
                   onClick={() => openEdit(venue)}
-                  className="p-2 rounded-lg text-gray-400 hover:bg-gray-100 hover:text-blue-600"
+                  className="p-2 rounded-lg text-gray-400 hover:bg-gray-100 hover:text-brand-600"
                   aria-label={`Editar ${venue.name}`}
                 >
                   <Pencil className="w-4 h-4" />
@@ -170,7 +170,7 @@ export default function AdminVenuesPage() {
           <button
             type="submit"
             disabled={isSaving}
-            className="self-end bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white font-semibold px-6 py-2.5 rounded-xl transition-colors"
+            className="self-end bg-brand-600 hover:bg-brand-700 disabled:opacity-60 text-white font-semibold px-6 py-2.5 rounded-xl transition-colors"
           >
             {isSaving ? "Salvando..." : "Salvar"}
           </button>

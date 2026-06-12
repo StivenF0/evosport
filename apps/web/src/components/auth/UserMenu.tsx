@@ -32,13 +32,13 @@ export function UserMenu() {
       <div className="flex items-center gap-2">
         <Link
           href="/login"
-          className="text-gray-700 hover:text-blue-600 px-3 py-2 text-sm font-medium"
+          className="text-gray-700 hover:text-brand-600 px-3 py-2 text-sm font-medium"
         >
           Entrar
         </Link>
         <Link
           href="/register"
-          className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors"
+          className="bg-brand-600 hover:bg-brand-700 text-white px-4 py-2 rounded-full text-sm font-semibold transition-colors"
         >
           Criar conta
         </Link>
@@ -64,7 +64,7 @@ export function UserMenu() {
         aria-expanded={open}
         aria-haspopup="menu"
       >
-        <span className="w-9 h-9 rounded-full bg-blue-50 text-blue-600 flex items-center justify-center font-bold">
+        <span className="w-9 h-9 rounded-full bg-brand-50 text-brand-600 flex items-center justify-center font-bold">
           {initial}
         </span>
         <ChevronDown className="w-4 h-4 text-gray-400" />

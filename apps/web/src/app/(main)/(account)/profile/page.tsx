@@ -45,7 +45,7 @@ export default function ProfilePage() {
       </header>
 
       <div className="flex flex-col items-center gap-4 bg-white rounded-2xl border border-gray-100 shadow-sm p-12">
-        <span className="w-32 aspect-square rounded-full bg-blue-50 text-blue-600 flex items-center justify-center text-2xl font-bold">
+        <span className="w-32 aspect-square rounded-full bg-brand-50 text-brand-600 flex items-center justify-center text-2xl font-bold">
           {initial}
         </span>
         <div className="min-w-0 flex flex-col items-center">
@@ -67,7 +67,7 @@ export default function ProfilePage() {
             id="name"
             type="text"
             {...register("name")}
-            className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-gray-900 focus:border-blue-500 focus:ring-2 focus:ring-blue-100 outline-none transition"
+            className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-gray-900 focus:border-brand-500 focus:ring-2 focus:ring-brand-100 outline-none transition"
           />
           {errors.name && <p className="text-sm text-red-600 mt-1">{errors.name.message}</p>}
         </div>
@@ -88,7 +88,7 @@ export default function ProfilePage() {
         <button
           type="submit"
           disabled={updateProfile.isPending || !isDirty}
-          className="self-start bg-blue-600 hover:bg-blue-700 disabled:opacity-60 text-white font-semibold px-6 py-2.5 rounded-xl transition-colors"
+          className="self-start bg-brand-600 hover:bg-brand-700 disabled:opacity-60 text-white font-semibold px-6 py-2.5 rounded-xl transition-colors"
         >
           {updateProfile.isPending ? "Salvando..." : "Salvar"}
         </button>

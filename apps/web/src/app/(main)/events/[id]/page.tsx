@@ -57,7 +57,7 @@ export default function EventPage() {
       <div className="min-w-0">
         {/* Breadcrumb */}
         <nav className="flex items-center gap-1 text-sm text-gray-500 mb-4">
-          <Link href="/" className="hover:text-blue-600">
+          <Link href="/" className="hover:text-brand-600">
             Home
           </Link>
           <ChevronRight className="w-4 h-4" />
@@ -80,7 +80,7 @@ export default function EventPage() {
               onClick={() => setTab(tabId)}
               className={`inline-flex items-center gap-2 px-4 py-3 text-sm font-semibold border-b-2 -mb-px whitespace-nowrap transition-colors ${
                 tab === tabId
-                  ? "border-blue-600 text-blue-600"
+                  ? "border-brand-600 text-brand-600"
                   : "border-transparent text-gray-500 hover:text-gray-800"
               }`}
             >
